@@ -39,7 +39,7 @@ export const Dashboard: React.FC = () => {
   ];
 
   return (
-    <div className="min-h-screen pt-32 pb-12 px-6 md:px-12 bg-brand-offwhite">
+    <div className="min-h-screen pt-12 md:pt-16 pb-12 px-6 md:px-12 bg-brand-offwhite">
       <div className="max-w-7xl mx-auto">
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-12 gap-6">
           <div>

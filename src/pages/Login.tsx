@@ -109,7 +109,7 @@ export const Login: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen pt-32 pb-12 px-6 flex flex-col items-center bg-brand-offwhite">
+    <div className="min-h-screen pt-12 md:pt-16 pb-12 px-6 flex flex-col items-center bg-brand-offwhite">
       <div className="w-full max-w-md bg-white border border-brand-border p-12 rounded-sm shadow-sm">
         <div className="text-center mb-12">
           <h1 className="text-4xl font-serif italic mb-4">Talent Login</h1>

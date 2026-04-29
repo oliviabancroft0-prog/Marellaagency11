@@ -72,7 +72,7 @@ const AllProductsView = ({ onBack, onProductClick }: { onBack: () => void, onPro
     <motion.div 
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      className="min-h-screen pt-32 px-6 md:px-12 bg-white"
+      className="min-h-screen pt-12 md:pt-16 px-6 md:px-12 bg-white"
     >
       <div className="flex justify-between items-end mb-16 max-w-7xl mx-auto">
         <div>
@@ -126,13 +126,15 @@ const Navbar = ({ cartCount, onCartOpen }: { cartCount: number, onCartOpen: () =
   return (
     <nav 
       onMouseLeave={() => setActiveMenu(null)}
-      className="fixed top-0 left-0 w-full z-50 bg-brand-offwhite border-b border-brand-border h-16 md:h-20 flex items-center px-6 md:px-12 transition-all duration-300"
+      className="fixed top-0 left-0 w-full z-50 bg-brand-offwhite border-b border-brand-border h-12 md:h-16 flex items-center px-6 md:px-12 transition-all duration-300"
     >
       <div className="flex-1 flex items-center">
-        <button onClick={() => navigate('/')} className="flex items-center space-x-2 md:space-x-3 text-[10px] md:text-sm font-black tracking-[0.4em] uppercase font-display mr-8 md:mr-16">
-          <span>Bramingham</span>
-          <div className="w-4 md:w-8 h-[1px] bg-brand-black"></div>
-          <span>Barely</span>
+        <button onClick={() => navigate('/')} className="h-32 md:h-56 flex items-center mr-8 md:mr-16 translate-y-2 md:translate-y-4">
+          <img 
+            src="https://raw.githubusercontent.com/oliviabancroft0-prog/marellaagency/main/ChatGPT%20Image%20Apr%2030%2C%202026%2C%2001_48_30%20AM.png" 
+            alt="Marella Agency Logo" 
+            className="h-full w-auto object-contain mix-blend-multiply" 
+          />
         </button>
 
         <div className="hidden lg:flex items-center space-x-8 text-[11px] font-bold tracking-[0.2em] uppercase">
@@ -232,7 +234,7 @@ const Navbar = ({ cartCount, onCartOpen }: { cartCount: number, onCartOpen: () =
 
 const Hero = ({ onShopNow }: { onShopNow: () => void }) => {
   return (
-    <section className="relative h-screen w-full flex items-center px-6 md:px-24 overflow-hidden pt-16 bg-brand-offwhite">
+    <section className="relative h-screen w-full flex items-center px-6 md:px-24 overflow-hidden pt-12 md:pt-16 bg-brand-offwhite">
       <div className="absolute inset-0 z-0">
         <img 
           src="https://raw.githubusercontent.com/oliviabancroft0-prog/marellaagency/main/Sophcoverphoto-CGr776cV.png" 
@@ -433,10 +435,12 @@ const Footer = () => {
           </div>
         </div>
         
-        <div className="flex items-center space-x-4 text-4xl md:text-8xl font-black uppercase font-display select-none opacity-10">
-          <span>Bramingham</span>
-          <div className="w-12 h-[2px] bg-brand-black"></div>
-          <span>Barely</span>
+        <div className="h-24 md:h-48 flex items-center select-none opacity-10 grayscale">
+          <img 
+            src="https://raw.githubusercontent.com/oliviabancroft0-prog/marellaagency/main/ChatGPT%20Image%20Apr%2030%2C%202026%2C%2001_48_30%20AM.png" 
+            alt="Marella Agency Logo" 
+            className="h-full w-auto object-contain" 
+          />
         </div>
 
         <div className="text-[10px] tracking-widest uppercase text-brand-black/50 text-right space-y-2">
@@ -458,7 +462,7 @@ const ProductDetail = ({ onBack, onAddToCart }: { onBack: () => void, onAddToCar
     <motion.div 
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      className="min-h-screen pt-24 px-6 md:px-12 bg-white"
+      className="min-h-screen pt-12 md:pt-16 px-6 md:px-12 bg-white"
     >
       <button onClick={onBack} className="mb-8 flex items-center space-x-2 text-[10px] uppercase tracking-widest group">
         <X size={14} className="transition-transform group-hover:rotate-90" />
