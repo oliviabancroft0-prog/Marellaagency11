@@ -235,7 +235,7 @@ const Hero = ({ onShopNow }: { onShopNow: () => void }) => {
     <section className="relative h-screen w-full flex items-center px-6 md:px-24 overflow-hidden pt-16">
       <div className="absolute inset-0 z-0">
         <img 
-          src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?q=80&w=2600&auto=format&fit=crop" 
+          src="https://raw.githubusercontent.com/oliviabancroft0-prog/marellaagency/main/Sophcoverphoto-CGr776cV.png" 
           alt="Hero Model"
           className="w-full h-full object-cover"
         />
