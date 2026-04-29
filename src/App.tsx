@@ -232,14 +232,14 @@ const Navbar = ({ cartCount, onCartOpen }: { cartCount: number, onCartOpen: () =
 
 const Hero = ({ onShopNow }: { onShopNow: () => void }) => {
   return (
-    <section className="relative h-screen w-full flex items-center px-6 md:px-24 overflow-hidden pt-16">
+    <section className="relative h-screen w-full flex items-center px-6 md:px-24 overflow-hidden pt-16 bg-brand-offwhite">
       <div className="absolute inset-0 z-0">
         <img 
           src="https://raw.githubusercontent.com/oliviabancroft0-prog/marellaagency/main/Sophcoverphoto-CGr776cV.png" 
           alt="Hero Model"
-          className="w-full h-full object-cover"
+          className="w-full h-full object-contain"
         />
-        <div className="absolute inset-0 bg-black/10"></div>
+        <div className="absolute inset-0 bg-brand-black/5"></div>
       </div>
       
       <div className="relative z-10 max-w-sm">
