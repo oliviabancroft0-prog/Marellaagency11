@@ -253,19 +253,11 @@ const Hero = ({ onShopNow }: { onShopNow: () => void }) => {
         >
           The Premier OnlyFans Agency for UK Creators
         </motion.h1>
-        <motion.p 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
-          className="text-white/80 text-lg mb-8 leading-relaxed font-light"
-        >
-          Scaling elite United Kingdom talent through professional management, high-converting PPV strategies, and domestic market dominance.
-        </motion.p>
         <motion.button 
           onClick={onShopNow}
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
+          transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
           className="text-white text-[11px] font-medium tracking-[0.3em] uppercase border-b border-white pb-2 hover:opacity-70 transition-opacity"
         >
           Apply to Roster
