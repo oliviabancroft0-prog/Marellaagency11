@@ -542,9 +542,9 @@ const Philosophy = () => {
           <div className="relative aspect-[4/5] w-full max-w-sm overflow-hidden rounded-sm bg-black/5">
             <video 
               autoPlay 
-              muted 
               loop 
               playsInline 
+              controls
               preload="auto"
               className="w-full h-full object-cover"
             >
@@ -576,9 +576,9 @@ const Philosophy = () => {
             <div className="aspect-[9/16] w-full max-w-[320px] bg-black/5 rounded-lg overflow-hidden shadow-2xl mx-auto md:mx-0">
               <video 
                 autoPlay 
-                muted 
                 loop 
                 playsInline 
+                controls
                 preload="auto"
                 className="w-full h-full object-cover"
               >
