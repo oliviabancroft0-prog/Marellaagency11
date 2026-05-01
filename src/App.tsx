@@ -245,14 +245,6 @@ const Hero = ({ onShopNow }: { onShopNow: () => void }) => {
       </div>
       
       <div className="relative z-10 max-w-sm">
-        <motion.h1 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-          className="text-4xl md:text-6xl text-white mb-6 leading-[1.1]"
-        >
-          The Premier OnlyFans Agency for UK Creators
-        </motion.h1>
         <motion.button 
           onClick={onShopNow}
           initial={{ opacity: 0, y: 20 }}
@@ -273,8 +265,8 @@ const Philosophy = () => {
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 items-start">
         <div className="space-y-12">
           <h2 className="text-4xl md:text-5xl leading-tight">
-            United Kingdom Authenticity.<br />
-            OnlyFans Excellence.
+            Authentic vibes and OnlyFans excellence,<br />
+            without ever showing your face
           </h2>
           <div className="relative aspect-[4/5] w-64">
             <img 
@@ -370,6 +362,45 @@ const Footer = () => {
             Apply to the Roster
           </button>
         </div>
+      </div>
+
+      {/* Payment Logos Section */}
+      <div className="py-20 px-6 bg-brand-offwhite flex flex-col items-center border-t border-brand-border">
+        <motion.p 
+          initial={{ opacity: 0, y: 10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="text-[10px] tracking-[0.4em] uppercase font-bold text-brand-black/30 mb-12"
+        >
+          Secure Payment Methods
+        </motion.p>
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.2 }}
+          className="flex flex-wrap justify-center items-center gap-6 md:gap-12 max-w-6xl"
+        >
+          <img src="https://raw.githubusercontent.com/oliviabancroft0-prog/marellaagency/main/41fe5e9d3f2cd4474a88020f15561b6eda43ebef-3840x2160.png" alt="Visa" className="h-6 md:h-8 w-auto opacity-80 hover:opacity-100 transition-opacity" />
+          <img src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg" alt="Mastercard" className="h-6 md:h-10 w-auto opacity-80 hover:opacity-100 transition-opacity" />
+          <img src="https://upload.wikimedia.org/wikipedia/commons/f/fa/American_Express_logo_%282018%29.svg" alt="AMEX" className="h-5 md:h-8 w-auto opacity-80 hover:opacity-100 transition-opacity" />
+          <img src="https://upload.wikimedia.org/wikipedia/commons/b/b0/Apple_Pay_logo.svg" alt="Apple Pay" className="h-6 md:h-9 w-auto opacity-80 hover:opacity-100 transition-opacity" />
+          <div className="bg-[#003087] px-3 py-1 rounded-md opacity-80 hover:opacity-100 transition-opacity">
+            <span className="text-white font-bold italic text-sm md:text-lg">Pay+</span>
+          </div>
+          <img src="https://upload.wikimedia.org/wikipedia/commons/b/b5/PayPal.svg" alt="PayPal" className="h-5 md:h-8 w-auto opacity-80 hover:opacity-100 transition-opacity" />
+          
+          {/* Klarna & Clearpay boxes */}
+          <div className="opacity-80 hover:opacity-100 transition-opacity">
+            <img src="https://raw.githubusercontent.com/oliviabancroft0-prog/marellaagency/main/Klarna_Payment_Badge.svg.png" alt="Klarna" className="h-8 md:h-12 w-auto rounded-lg" />
+          </div>
+          <div className="opacity-80 hover:opacity-100 transition-opacity">
+            <img src="https://raw.githubusercontent.com/oliviabancroft0-prog/marellaagency/main/images.png" alt="Clearpay" className="h-8 md:h-12 w-auto rounded-lg" />
+          </div>
+          <div className="bg-white border border-brand-border px-4 py-2 rounded-lg flex items-center space-x-2 opacity-80 hover:opacity-100 transition-opacity shadow-sm">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/f/f2/Google_Pay_Logo.svg" alt="Google Pay" className="h-5 md:h-7 w-auto" />
+          </div>
+        </motion.div>
       </div>
 
       <div className="px-6 md:px-12 py-24 border-t border-brand-border grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-12 text-[11px] tracking-widest uppercase text-brand-black/60">
