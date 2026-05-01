@@ -615,15 +615,15 @@ const CollectionsSlider = () => {
         <div className="absolute inset-0 bg-black/20"></div>
       </div>
 
-      <div className="relative z-10 w-full px-6 md:px-24 flex justify-between items-end pb-24 h-full">
-        <div className="flex flex-col space-y-4">
-          <span className="text-white/60 text-[11px] font-medium tracking-[0.3em] uppercase mb-4">Mood Edits</span>
+      <div className="relative z-10 w-full px-6 md:px-24 flex flex-col md:flex-row justify-end md:justify-between items-start md:items-end pb-12 md:pb-24 h-full">
+        <div className="flex flex-col space-y-2 md:space-y-4 mb-8 md:mb-0">
+          <span className="text-white/60 text-[10px] md:text-[11px] font-medium tracking-[0.3em] uppercase mb-2 md:mb-4">Mood Edits</span>
           {COLLECTIONS.map((c) => (
             <button 
               key={c.id}
               onClick={() => setActive(c.id)}
               onMouseEnter={() => setActive(c.id)}
-              className={`text-4xl md:text-7xl italic font-serif text-left transition-all duration-300 ${active === c.id ? 'text-white translate-x-4' : 'text-white/40 hover:text-white/70'}`}
+              className={`text-2xl sm:text-3xl md:text-7xl italic font-serif text-left transition-all duration-300 ${active === c.id ? 'text-white translate-x-2 md:translate-x-4' : 'text-white/40 hover:text-white/70'}`}
             >
               ({c.label})
             </button>
@@ -631,8 +631,8 @@ const CollectionsSlider = () => {
         </div>
         
         <div className="pb-4">
-          <button className="bg-white/10 backdrop-blur-md border border-white/20 text-white px-8 py-4 rounded-full text-[11px] font-medium tracking-[0.2em] uppercase hover:bg-white/20 transition-colors">
-            View Archetype
+          <button className="bg-white/10 backdrop-blur-md border border-white/20 text-white px-6 md:px-8 py-3 md:py-4 rounded-full text-[10px] md:text-[11px] font-medium tracking-[0.2em] uppercase hover:bg-white/20 transition-colors">
+            Explore Collection
           </button>
         </div>
       </div>
