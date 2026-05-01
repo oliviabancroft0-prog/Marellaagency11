@@ -19,7 +19,8 @@ import {
   Instagram,
   Facebook,
   Youtube,
-  Twitter
+  Twitter,
+  Menu
 } from 'lucide-react';
 import { Login } from './pages/Login';
 import { Dashboard } from './pages/Dashboard';
@@ -30,14 +31,144 @@ import { useAuth } from './context/AuthContext';
 
 type ViewState = 'home' | 'product' | 'checkout' | 'all-products';
 
-const PRODUCTS = [
-  { id: 'account-management', name: 'Elite OF Management', subtitle: '24/7 Chat & PPV Optimization', price: '£1,499/mo', image: 'https://images.unsplash.com/photo-1612817288484-6f916006741a?q=80&w=1000&auto=format&fit=crop' },
-  { id: 'market-strategy', name: 'UK Market Strategy', subtitle: 'High-LTV UK Fan Targeting', price: '£999/plan', image: 'https://images.unsplash.com/photo-1556228720-195a672e8a03?q=80&w=1000&auto=format&fit=crop' },
-  { id: 'cross-promotion', name: 'Network Synergy', subtitle: 'Exclusive UK Roster Sync', price: 'Bespoke', image: 'https://images.unsplash.com/photo-1620916566398-39f1143ab7be?q=80&w=1000&auto=format&fit=crop' },
-  { id: 'production', name: 'Premium Production', subtitle: 'Vocal Signature & Visuals', price: '£2,495/pkg', image: 'https://images.unsplash.com/photo-1590156221170-ce35ee77cb7a?q=80&w=1000&auto=format&fit=crop' },
-];
+interface Product {
+  id: string;
+  name: string;
+  subtitle: string;
+  location: string;
+  instagram: string;
+  onlyfans: string;
+  bio: string;
+  price: string;
+  image: string;
+  gallery: string[];
+}
 
-type Product = typeof PRODUCTS[0];
+const MODELS: Product[] = [
+  { 
+    id: 'sophia', 
+    name: 'Sophia', 
+    subtitle: 'High-Fashion Elite', 
+    location: 'Greater London', 
+    instagram: '@sophia_marella', 
+    onlyfans: 'onlyfans.com/sophia_elite',
+    bio: 'The definition of London elegance. Sophia combines high-fashion aesthetics with a mischievous streak that keeps her fans hooked.',
+    price: '£500/Session', 
+    image: 'https://raw.githubusercontent.com/oliviabancroft0-prog/marellaagency/main/Sophcoverphoto-CGr776cV.png',
+    gallery: [
+      'https://images.unsplash.com/photo-1596462502278-27bfaf410911?q=80&w=1000',
+      'https://images.unsplash.com/photo-1512496015851-a90fb38ba796?q=80&w=1000'
+    ]
+  },
+  { 
+    id: 'isabella', 
+    name: 'Isabella', 
+    subtitle: 'Northern Silk', 
+    location: 'Manchester', 
+    instagram: '@bella_silk', 
+    onlyfans: 'onlyfans.com/bellas_secrets',
+    bio: 'Northern charm at its finest. Isabella is known for her authentic connection and unfiltered presence.',
+    price: '£450/Session', 
+    image: 'https://images.unsplash.com/photo-1570172234562-969c67678004?q=80&w=1000',
+    gallery: []
+  },
+  { 
+    id: 'mia', 
+    name: 'Mia', 
+    subtitle: 'Midlands Rose', 
+    location: 'Birmingham', 
+    instagram: '@mia_rose_uk', 
+    onlyfans: 'onlyfans.com/miarose',
+    bio: 'Classically beautiful with a contemporary edge. Mia captures the spirit of the Midlands.',
+    price: '£400/Session', 
+    image: 'https://images.unsplash.com/photo-1509631179647-0177331693ae?q=80&w=1000',
+    gallery: []
+  },
+  { 
+    id: 'olivia', 
+    name: 'Olivia', 
+    subtitle: 'Yorkshire Belle', 
+    location: 'Leeds', 
+    instagram: '@liv_leeds', 
+    onlyfans: 'onlyfans.com/oliviamodels',
+    bio: 'A mix of sophisticated wit and natural beauty. Olivia is a fan favorite across the UK.',
+    price: '£350/Session', 
+    image: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=1000',
+    gallery: []
+  },
+  { 
+    id: 'ava', 
+    name: 'Ava', 
+    subtitle: 'Heritage Chic', 
+    location: 'East Midlands', 
+    instagram: '@ava_heritage', 
+    onlyfans: 'onlyfans.com/ava_chic',
+    bio: 'Timeless beauty with a modern OnlyFans strategy.',
+    price: '£380/Session', 
+    image: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=1000',
+    gallery: []
+  },
+  { 
+    id: 'lily', 
+    name: 'Lily', 
+    subtitle: 'Western Wild', 
+    location: 'Bristol', 
+    instagram: '@lily_bristol', 
+    onlyfans: 'onlyfans.com/lilywild',
+    bio: 'Creative, edgy, and unapologetically British.',
+    price: '£300/Session', 
+    image: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?q=80&w=1000',
+    gallery: []
+  },
+  { 
+    id: 'emily', 
+    name: 'Emily', 
+    subtitle: 'Geordie Star', 
+    location: 'Newcastle', 
+    instagram: '@emily_ncl', 
+    onlyfans: 'onlyfans.com/emilyncl',
+    bio: 'Bringing Northern energy and high-earning content to the roster.',
+    price: '£420/Session', 
+    image: 'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?q=80&w=1000',
+    gallery: []
+  },
+  { 
+    id: 'grace', 
+    name: 'Grace', 
+    subtitle: 'Mersey Muse', 
+    location: 'Liverpool', 
+    instagram: '@grace_mersey', 
+    onlyfans: 'onlyfans.com/grace_m',
+    bio: 'A powerhouse of charm and commercial appeal.',
+    price: '£390/Session', 
+    image: 'https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?q=80&w=1000',
+    gallery: []
+  },
+  { 
+    id: 'chloe', 
+    name: 'Chloe', 
+    subtitle: 'Scottish Spirit', 
+    location: 'Edinburgh', 
+    instagram: '@chloe_edi', 
+    onlyfans: 'onlyfans.com/chloe_spirit',
+    bio: 'Sophistication from the north of the border.',
+    price: '£450/Session', 
+    image: 'https://images.unsplash.com/photo-1531123897727-8f129e16fd3c?q=80&w=1000',
+    gallery: []
+  },
+  { 
+    id: 'sophie-c', 
+    name: 'Sophie C.', 
+    subtitle: 'Welsh Wonder', 
+    location: 'Cardiff', 
+    instagram: '@sophie_c_cardiff', 
+    onlyfans: 'onlyfans.com/sophie_c',
+    bio: 'Authentic connection and stunning visuals.',
+    price: '£320/Session', 
+    image: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=1000',
+    gallery: []
+  }
+];
 
 interface ProductCardProps {
   key?: string | number;
@@ -48,51 +179,103 @@ interface ProductCardProps {
 const ProductCard = ({ product, onClick }: ProductCardProps) => {
   return (
     <div onClick={onClick} className="group cursor-pointer">
-      <div className="aspect-[4/5] bg-[#f5f5f5] mb-4 overflow-hidden relative">
+      <div className="aspect-[4/5] bg-brand-offwhite mb-4 overflow-hidden relative rounded-sm">
         <img 
           src={product.image} 
           alt={product.name} 
-          className="w-full h-full object-cover mix-blend-multiply transition-transform duration-700 group-hover:scale-105" 
+          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" 
         />
+        <div className="absolute top-4 left-4">
+          <span className="bg-white/90 backdrop-blur-sm text-[9px] uppercase tracking-widest px-2 py-1 font-bold rounded-full">
+            {product.location}
+          </span>
+        </div>
         <div className="absolute bottom-4 right-4 translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300">
-           <button className="w-10 h-10 rounded-full bg-white flex items-center justify-center shadow-lg hover:bg-brand-black hover:text-white transition-colors">
-            <Plus size={18} />
+           <button className="bg-white px-4 py-2 rounded-full text-[9px] uppercase tracking-widest font-bold shadow-lg hover:bg-brand-black hover:text-white transition-colors">
+            Book Session
            </button>
         </div>
       </div>
-      <h3 className="text-xl font-serif italic mb-1">{product.name}</h3>
-      <p className="text-[10px] uppercase tracking-widest text-brand-black/40 mb-3">{product.subtitle}</p>
-      <p className="text-sm font-medium">{product.price}</p>
+      <div className="flex justify-between items-start">
+        <div>
+          <h3 className="text-xl font-serif italic mb-1">{product.name}</h3>
+          <p className="text-[10px] uppercase tracking-widest text-brand-black/40 mb-1">{product.subtitle}</p>
+          <p className="text-[9px] text-brand-black/60 font-medium lowercase font-mono">{product.instagram}</p>
+        </div>
+        <p className="text-sm font-medium">{product.price}</p>
+      </div>
     </div>
   );
 };
 
-const AllProductsView = ({ onBack, onProductClick }: { onBack: () => void, onProductClick: () => void }) => {
+const AllProductsView = ({ onBack, onProductClick }: { onBack: () => void, onProductClick: (p: Product) => void }) => {
+  const [selectedLocation, setSelectedLocation] = useState<string | null>(null);
+  const [showLocationFilter, setShowLocationFilter] = useState(false);
+
+  const locations = Array.from(new Set(MODELS.map(m => m.location)));
+
+  const filteredModels = selectedLocation 
+    ? MODELS.filter(m => m.location === selectedLocation)
+    : MODELS;
+
   return (
     <motion.div 
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       className="min-h-screen pt-12 md:pt-16 px-6 md:px-12 bg-white"
     >
-      <div className="flex justify-between items-end mb-16 max-w-7xl mx-auto">
+      <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 max-w-7xl mx-auto gap-8">
         <div>
           <nav className="flex items-center space-x-2 text-[9px] uppercase tracking-widest text-brand-black/40 mb-4">
             <span className="cursor-pointer hover:text-brand-black" onClick={onBack}>The Firm</span>
             <ChevronRight size={10} />
-            <span className="text-brand-black">Bespoke Services</span>
+            <span className="text-brand-black">The Lineup</span>
           </nav>
-          <h1 className="text-6xl italic">The OnlyFans Suite</h1>
-          <p className="text-brand-black/50 mt-4 text-lg font-light tracking-wide">Strategic architecture for elite United Kingdom creators.</p>
+          <h1 className="text-6xl italic">The Roster</h1>
+          <p className="text-brand-black/50 mt-4 text-lg font-light tracking-wide">Elite United Kingdom talent curated for dominance.</p>
         </div>
-        <button className="flex items-center space-x-3 text-[11px] font-bold uppercase tracking-widest border-b border-brand-black pb-1">
-          <span>Focus</span>
-          <ChevronRight size={14} className="rotate-90" />
-        </button>
+        
+        <div className="relative">
+          <button 
+            onClick={() => setShowLocationFilter(!showLocationFilter)}
+            className="flex items-center space-x-3 text-[11px] font-bold uppercase tracking-widest border-b border-brand-black pb-1 hover:opacity-50 transition-opacity"
+          >
+            <span>Focus: {selectedLocation || 'UK National'}</span>
+            <ChevronRight size={14} className={`transition-transform duration-300 ${showLocationFilter ? 'rotate-[-90deg]' : 'rotate-90'}`} />
+          </button>
+          
+          <AnimatePresence>
+            {showLocationFilter && (
+              <motion.div 
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: 10 }}
+                className="absolute top-full right-0 mt-4 bg-white border border-brand-border p-6 z-50 w-64 shadow-xl grid grid-cols-1 gap-3"
+              >
+                <button 
+                  onClick={() => { setSelectedLocation(null); setShowLocationFilter(false); }}
+                  className={`text-[10px] uppercase tracking-widest text-left font-bold border-b border-brand-border pb-2 ${selectedLocation === null ? 'text-blue-600' : 'text-brand-black/40'}`}
+                >
+                  All Hubs
+                </button>
+                {locations.map(loc => (
+                  <button 
+                    key={loc}
+                    onClick={() => { setSelectedLocation(loc); setShowLocationFilter(false); }}
+                    className={`text-[10px] uppercase tracking-widest text-left hover:text-brand-black transition-colors ${selectedLocation === loc ? 'text-blue-600 font-bold' : 'text-brand-black/40'}`}
+                  >
+                    {loc}
+                  </button>
+                ))}
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-16 max-w-7xl mx-auto pb-24">
-        {[...PRODUCTS, ...PRODUCTS].map((p, i) => (
-          <ProductCard key={`${p.id}-${i}`} product={p} onClick={onProductClick} />
+        {filteredModels.map((p) => (
+          <ProductCard key={p.id} product={p} onClick={() => onProductClick(p)} />
         ))}
       </div>
     </motion.div>
@@ -100,11 +283,11 @@ const AllProductsView = ({ onBack, onProductClick }: { onBack: () => void, onPro
 };
 
 const COLLECTIONS = [
-  { id: 'posh', label: 'Posh', image: 'https://images.unsplash.com/photo-1596462502278-27bfaf410911?q=80&w=1600&auto=format&fit=crop' },
-  { id: 'bratty', label: 'Bratty', image: 'https://images.unsplash.com/photo-1570172234562-969c67678004?q=80&w=1600&auto=format&fit=crop' },
-  { id: 'girl-next-door', label: 'Girl-next-door', image: 'https://images.unsplash.com/photo-1512496015851-a90fb38ba796?q=80&w=1600&auto=format&fit=crop' },
-  { id: 'sophisticate', label: 'Sophisticate', image: 'https://images.unsplash.com/photo-1509631179647-0177331693ae?q=80&w=1600&auto=format&fit=crop' },
-  { id: 'regional', label: 'Regional', image: 'https://images.unsplash.com/photo-1612817288484-6f916006741a?q=80&w=1600&auto=format&fit=crop' },
+  { id: 'posh', label: 'Date Night', image: 'https://images.unsplash.com/photo-1596462502278-27bfaf410911?q=80&w=1600&auto=format&fit=crop' },
+  { id: 'bratty', label: 'Work Week', image: 'https://images.unsplash.com/photo-1570172234562-969c67678004?q=80&w=1600&auto=format&fit=crop' },
+  { id: 'girl-next-door', label: 'Weekend Escape', image: 'https://images.unsplash.com/photo-1512496015851-a90fb38ba796?q=80&w=1600&auto=format&fit=crop' },
+  { id: 'sophisticate', label: 'City Chic', image: 'https://images.unsplash.com/photo-1509631179647-0177331693ae?q=80&w=1600&auto=format&fit=crop' },
+  { id: 'regional', label: 'Coastal Ease', image: 'https://images.unsplash.com/photo-1612817288484-6f916006741a?q=80&w=1600&auto=format&fit=crop' },
 ];
 
 // Already defined at the top
@@ -113,31 +296,46 @@ const COLLECTIONS = [
 
 const Navbar = ({ cartCount, onCartOpen }: { cartCount: number, onCartOpen: () => void }) => {
   const [activeMenu, setActiveMenu] = useState<string | null>(null);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const navigate = useNavigate();
   const { user } = useAuth();
 
   const menuItems = [
     { label: 'The Roster', id: 'shop' },
-    { label: 'UK Archetypes', id: 'collections' },
+    { label: 'Mood Edits', id: 'collections' },
     { label: 'The Agency', id: 'about' },
-    { label: 'OF Strategy', id: 'treatments' },
   ];
+
+  const toggleMobileMenu = () => setIsMobileMenuOpen(!isMobileMenuOpen);
 
   return (
     <nav 
       onMouseLeave={() => setActiveMenu(null)}
-      className="fixed top-0 left-0 w-full z-50 bg-brand-offwhite border-b border-brand-border h-12 md:h-16 flex items-center px-6 md:px-12 transition-all duration-300"
+      className="fixed top-0 left-0 w-full z-50 bg-brand-offwhite border-b border-brand-border h-12 md:h-16 flex items-center px-4 md:px-12 transition-all duration-300"
     >
       <div className="flex-1 flex items-center">
-        <button onClick={() => navigate('/')} className="h-32 md:h-56 flex items-center mr-8 md:mr-16 translate-y-2 md:translate-y-4">
-          <img 
-            src="https://raw.githubusercontent.com/oliviabancroft0-prog/marellaagency/main/ChatGPT%20Image%20Apr%2030%2C%202026%2C%2001_48_30%20AM.png" 
-            alt="Marella Agency Logo" 
-            className="h-full w-auto object-contain mix-blend-multiply" 
-          />
-        </button>
+        <div className="flex items-center">
+          <button 
+            onClick={() => navigate(-1)} 
+            className="h-32 md:h-56 flex items-center mr-4 md:mr-16 translate-y-2 md:translate-y-4"
+          >
+            <img 
+              src="https://raw.githubusercontent.com/oliviabancroft0-prog/marellaagency/main/ChatGPT%20Image%20Apr%2030%2C%202026%2C%2001_48_30%20AM.png" 
+              alt="Marella Agency" 
+              className="h-full w-auto object-contain mix-blend-multiply" 
+              fetchPriority="high"
+              loading="eager"
+            />
+          </button>
+          <button 
+            onClick={() => navigate('/')} 
+            className="hidden sm:block text-[10px] tracking-[0.2em] uppercase font-bold text-brand-black/60 hover:text-brand-black transition-colors"
+          >
+            The Firm
+          </button>
+        </div>
 
-        <div className="hidden lg:flex items-center space-x-8 text-[11px] font-bold tracking-[0.2em] uppercase">
+        <div className="hidden lg:flex items-center space-x-8 text-[11px] font-bold tracking-[0.2em] uppercase ml-12">
           {menuItems.map(item => (
             <button 
               key={item.id}
@@ -151,28 +349,89 @@ const Navbar = ({ cartCount, onCartOpen }: { cartCount: number, onCartOpen: () =
         </div>
       </div>
 
-      <div className="flex justify-end items-center space-x-6 md:space-x-10 text-[11px] font-bold tracking-[0.15em] uppercase">
-        <div className="hidden xl:flex items-center space-x-2 text-brand-black/40">
-          <span>Currency: GBP / £</span>
-        </div>
+      <div className="flex justify-end items-center space-x-4 md:space-x-10 text-[11px] font-bold tracking-[0.15em] uppercase">
         <button className="hover:opacity-50 transition-opacity flex items-center">
           <Search size={16} />
-          <span className="hidden sm:inline ml-3">Registry</span>
+          <span className="hidden lg:inline ml-3 font-semibold">Registry</span>
         </button>
         <button 
           onClick={() => navigate(user ? '/dashboard' : '/login')}
           className="hover:opacity-50 transition-opacity flex items-center"
         >
           <User size={16} />
-          <span className="hidden sm:inline ml-3">{user ? 'Portal' : 'Talent Login'}</span>
+          <span className="hidden lg:inline ml-3 font-semibold">{user ? 'Portal' : 'Talent Login'}</span>
         </button>
         <button onClick={onCartOpen} className="hover:opacity-50 transition-opacity flex items-center">
           <ShoppingBag size={16} />
-          <span className="ml-3">Selections ({cartCount})</span>
+          <span className="hidden lg:inline ml-3 font-semibold">Selections ({cartCount})</span>
+          {cartCount > 0 && <span className="lg:hidden ml-1">({cartCount})</span>}
+        </button>
+        
+        {/* Mobile Hamburger */}
+        <button 
+          onClick={toggleMobileMenu}
+          className="lg:hidden hover:opacity-50 transition-opacity ml-2"
+        >
+          {isMobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
         </button>
       </div>
 
-      {/* Dropdown Menus */}
+      {/* Mobile Menu Overlay */}
+      <AnimatePresence>
+        {isMobileMenuOpen && (
+          <motion.div 
+            initial={{ opacity: 0, x: '100%' }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: '100%' }}
+            transition={{ type: 'spring', damping: 30, stiffness: 300 }}
+            className="fixed inset-0 z-[60] bg-brand-offwhite lg:hidden flex flex-col p-8 pt-24"
+          >
+            <button 
+              onClick={toggleMobileMenu}
+              className="absolute top-6 right-6 p-2 text-brand-black"
+            >
+              <X size={24} />
+            </button>
+            
+            <div className="flex flex-col space-y-8">
+              <button 
+                onClick={() => { navigate('/'); setIsMobileMenuOpen(false); }}
+                className="text-[10px] tracking-[0.3em] uppercase font-bold text-left border-b border-brand-border pb-4 w-fit"
+              >
+                The Firm (Home)
+              </button>
+              {menuItems.map(item => (
+                <button 
+                  key={item.id}
+                  onClick={() => { navigate('/'); setIsMobileMenuOpen(false); }}
+                  className="text-2xl font-serif italic text-left hover:pl-4 transition-all duration-300"
+                >
+                  {item.label}
+                </button>
+              ))}
+            </div>
+
+            <div className="mt-auto space-y-6 pt-12 border-t border-brand-border">
+               <button 
+                onClick={() => { navigate(user ? '/dashboard' : '/login'); setIsMobileMenuOpen(false); }}
+                className="flex items-center space-x-4 text-[11px] tracking-widest uppercase font-bold"
+              >
+                <User size={18} />
+                <span>{user ? 'Talent Portal' : 'Talent Login'}</span>
+              </button>
+              <button 
+                onClick={() => { onCartOpen(); setIsMobileMenuOpen(false); }}
+                className="flex items-center space-x-4 text-[11px] tracking-widest uppercase font-bold"
+              >
+                <ShoppingBag size={18} />
+                <span>My Selections ({cartCount})</span>
+              </button>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Dropdown Menus (Desktop) */}
       <AnimatePresence>
         {activeMenu && (
           <motion.div 
@@ -180,7 +439,7 @@ const Navbar = ({ cartCount, onCartOpen }: { cartCount: number, onCartOpen: () =
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
             transition={{ duration: 0.3, ease: 'easeOut' }}
-            className="absolute top-full left-0 w-full bg-brand-offwhite border-b border-brand-border py-16 px-12 z-40"
+            className="absolute top-full left-0 w-full bg-brand-offwhite border-b border-brand-border py-16 px-12 z-40 hidden lg:block"
           >
             {activeMenu === 'shop' && (
               <div className="max-w-7xl mx-auto grid grid-cols-4 gap-24">
@@ -238,21 +497,33 @@ const Hero = ({ onShopNow }: { onShopNow: () => void }) => {
       <div className="absolute inset-0 z-0">
         <img 
           src="https://raw.githubusercontent.com/oliviabancroft0-prog/marellaagency/main/Sophcoverphoto-CGr776cV.png" 
-          alt="Hero Model"
+          alt="Sophia - Marella Agency"
           className="w-full h-full object-contain"
+          fetchPriority="high"
+          loading="eager"
+          decoding="async"
         />
         <div className="absolute inset-0 bg-brand-black/5"></div>
       </div>
       
-      <div className="relative z-10 max-w-sm">
+      <div className="relative z-10 max-w-sm flex flex-col items-start">
+        <motion.p
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          className="text-white/80 text-[10px] uppercase tracking-[0.4em] font-bold mb-4"
+        >
+          hey im sophia
+        </motion.p>
         <motion.button 
           onClick={onShopNow}
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
-          className="text-white text-[11px] font-medium tracking-[0.3em] uppercase border-b border-white pb-2 hover:opacity-70 transition-opacity"
+          className="bg-blue-600 text-white px-8 py-4 text-[11px] font-bold tracking-[0.3em] uppercase hover:bg-blue-700 transition-all duration-300 relative group overflow-hidden"
         >
-          Apply to Roster
+          <span className="relative z-10">Apply to Roster</span>
+          <span className="absolute bottom-3 left-8 right-8 h-[1px] bg-white transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></span>
         </motion.button>
       </div>
     </section>
@@ -265,32 +536,58 @@ const Philosophy = () => {
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 items-start">
         <div className="space-y-12">
           <h2 className="text-4xl md:text-5xl leading-tight">
-            Authentic vibes and OnlyFans excellence,<br />
+            OnlyFans excellence,<br />
             without ever showing your face
           </h2>
-          <div className="relative aspect-[4/5] w-64">
-            <img 
-              src="https://images.unsplash.com/photo-1554048612-b6a482bc67e5?q=80&w=1200&auto=format&fit=crop" 
-              alt="Philosophy Firm"
-              className="w-full h-full object-cover rounded-sm h-112"
-            />
+          <div className="relative aspect-[4/5] w-full max-w-sm overflow-hidden rounded-sm bg-black/5">
+            <video 
+              autoPlay 
+              muted 
+              loop 
+              playsInline 
+              preload="auto"
+              className="w-full h-full object-cover"
+            >
+              <source src="https://raw.githubusercontent.com/oliviabancroft0-prog/marellaagency/main/Sophia_Intro_website_1.mp4#t=5" type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
           </div>
         </div>
-        <div className="md:pt-32 space-y-12">
-          <div className="aspect-[16/9] w-full">
-            <img 
-              src="https://images.unsplash.com/photo-1483985988355-763728e1935b?q=80&w=1600&auto=format&fit=crop" 
-              alt="Philosophy Lifestyle"
-              className="w-full h-full object-cover rounded-sm"
-            />
-          </div>
-          <div className="max-w-md">
-            <p className="text-lg leading-relaxed font-light text-brand-black/80 mb-8">
-              Bramingham Barely is a top-tier OnlyFans management firm established to identify and scale elite creators within the United Kingdom. We operate at the intersection of cultural authority and professional business management, transforming raw talent into high-revenue commercial entities by leveraging the psychological appeal of the UK persona.
+        <div className="md:pt-32 space-y-12 flex flex-col">
+          <div className="max-w-md order-1">
+            <p className="text-lg leading-relaxed font-light text-brand-black/80 mb-6">
+              Bramingham Barely is a top tier OnlyFans management firm based in the UK.
             </p>
-            <button className="text-[11px] font-medium tracking-[0.3em] uppercase border-b border-brand-black pb-2 hover:opacity-50 transition-opacity">
+            <p className="text-lg leading-relaxed font-light text-brand-black/80 mb-6">
+              We believe the beautiful part of kink is that there's room for everyone ❤️. Yes, it can be harder if you don't fit the usual "norm"... but that doesn't mean it's impossible.
+            </p>
+            <p className="text-lg leading-relaxed font-light text-brand-black/80 mb-6 font-medium italic">
+              We specialize in turning talented British creators into high-earning stars by combining cultural appeal, smart strategy, and real business management.
+            </p>
+            <p className="text-2xl font-serif italic text-brand-black mb-8">
+              In short: we make girls rich
+            </p>
+            <button className="text-[11px] font-bold tracking-[0.3em] uppercase border-b border-brand-black pb-2 hover:opacity-50 transition-opacity mb-12">
               The Agency Pillars
             </button>
+          </div>
+          
+          <div className="space-y-4 order-2 flex flex-col items-center md:items-start">
+            <div className="aspect-[9/16] w-full max-w-[320px] bg-black/5 rounded-lg overflow-hidden shadow-2xl mx-auto md:mx-0">
+              <video 
+                autoPlay 
+                muted 
+                loop 
+                playsInline 
+                preload="auto"
+                className="w-full h-full object-cover"
+              >
+                <source src="https://raw.githubusercontent.com/oliviabancroft0-prog/marellaagency/main/gia_review%20(1).mp4" type="video/mp4" />
+              </video>
+            </div>
+            <p className="text-[10px] tracking-[0.4em] uppercase font-bold text-brand-black/40 text-center w-full max-w-[320px] md:text-left">
+              model review
+            </p>
           </div>
         </div>
       </div>
@@ -320,7 +617,7 @@ const CollectionsSlider = () => {
 
       <div className="relative z-10 w-full px-6 md:px-24 flex justify-between items-end pb-24 h-full">
         <div className="flex flex-col space-y-4">
-          <span className="text-white/60 text-[11px] font-medium tracking-[0.3em] uppercase mb-4">UK Archetypes</span>
+          <span className="text-white/60 text-[11px] font-medium tracking-[0.3em] uppercase mb-4">Mood Edits</span>
           {COLLECTIONS.map((c) => (
             <button 
               key={c.id}
@@ -413,12 +710,12 @@ const Footer = () => {
           <p className="hover:text-brand-black cursor-pointer">UK National</p>
         </div>
         <div className="space-y-6">
-          <p className="text-brand-black font-bold mb-8">UK Archetypes</p>
-          <p className="hover:text-brand-black cursor-pointer">Posh</p>
-          <p className="hover:text-brand-black cursor-pointer">Bratty</p>
-          <p className="hover:text-brand-black cursor-pointer">Girl-Next-Door</p>
-          <p className="hover:text-brand-black cursor-pointer">Sophisticate</p>
-          <p className="hover:text-brand-black cursor-pointer">Regional Hub</p>
+          <p className="text-brand-black font-bold mb-8">Mood Edits</p>
+          <p className="hover:text-brand-black cursor-pointer">Date Night</p>
+          <p className="hover:text-brand-black cursor-pointer">Work Week</p>
+          <p className="hover:text-brand-black cursor-pointer">Weekend Escape</p>
+          <p className="hover:text-brand-black cursor-pointer">City Chic</p>
+          <p className="hover:text-brand-black cursor-pointer">Coastal Ease</p>
         </div>
         <div className="space-y-6">
           <p className="text-brand-black font-bold mb-8">Elite Roster</p>
@@ -478,8 +775,8 @@ const Footer = () => {
   );
 };
 
-const ProductDetail = ({ onBack, onAddToCart }: { onBack: () => void, onAddToCart: () => void }) => {
-  const [qty, setQty] = useState(1);
+const ProductDetail = ({ product, onBack, onAddToCart }: { product: Product, onBack: () => void, onAddToCart: () => void }) => {
+  const [selectedDate, setSelectedDate] = useState('Today');
   
   return (
     <motion.div 
@@ -489,74 +786,97 @@ const ProductDetail = ({ onBack, onAddToCart }: { onBack: () => void, onAddToCar
     >
       <button onClick={onBack} className="mb-8 flex items-center space-x-2 text-[10px] uppercase tracking-widest group">
         <X size={14} className="transition-transform group-hover:rotate-90" />
-        <span>Close</span>
+        <span>Back to Roster</span>
       </button>
-
+      
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
-        <div className="aspect-square bg-brand-offwhite">
-          <img 
-            src="https://images.unsplash.com/photo-1556228720-195a672e8a03?q=80&w=2000&auto=format&fit=crop" 
-            alt="Product detail" 
-            className="w-full h-full object-cover mix-blend-multiply"
-          />
+        <div className="space-y-8">
+          <div className="aspect-[4/5] bg-brand-offwhite rounded-sm overflow-hidden">
+            <img 
+              src={product.image} 
+              alt={product.name} 
+              className="w-full h-full object-cover"
+            />
+          </div>
+          <div className="grid grid-cols-2 gap-4">
+            {product.gallery.map((img, i) => (
+              <div key={i} className="aspect-square bg-brand-offwhite rounded-sm overflow-hidden">
+                <img src={img} className="w-full h-full object-cover" />
+              </div>
+            ))}
+          </div>
         </div>
 
         <div className="space-y-8 max-w-lg">
           <div>
-            <span className="inline-block bg-brand-black text-white text-[9px] px-3 py-1 uppercase tracking-widest mb-4">Elite OnlyFans Management</span>
-            <h1 className="text-5xl md:text-6xl mb-4 italic">OF Operational Excellence</h1>
-            <p className="text-lg text-brand-black/60 mb-6 font-light">24/7 Chat Dominance / High-LTV Retention</p>
+            <div className="flex items-center space-x-3 mb-4">
+              <span className="bg-brand-black text-white text-[9px] px-3 py-1 uppercase tracking-widest">Elite Talent</span>
+              <span className="text-[9px] uppercase tracking-widest text-brand-black/40 font-bold">{product.location} Hub</span>
+            </div>
+            <h1 className="text-5xl md:text-6xl mb-4 italic">{product.name}</h1>
+            <p className="text-lg text-brand-black/60 mb-6 font-light">{product.subtitle}</p>
           </div>
 
-          <p className="text-lg leading-relaxed font-light">
-            Bramingham Barely provides 24/7 professional oversight of all creator communications on OnlyFans. Our management team employs seductive sales techniques and expert PPV optimization to maximize your revenue.
-          </p>
-
-          <ul className="space-y-4 text-sm font-light list-disc list-inside border-t border-brand-border pt-8">
-            <li>Account & 24/7 Chat Management</li>
-            <li>High-Converting PPV Strategies</li>
-            <li>Subscriber Retention & Fan LTV Management</li>
-            <li>Administrative & Scaling Excellence</li>
-          </ul>
+          <div className="space-y-4">
+            <h3 className="text-[10px] uppercase tracking-widest font-bold">Biography</h3>
+            <p className="text-lg leading-relaxed font-light text-brand-black/80">
+              {product.bio}
+            </p>
+          </div>
 
           <div className="pt-8 border-t border-brand-border space-y-6">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center border border-brand-border rounded-full px-4 py-3">
-                <button onClick={() => setQty(Math.max(1, qty-1))}><Minus size={14} /></button>
-                <span className="px-6 font-medium">{qty}</span>
-                <button onClick={() => setQty(qty+1)}><Plus size={14} /></button>
+            <div className="space-y-4">
+              <h3 className="text-[10px] uppercase tracking-widest font-bold">Booking Details</h3>
+              <div className="grid grid-cols-2 gap-4">
+                <div className="border border-brand-border p-4 rounded-sm">
+                  <p className="text-[9px] uppercase tracking-widest text-brand-black/40 mb-1">Fee</p>
+                  <p className="text-xl font-medium">{product.price}</p>
+                </div>
+                <div className="border border-brand-border p-4 rounded-sm">
+                  <p className="text-[9px] uppercase tracking-widest text-brand-black/40 mb-1">Availability</p>
+                  <p className="text-lg font-medium text-green-600">Immediate</p>
+                </div>
               </div>
-              <p className="text-2xl font-medium">£1,499</p>
+              
+              <div className="pt-4 space-y-4">
+                <p className="text-[10px] uppercase tracking-widest font-bold">Social Connection</p>
+                <div className="flex space-x-6">
+                   <a href="#" className="flex items-center space-x-2 text-[11px] font-mono hover:text-blue-600 transition-colors">
+                     <Instagram size={14} />
+                     <span>{product.instagram}</span>
+                   </a>
+                   <a href="#" className="flex items-center space-x-2 text-[11px] font-mono hover:text-blue-600 transition-colors">
+                     <Globe size={14} />
+                     <span>OnlyFans Profile</span>
+                   </a>
+                </div>
+              </div>
+            </div>
+
+            <div className="pt-8 space-y-4">
+              <p className="text-[10px] uppercase tracking-widest font-bold">Select Date for Session</p>
+              <div className="flex flex-wrap gap-2">
+                {['Today', 'Tomorrow', 'This Weekend', 'Next Week'].map(date => (
+                  <button 
+                    key={date}
+                    onClick={() => setSelectedDate(date)}
+                    className={`px-6 py-3 text-[10px] uppercase tracking-widest font-bold transition-all ${selectedDate === date ? 'bg-brand-black text-white' : 'bg-brand-offwhite text-brand-black hover:bg-brand-border'}`}
+                  >
+                    {date}
+                  </button>
+                ))}
+              </div>
             </div>
 
             <button 
               onClick={onAddToCart}
               className="w-full bg-brand-black text-white py-5 rounded-full text-[11px] uppercase tracking-[0.3em] font-bold hover:bg-brand-black/90 transition-colors"
             >
-              Add to Shortlist
+              Confirm Booking Selection
             </button>
-            <button className="w-full border border-brand-border py-5 rounded-full text-[11px] uppercase tracking-[0.3em] font-bold hover:bg-brand-offwhite transition-colors">
-              Request Strategy Call
-            </button>
-          </div>
-
-          <div className="grid grid-cols-2 gap-8 pt-12">
-            <div>
-              <p className="text-4xl font-serif italic mb-2">£1M+</p>
-              <p className="text-[10px] uppercase tracking-widest text-brand-black/50">Projected annual UK account revenue</p>
-            </div>
-            <div>
-              <p className="text-4xl font-serif italic mb-2">100%</p>
-              <p className="text-[10px] uppercase tracking-widest text-brand-black/50">Authentic UK Persona Guarantee</p>
-            </div>
-            <div>
-              <p className="text-4xl font-serif italic mb-2">24/7</p>
-              <p className="text-[10px] uppercase tracking-widest text-brand-black/50">OnlyFans Chat & PPV Optimization</p>
-            </div>
-            <div>
-              <p className="text-4xl font-serif italic mb-2">Elite</p>
-              <p className="text-[10px] uppercase tracking-widest text-brand-black/50">Network Synergy & Scale</p>
-            </div>
+            <p className="text-[9px] text-center text-brand-black/40 uppercase tracking-widest mt-4 italic">
+              *All sessions are managed through our secure UK architecture.
+            </p>
           </div>
         </div>
       </div>
@@ -615,15 +935,15 @@ const CartDrawer = ({ isOpen, onClose, cartCount }: { isOpen: boolean, onClose: 
               )}
 
               <div className="pt-12 border-t border-brand-border space-y-6">
-                <span className="text-[10px] uppercase tracking-widest text-brand-black/40 font-bold">Recommended Extensions</span>
+                <span className="text-[10px] uppercase tracking-widest text-brand-black/40 font-bold">Recommended Talents</span>
                 <div className="flex space-x-4 overflow-x-auto hide-scrollbar pb-4">
-                  {PRODUCTS.slice(1, 3).map(p => (
+                  {MODELS.slice(1, 4).map(p => (
                     <div key={p.id} className="min-w-[12rem] group">
                       <div className="aspect-square bg-brand-offwhite mb-2 overflow-hidden">
                         <img src={p.image} className="w-full h-full object-cover mix-blend-multiply group-hover:scale-105 transition-transform" />
                       </div>
                       <p className="text-xs font-serif italic">{p.name}</p>
-                      <button className="text-[9px] uppercase tracking-widest mt-2 border-b border-brand-black">Add to brief</button>
+                      <button className="text-[9px] uppercase tracking-widest mt-2 border-b border-brand-black">View Profile</button>
                     </div>
                   ))}
                 </div>
@@ -661,7 +981,7 @@ const AppLayout = ({ children, cartCount, onCartOpen }: { children: React.ReactN
   );
 };
 
-const Home = ({ onViewChange }: { onViewChange: (v: ViewState) => void }) => {
+const Home = ({ onViewChange, onProductClick }: { onViewChange: (v: ViewState) => void, onProductClick: (p: Product) => void }) => {
   return (
     <motion.div 
       key="home"
@@ -674,19 +994,22 @@ const Home = ({ onViewChange }: { onViewChange: (v: ViewState) => void }) => {
       
       <section className="py-24 px-6 md:px-12 bg-white">
         <div className="max-w-7xl mx-auto">
-          <div className="flex justify-between items-end mb-16">
+          <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 gap-8">
             <div className="space-y-4">
-              <h2 className="text-4xl italic">UK Market Dominance</h2>
-              <p className="text-lg font-light text-brand-black/60 max-w-xs">We provide the strategic OnlyFans architecture required to turn raw UK talent into elite commercial assets.</p>
+              <h2 className="text-4xl italic">The Lineup</h2>
+              <p className="text-lg font-light text-brand-black/60 max-w-md">
+                These are our girls. The sexiest, most obedient, and most insatiable talents we represent. 
+                Pick one. Or pick several. Just know once you enter The Lineup… you won’t want to leave
+              </p>
             </div>
             <button onClick={() => onViewChange('all-products')} className="text-[11px] font-medium tracking-[0.3em] uppercase border-b border-brand-black pb-2 hover:opacity-50 transition-opacity">
-              View OnlyFans Suite
+              View The Full Roster
             </button>
           </div>
           
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-            {PRODUCTS.map((p) => (
-              <ProductCard key={p.id} product={p} onClick={() => onViewChange('product')} />
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-16">
+            {MODELS.slice(0, 4).map((p) => (
+              <ProductCard key={p.id} product={p} onClick={() => onProductClick(p)} />
             ))}
           </div>
         </div>
@@ -735,10 +1058,17 @@ export default function App() {
   const [view, setView] = useState<ViewState>('home');
   const [cartOpen, setCartOpen] = useState(false);
   const [cartCount, setCartCount] = useState(0);
+  const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
 
   const handleAddToCart = () => {
     setCartCount(prev => prev + 1);
     setCartOpen(true);
+  };
+
+  const handleProductClick = (product: Product) => {
+    setSelectedProduct(product);
+    setView('product');
+    window.scrollTo(0, 0);
   };
 
   const wrapInLayout = (content: React.ReactNode) => (
@@ -754,15 +1084,19 @@ export default function App() {
         <AnimatePresence mode="wait">
           {view === 'home' ? (
             <motion.div key="home">
-              <Home onViewChange={(v) => { setView(v); window.scrollTo(0, 0); }} />
+              <Home onViewChange={(v) => { setView(v); window.scrollTo(0, 0); }} onProductClick={handleProductClick} />
             </motion.div>
-          ) : view === 'product' ? (
+          ) : view === 'product' && selectedProduct ? (
             <motion.div key="product">
-              <ProductDetail onBack={() => setView('home')} onAddToCart={handleAddToCart} />
+              <ProductDetail 
+                product={selectedProduct} 
+                onBack={() => setView('home')} 
+                onAddToCart={handleAddToCart} 
+              />
             </motion.div>
           ) : (
             <motion.div key="all-products">
-              <AllProductsView onBack={() => setView('home')} onProductClick={() => setView('product')} />
+              <AllProductsView onBack={() => setView('home')} onProductClick={handleProductClick} />
             </motion.div>
           )}
         </AnimatePresence>
