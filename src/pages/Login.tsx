@@ -135,12 +135,17 @@ export const Login: React.FC = () => {
       <div className="w-full max-w-md bg-white border border-brand-border p-12 rounded-sm shadow-sm">
         <div className="text-center mb-12">
           <h1 className="text-4xl font-serif italic mb-4">Creator Login</h1>
-          <p className="text-sm font-light text-brand-black/50 uppercase tracking-widest">Access your Creator Dashboard</p>
+          <p className="text-sm font-light text-brand-black/50 uppercase tracking-widest">Join our global creator network</p>
         </div>
 
         {error && (
-          <div className="mb-8 p-4 bg-red-50 border border-red-100 text-red-600 text-xs uppercase tracking-widest text-center">
+          <div className="mb-8 p-4 bg-red-50 border border-red-100 text-red-600 text-xs uppercase tracking-widest text-center leading-relaxed">
             {error}
+            {(error.includes('Connection failed') || error.includes('403')) && (
+              <p className="mt-2 text-[10px] lowercase italic normal-case">
+                Note: If you receive a Google "403" page, your InsForge project may be set to "Internal" access only. Please check your credentials or contact support.
+              </p>
+            )}
           </div>
         )}
 
@@ -253,10 +258,10 @@ export const Login: React.FC = () => {
           <span>Continue with Google</span>
         </button>
 
-        <p className="mt-12 text-center text-[10px] uppercase tracking-widest text-brand-black/40 leading-relaxed">
-          Welcome to the future of content. Join the Bramingham Barely network today.<br />
-          Experience professional management tailored for success.
-        </p>
+          <p className="mt-12 text-center text-[10px] uppercase tracking-widest text-brand-black/40 leading-relaxed">
+            Joining the Bramingham Barely network is open to all ambitious creators.<br />
+            Step into professional management designed for your growth.
+          </p>
       </div>
     </div>
   );

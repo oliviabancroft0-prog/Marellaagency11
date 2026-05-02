@@ -1,7 +1,7 @@
 import { createClient } from '@insforge/sdk';
 
-const insforgeUrl = import.meta.env.VITE_INSFORGE_URL;
-const insforgeAnonKey = import.meta.env.VITE_INSFORGE_ANON_KEY;
+const insforgeUrl = (import.meta as any).env.VITE_INSFORGE_URL;
+const insforgeAnonKey = (import.meta as any).env.VITE_INSFORGE_ANON_KEY;
 
 if (!insforgeUrl || !insforgeAnonKey) {
   console.error('InsForge credentials missing! Ensure VITE_INSFORGE_URL and VITE_INSFORGE_ANON_KEY are set in your environment variables.');
