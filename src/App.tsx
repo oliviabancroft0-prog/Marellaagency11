@@ -494,11 +494,11 @@ const Navbar = ({ cartCount, onCartOpen }: { cartCount: number, onCartOpen: () =
 const Hero = ({ onShopNow }: { onShopNow: () => void }) => {
   return (
     <section className="relative h-screen w-full flex items-center px-6 md:px-24 overflow-hidden pt-12 md:pt-16 bg-brand-offwhite">
-      <div className="absolute inset-0 z-0">
+      <div className="absolute inset-0 z-0 pt-12 md:pt-20">
         <img 
           src="https://raw.githubusercontent.com/oliviabancroft0-prog/marellaagency/main/Sophcoverphoto-CGr776cV.png" 
           alt="Sophia - Marella Agency"
-          className="w-full h-full object-contain"
+          className="w-full h-full object-contain object-bottom md:object-right"
           fetchPriority="high"
           loading="eager"
           decoding="async"
@@ -506,21 +506,22 @@ const Hero = ({ onShopNow }: { onShopNow: () => void }) => {
         <div className="absolute inset-0 bg-brand-black/5"></div>
       </div>
       
-      <div className="relative z-10 max-w-sm flex flex-col items-start">
-        <motion.p
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-          className="text-white/80 text-[10px] uppercase tracking-[0.4em] font-bold mb-4"
-        >
-          hey, I'm sophia
-        </motion.p>
+      <motion.p
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1, delay: 0.4 }}
+        className="absolute top-[10%] md:top-[12%] right-[15%] md:right-[25%] text-black text-4xl md:text-7xl font-serif italic z-20"
+      >
+        hey im olivia
+      </motion.p>
+
+      <div className="relative z-10 max-w-sm flex flex-col items-start pt-24">
         <motion.button 
           onClick={onShopNow}
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
-          className="bg-blue-600 text-white px-8 py-4 text-[11px] font-bold tracking-[0.3em] uppercase hover:bg-blue-700 transition-all duration-300 relative group overflow-hidden"
+          transition={{ duration: 0.8, delay: 0.6, ease: "easeOut" }}
+          className="bg-blue-600 text-white px-10 py-5 text-[12px] font-bold tracking-[0.3em] uppercase hover:bg-blue-700 transition-all duration-300 relative group overflow-hidden shadow-xl"
         >
           <span className="relative z-10">Join the Roster</span>
           <span className="absolute bottom-3 left-8 right-8 h-[1px] bg-white transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></span>
@@ -1104,11 +1105,7 @@ export default function App() {
       
       <Route path="/login" element={wrapInLayout(<Login />)} />
       
-      <Route path="/dashboard" element={
-        <ProtectedRoute>
-          {wrapInLayout(<Dashboard />)}
-        </ProtectedRoute>
-      } />
+      <Route path="/dashboard" element={wrapInLayout(<Dashboard />)} />
 
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
