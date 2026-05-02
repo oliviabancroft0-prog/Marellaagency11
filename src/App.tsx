@@ -48,7 +48,7 @@ const MODELS: Product[] = [
   { 
     id: 'sophia', 
     name: 'Sophia', 
-    subtitle: 'High-Fashion Elite', 
+    subtitle: 'High-Fashion Style', 
     location: 'Greater London', 
     instagram: '@sophia_marella', 
     onlyfans: 'onlyfans.com/sophia_elite',
@@ -232,7 +232,7 @@ const AllProductsView = ({ onBack, onProductClick }: { onBack: () => void, onPro
             <span className="text-brand-black">The Lineup</span>
           </nav>
           <h1 className="text-6xl italic">The Roster</h1>
-          <p className="text-brand-black/50 mt-4 text-lg font-light tracking-wide">Elite United Kingdom talent curated for dominance.</p>
+          <p className="text-brand-black/50 mt-4 text-lg font-light tracking-wide">Professional United Kingdom talent curated for success.</p>
         </div>
         
         <div className="relative">
@@ -359,7 +359,7 @@ const Navbar = ({ cartCount, onCartOpen }: { cartCount: number, onCartOpen: () =
           className="hover:opacity-50 transition-opacity flex items-center"
         >
           <User size={16} />
-          <span className="hidden lg:inline ml-3 font-semibold">{user ? 'Portal' : 'Talent Login'}</span>
+          <span className="hidden lg:inline ml-3 font-semibold">{user ? 'Portal' : 'Creator Login'}</span>
         </button>
         <button onClick={onCartOpen} className="hover:opacity-50 transition-opacity flex items-center">
           <ShoppingBag size={16} />
@@ -417,7 +417,7 @@ const Navbar = ({ cartCount, onCartOpen }: { cartCount: number, onCartOpen: () =
                 className="flex items-center space-x-4 text-[11px] tracking-widest uppercase font-bold"
               >
                 <User size={18} />
-                <span>{user ? 'Talent Portal' : 'Talent Login'}</span>
+                <span>{user ? 'Creator Portal' : 'Creator Login'}</span>
               </button>
               <button 
                 onClick={() => { onCartOpen(); setIsMobileMenuOpen(false); }}
@@ -445,7 +445,7 @@ const Navbar = ({ cartCount, onCartOpen }: { cartCount: number, onCartOpen: () =
               <div className="max-w-7xl mx-auto grid grid-cols-4 gap-24">
                 <div className="space-y-6">
                   <p className="text-brand-black font-bold text-[10px] uppercase tracking-widest mb-8">By Demand</p>
-                  <p className="text-xl font-serif italic hover:opacity-50 cursor-pointer">View Elite Roster</p>
+                  <p className="text-xl font-serif italic hover:opacity-50 cursor-pointer">View Roster</p>
                   <p className="text-xl font-serif italic hover:opacity-50 cursor-pointer">Emerging UK Models</p>
                   <p className="text-xl font-serif italic hover:opacity-50 cursor-pointer">Highest Earners</p>
                 </div>
@@ -513,7 +513,7 @@ const Hero = ({ onShopNow }: { onShopNow: () => void }) => {
           transition={{ duration: 0.8, ease: "easeOut" }}
           className="text-white/80 text-[10px] uppercase tracking-[0.4em] font-bold mb-4"
         >
-          hey im sophia
+          hey, I'm sophia
         </motion.p>
         <motion.button 
           onClick={onShopNow}
@@ -522,7 +522,7 @@ const Hero = ({ onShopNow }: { onShopNow: () => void }) => {
           transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
           className="bg-blue-600 text-white px-8 py-4 text-[11px] font-bold tracking-[0.3em] uppercase hover:bg-blue-700 transition-all duration-300 relative group overflow-hidden"
         >
-          <span className="relative z-10">Apply to Roster</span>
+          <span className="relative z-10">Join the Roster</span>
           <span className="absolute bottom-3 left-8 right-8 h-[1px] bg-white transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></span>
         </motion.button>
       </div>
@@ -653,10 +653,10 @@ const Footer = () => {
         />
         <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-6">
           <h2 className="text-4xl md:text-6xl max-w-2xl leading-tight mb-8">
-            The UK persona is an elite financial asset. Let us manage the OnlyFans architecture.
+            The UK persona is a powerful creative asset. Let us manage the OnlyFans architecture.
           </h2>
           <button className="text-[11px] font-medium tracking-[0.3em] uppercase border-b border-brand-black pb-2 hover:opacity-50 transition-opacity">
-            Apply to the Roster
+            Join the Roster
           </button>
         </div>
       </div>
@@ -703,7 +703,7 @@ const Footer = () => {
       <div className="px-6 md:px-12 py-24 border-t border-brand-border grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-12 text-[11px] tracking-widest uppercase text-brand-black/60">
         <div className="space-y-6">
           <p className="text-brand-black font-bold mb-8">UK Market Hubs</p>
-          <p className="hover:text-brand-black cursor-pointer">London Elite</p>
+          <p className="hover:text-brand-black cursor-pointer">London Hub</p>
           <p className="hover:text-brand-black cursor-pointer">Manchester Silk</p>
           <p className="hover:text-brand-black cursor-pointer">Birmingham Style</p>
           <p className="hover:text-brand-black cursor-pointer">Northern Authority</p>
@@ -718,7 +718,7 @@ const Footer = () => {
           <p className="hover:text-brand-black cursor-pointer">Coastal Ease</p>
         </div>
         <div className="space-y-6">
-          <p className="text-brand-black font-bold mb-8">Elite Roster</p>
+          <p className="text-brand-black font-bold mb-8">Our Roster</p>
           <p className="hover:text-brand-black cursor-pointer">Top 0.1% Management</p>
           <p className="hover:text-brand-black cursor-pointer">Emerging Creations</p>
           <p className="hover:text-brand-black cursor-pointer">UK Exclusive</p>
@@ -727,7 +727,7 @@ const Footer = () => {
         <div className="space-y-6">
           <p className="text-brand-black font-bold mb-8">Creator Portal</p>
           <p className="hover:text-brand-black cursor-pointer">Login</p>
-          <p className="hover:text-brand-black cursor-pointer">Apply Now</p>
+          <p className="hover:text-brand-black cursor-pointer">Join Now</p>
         </div>
         <div className="space-y-6">
           <p className="text-brand-black font-bold mb-8">The Agency</p>
@@ -748,10 +748,10 @@ const Footer = () => {
 
       <div className="px-6 md:px-12 py-12 border-t border-brand-border flex flex-col lg:flex-row justify-between items-center space-y-12 lg:space-y-0">
         <div className="flex flex-col space-y-4">
-          <p className="text-[11px] tracking-widest uppercase">Apply for the Bramingham Barely United Kingdom Elite Roster</p>
+          <p className="text-[11px] tracking-widest uppercase">Join the Bramingham Barely United Kingdom Roster</p>
           <div className="flex border-b border-brand-black pb-2">
             <input type="email" placeholder="OnlyFans Link / Social Footprint" className="bg-transparent text-sm w-64 focus:outline-none" />
-            <button className="text-[10px] tracking-widest uppercase font-bold">Apply</button>
+            <button className="text-[10px] tracking-widest uppercase font-bold">Join</button>
           </div>
         </div>
         
@@ -810,7 +810,7 @@ const ProductDetail = ({ product, onBack, onAddToCart }: { product: Product, onB
         <div className="space-y-8 max-w-lg">
           <div>
             <div className="flex items-center space-x-3 mb-4">
-              <span className="bg-brand-black text-white text-[9px] px-3 py-1 uppercase tracking-widest">Elite Talent</span>
+              <span className="bg-brand-black text-white text-[9px] px-3 py-1 uppercase tracking-widest">Verified Talent</span>
               <span className="text-[9px] uppercase tracking-widest text-brand-black/40 font-bold">{product.location} Hub</span>
             </div>
             <h1 className="text-5xl md:text-6xl mb-4 italic">{product.name}</h1>
@@ -920,7 +920,7 @@ const CartDrawer = ({ isOpen, onClose, cartCount }: { isOpen: boolean, onClose: 
                     <img src="https://images.unsplash.com/photo-1556228720-195a672e8a03?q=80&w=400" className="w-full h-full object-cover mix-blend-multiply" />
                   </div>
                   <div className="flex-1">
-                    <h4 className="font-serif italic mb-1">Elite Management</h4>
+                    <h4 className="font-serif italic mb-1">Professional Management</h4>
                     <p className="text-[10px] text-brand-black/50 uppercase tracking-widest mb-4">Scalability / Frictionless</p>
                     <div className="flex items-center justify-between">
                        <div className="flex items-center border border-brand-border rounded-full px-3 py-1">

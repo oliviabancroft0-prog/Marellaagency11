@@ -32,19 +32,23 @@
 import { insforge } from './insforge';
 
 export const syncUserProfile = async () => {
-  const { data: { user } } = await insforge.auth.getCurrentUser();
-  if (!user) return;
+  try {
+    const { data: { user } } = await insforge.auth.getCurrentUser();
+    if (!user) return;
 
-  // Attempt to upsert profile
-  const { error } = await insforge.database
-    .from('users')
-    .upsert({
-      id: user.id,
-      full_name: (user as any).name || user.email,
-      updated_at: new Date().toISOString()
-    });
+    // Attempt to upsert profile
+    const { error } = await insforge.database
+      .from('users')
+      .upsert({
+        id: user.id,
+        full_name: (user as any).name || user.email,
+        updated_at: new Date().toISOString()
+      });
 
-  if (error) {
-    console.error('Error syncing user profile:', error.message);
+    if (error) {
+      console.error('Error syncing user profile:', error.message);
+    }
+  } catch (err) {
+    console.error('Network error syncing profile:', err);
   }
 };

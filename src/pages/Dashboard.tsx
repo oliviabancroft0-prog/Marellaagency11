@@ -45,7 +45,7 @@ export const Dashboard: React.FC = () => {
           <div>
             <h1 className="text-4xl font-serif italic mb-2">Welcome Back, {user?.email?.split('@')[0]}</h1>
             <div className="flex items-center space-x-3 text-sm font-light text-brand-black/50 uppercase tracking-widest">
-              <span>United Kingdom Elite Roster</span>
+              <span>United Kingdom Creator Network</span>
               <span className="w-4 h-[1px] bg-brand-border"></span>
               <div className="flex items-center space-x-1 text-green-600">
                 <ShieldCheck size={14} />

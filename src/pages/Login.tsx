@@ -22,21 +22,31 @@ export const Login: React.FC = () => {
     setError(null);
     setMessage(null);
 
-    const { error } = await insforge.auth.signInWithPassword({
-      email,
-      password,
-    });
+    try {
+      const { error } = await insforge.auth.signInWithPassword({
+        email,
+        password,
+      });
 
-    if (error) {
-      if (error.message.toLowerCase().includes('verify your email')) {
-        setShowOtp(true);
-        setMessage('Please enter the 6-digit code sent to your email.');
+      if (error) {
+        if (error.message.toLowerCase().includes('verify your email')) {
+          setShowOtp(true);
+          setMessage('Please enter the 6-digit code sent to your email.');
+        } else {
+          setError(error.message);
+        }
       } else {
-        setError(error.message);
+        navigate(from, { replace: true });
       }
+    } catch (err: any) {
+      if (err.message === 'Failed to fetch' || err.name === 'TypeError') {
+        setError('Connection failed. Please ensure the InsForge URL is configured correctly in Vercel settings.');
+      } else {
+        setError('An unexpected network error occurred.');
+      }
+      console.error('Login error:', err);
+    } finally {
       setLoading(false);
-    } else {
-      navigate(from, { replace: true });
     }
   };
 
@@ -45,29 +55,32 @@ export const Login: React.FC = () => {
     setLoading(true);
     setError(null);
 
-    const { error } = await insforge.auth.verifyEmail({
-      email,
-      otp,
-    });
-
-    if (error) {
-      setError(error.message);
-      setLoading(false);
-    } else {
-      // After verification, we usually need to sign in again or the session might be established
-      // Try to sign in with the password we still have in state
-      const { error: loginError } = await insforge.auth.signInWithPassword({
+    try {
+      const { error } = await insforge.auth.verifyEmail({
         email,
-        password,
+        otp,
       });
 
-      if (loginError) {
-        setError('Verification successful. Please sign in now.');
-        setShowOtp(false);
-        setLoading(false);
+      if (error) {
+        setError(error.message);
       } else {
-        navigate(from, { replace: true });
+        const { error: loginError } = await insforge.auth.signInWithPassword({
+          email,
+          password,
+        });
+
+        if (loginError) {
+          setError('Verification successful. Please sign in now.');
+          setShowOtp(false);
+        } else {
+          navigate(from, { replace: true });
+        }
       }
+    } catch (err: any) {
+      setError('Connection failed. Please check your network.');
+      console.error('Verify error:', err);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -76,13 +89,18 @@ export const Login: React.FC = () => {
     setError(null);
     setMessage(null);
 
-    const { error } = await insforge.auth.signInWithOAuth({
-      provider: 'google',
-      redirectTo: window.location.origin + '/dashboard',
-    });
+    try {
+      const { error } = await insforge.auth.signInWithOAuth({
+        provider: 'google',
+        redirectTo: window.location.origin + '/dashboard',
+      });
 
-    if (error) {
-      setError(error.message);
+      if (error) {
+        setError(error.message);
+        setLoading(false);
+      }
+    } catch (err: any) {
+      setError('OAuth connection failed. Ensure your InsForge configuration allows this domain.');
       setLoading(false);
     }
     // Redirect happens automatically for OAuth
@@ -93,17 +111,21 @@ export const Login: React.FC = () => {
     setError(null);
     setMessage(null);
 
-    const { error } = await insforge.auth.signUp({
-      email,
-      password,
-    });
+    try {
+      const { error } = await insforge.auth.signUp({
+        email,
+        password,
+      });
 
-    if (error) {
-      setError(error.message);
-      setLoading(false);
-    } else {
-      setShowOtp(true);
-      setMessage('A verification code has been sent to your email.');
+      if (error) {
+        setError(error.message);
+      } else {
+        setShowOtp(true);
+        setMessage('A verification code has been sent to your email.');
+      }
+    } catch (err: any) {
+      setError('Registration failed. Check your network or credentials.');
+    } finally {
       setLoading(false);
     }
   };
@@ -112,8 +134,8 @@ export const Login: React.FC = () => {
     <div className="min-h-screen pt-12 md:pt-16 pb-12 px-6 flex flex-col items-center bg-brand-offwhite">
       <div className="w-full max-w-md bg-white border border-brand-border p-12 rounded-sm shadow-sm">
         <div className="text-center mb-12">
-          <h1 className="text-4xl font-serif italic mb-4">Talent Login</h1>
-          <p className="text-sm font-light text-brand-black/50 uppercase tracking-widest">Access the Elite Roster Portal</p>
+          <h1 className="text-4xl font-serif italic mb-4">Creator Login</h1>
+          <p className="text-sm font-light text-brand-black/50 uppercase tracking-widest">Access your Creator Dashboard</p>
         </div>
 
         {error && (
@@ -176,7 +198,7 @@ export const Login: React.FC = () => {
                   disabled={loading}
                   className="w-full border border-brand-border text-brand-black py-4 rounded-full text-[11px] uppercase tracking-[0.3em] font-bold hover:bg-brand-offwhite transition-colors disabled:opacity-50"
                 >
-                  Request Access (Sign Up)
+                  Join the Roster (Sign Up)
                 </button>
             </div>
           </>
@@ -232,8 +254,8 @@ export const Login: React.FC = () => {
         </button>
 
         <p className="mt-12 text-center text-[10px] uppercase tracking-widest text-brand-black/40 leading-relaxed">
-          Access is restricted to verified talent within the Bramingham Barely network.<br />
-          Contact your manager for credentials if required.
+          Welcome to the future of content. Join the Bramingham Barely network today.<br />
+          Experience professional management tailored for success.
         </p>
       </div>
     </div>
