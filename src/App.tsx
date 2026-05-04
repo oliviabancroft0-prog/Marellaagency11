@@ -5,7 +5,7 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence, useScroll, useTransform } from 'motion/react';
-import { Routes, Route, useNavigate, useLocation, Navigate, Link, useParams } from 'react-router-dom';
+import { Routes, Route, useNavigate, useLocation, Navigate, Link, useParams, useNavigationType } from 'react-router-dom';
 import { 
   Search, 
   User, 
@@ -27,6 +27,19 @@ import { Login } from './pages/Login';
 import { Dashboard } from './pages/Dashboard';
 import { ProtectedRoute } from './components/ProtectedRoute';
 import { useAuth } from './context/AuthContext';
+
+const ScrollToTop = () => {
+  const { pathname } = useLocation();
+  const navType = useNavigationType() as any;
+  
+  useEffect(() => {
+    if (navType !== 'POP') {
+      window.scrollTo(0, 0);
+    }
+  }, [pathname, navType]);
+  
+  return null;
+};
 
 // --- Types & Constants ---
 
@@ -120,18 +133,147 @@ const MODELS: Product[] = [
     price: '£300/Session', 
     image: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?q=80&w=1000',
     gallery: []
+  },
+  { 
+    id: 'freya', 
+    name: 'Freya', 
+    subtitle: 'Northern Shores Signature', 
+    location: 'Newcastle', 
+    instagram: '@freya_tyne', 
+    onlyfans: 'onlyfans.com/freya_geordie',
+    bio: 'Freya captures the raw, energetic spirit of the North East. Her branding prioritises high-energy engagement and a relatable, yet polished Northern aesthetic.',
+    price: '£280/Session', 
+    image: 'https://images.unsplash.com/photo-1524250502761-1ac6f2e30d43?q=80&w=1000',
+    gallery: []
+  },
+  { 
+    id: 'florence', 
+    name: 'Florence', 
+    subtitle: 'Oxfordshire Academic', 
+    location: 'Oxford', 
+    instagram: '@flo_oxford', 
+    onlyfans: 'onlyfans.com/florence_vibe',
+    bio: 'Intellectual elegance meets digital wealth architecture. Florence specializes in the "Academic Chic" narrative, driving high retention through sophisticated dialogue and content.',
+    price: '£420/Session', 
+    image: 'https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?q=80&w=1000',
+    gallery: []
+  },
+  { 
+    id: 'poppy', 
+    name: 'Poppy', 
+    subtitle: 'Coastal Breeze Signature', 
+    location: 'Brighton', 
+    instagram: '@poppy_brighton', 
+    onlyfans: 'onlyfans.com/poppy_waves',
+    bio: 'Brighton-based and high-spirited. Poppy leverages her vibrant coastal lifestyle to create a unique "Sun-Kissed" brand that consistently ranks high in engagement.',
+    price: '£320/Session', 
+    image: 'https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?q=80&w=1000',
+    gallery: []
+  },
+  { 
+    id: 'willow', 
+    name: 'Willow', 
+    subtitle: 'Scottish Heritage Excellence', 
+    location: 'Edinburgh', 
+    instagram: '@willow_edi', 
+    onlyfans: 'onlyfans.com/willow_scot',
+    bio: 'The pinnacle of Scottish talent management. Willow bridges the gap between historical heritage backgrounds and contemporary digital performance.',
+    price: '£480/Session', 
+    image: 'https://images.unsplash.com/photo-1531123897727-8f129e1688ce?q=80&w=1000',
+    gallery: []
+  },
+  { 
+    id: 'evie', 
+    name: 'Evie', 
+    subtitle: 'Lakeside Industrial', 
+    location: 'Sheffield', 
+    instagram: '@evie_steel', 
+    onlyfans: 'onlyfans.com/evie_sheff',
+    bio: 'Sheffield-born grit meets high-fashion management. Evie leverages her industrial-chic aesthetic to dominate the regional market with high-yield results.',
+    price: '£260/Session', 
+    image: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=1000',
+    gallery: []
+  },
+  { 
+    id: 'elsie', 
+    name: 'Elsie', 
+    subtitle: 'Celtic Authority', 
+    location: 'Cardiff', 
+    instagram: '@elsie_welsh', 
+    onlyfans: 'onlyfans.com/elsie_cardiff',
+    bio: 'Elsie represents the sovereign Welsh signature. Her presence is a masterclass in regional cultural resonance and high-fidelity subscriber engagement.',
+    price: '£310/Session', 
+    image: 'https://images.unsplash.com/photo-1554151228-14d9def656e4?q=80&w=1000',
+    gallery: []
+  },
+  { 
+    id: 'sienna', 
+    name: 'Sienna', 
+    subtitle: 'Urban Merseyside', 
+    location: 'Liverpool', 
+    instagram: '@sienna_mersey', 
+    onlyfans: 'onlyfans.com/sienna_liverpool',
+    bio: 'Liverpool charisma paired with professional management architecture. Sienna specializes in the "City Chic" lifestyle, driving record retention rates.',
+    price: '£340/Session', 
+    image: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=1000',
+    gallery: []
+  },
+  { 
+    id: 'alice', 
+    name: 'Alice', 
+    subtitle: 'Nottingham Signature', 
+    location: 'Nottingham', 
+    instagram: '@alice_notts', 
+    onlyfans: 'onlyfans.com/alice_lace',
+    bio: 'The evolution of Midlands industrial elegance. Alice leverages her organic charm and sophisticated content strategy to ensure peak fan lifetime value.',
+    price: '£290/Session', 
+    image: 'https://images.unsplash.com/photo-1534751435030-ef479953ee27?q=80&w=1000',
+    gallery: []
+  },
+  { 
+    id: 'rose', 
+    name: 'Rose', 
+    subtitle: 'Glasgow Grit Signature', 
+    location: 'Glasgow', 
+    instagram: '@rose_clyde', 
+    onlyfans: 'onlyfans.com/rose_glasgow',
+    bio: 'Unapologetically Glaswegian with a high-fashion edge. Rose combines cultural grit with technical optimisation to create a powerhouse digital brand.',
+    price: '£400/Session', 
+    image: 'https://images.unsplash.com/photo-1512413316925-fd4b93f31521?q=80&w=1000',
+    gallery: []
+  },
+  { 
+    id: 'phoebe', 
+    name: 'Phoebe', 
+    subtitle: 'Leicestershire Heritage', 
+    location: 'Leicester', 
+    instagram: '@phoebe_leicester', 
+    onlyfans: 'onlyfans.com/phoebe_fox',
+    bio: 'Phoebe bridges traditional East Midlands heritage with a forward-thinking OnlyFans architecture, maximizing engagement through strategic narrative building.',
+    price: '£270/Session', 
+    image: 'https://images.unsplash.com/photo-1492106084934-c2d9101d1752?q=80&w=1000',
+    gallery: []
   }
 ];
 
 interface ProductCardProps {
   key?: string | number;
   product: Product;
-  onClick: () => void;
+  onClick?: () => void;
 }
 
 const ProductCard = ({ product, onClick }: ProductCardProps) => {
+  const navigate = useNavigate();
+  const handleCardClick = () => {
+    if (onClick) {
+      onClick();
+    } else {
+      navigate(`/roster/${product.id}`);
+    }
+  };
+
   return (
-    <div onClick={onClick} className="group cursor-pointer">
+    <div onClick={handleCardClick} className="group cursor-pointer">
       <div className="aspect-[4/5] bg-brand-offwhite mb-4 overflow-hidden relative rounded-sm">
         <img 
           src={product.image} 
@@ -175,7 +317,7 @@ const AllProductsView = ({ onBack, onProductClick }: { onBack: () => void, onPro
     <motion.div 
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      className="min-h-screen pt-12 md:pt-16 px-6 md:px-12 bg-white"
+      className="min-h-screen pt-24 md:pt-32 px-6 md:px-12 bg-white"
     >
       <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 max-w-7xl mx-auto gap-8">
         <div>
@@ -236,11 +378,11 @@ const AllProductsView = ({ onBack, onProductClick }: { onBack: () => void, onPro
 };
 
 const COLLECTIONS = [
-  { id: 'posh', label: 'Date Night', image: 'https://images.unsplash.com/photo-1596462502278-27bfaf410911?q=80&w=1600&auto=format&fit=crop' },
-  { id: 'bratty', label: 'Work Week', image: 'https://images.unsplash.com/photo-1570172234562-969c67678004?q=80&w=1600&auto=format&fit=crop' },
-  { id: 'girl-next-door', label: 'Weekend Escape', image: 'https://images.unsplash.com/photo-1512496015851-a90fb38ba796?q=80&w=1600&auto=format&fit=crop' },
-  { id: 'sophisticate', label: 'City Chic', image: 'https://images.unsplash.com/photo-1509631179647-0177331693ae?q=80&w=1600&auto=format&fit=crop' },
-  { id: 'regional', label: 'Coastal Ease', image: 'https://images.unsplash.com/photo-1612817288484-6f916006741a?q=80&w=1600&auto=format&fit=crop' },
+  { id: 'date-night', label: 'The Posh (Date Night)', count: '12 Assets', image: 'https://images.unsplash.com/photo-1596462502278-27bfaf410911?q=80&w=1600' },
+  { id: 'work-week', label: 'The Bratty (Work Week)', count: '8 Assets', image: 'https://images.unsplash.com/photo-1570172234562-969c67678004?q=80&w=1600' },
+  { id: 'weekend-escape', label: 'The Girl Next Door', count: '15 Assets', image: 'https://images.unsplash.com/photo-1512496015851-a90fb38ba796?q=80&w=1600' },
+  { id: 'city-chic', label: 'The Sophisticate (City Chic)', count: '10 Assets', image: 'https://images.unsplash.com/photo-1509631179647-0177331693ae?q=80&w=1600' },
+  { id: 'coastal-ease', label: 'The Regional (Coastal Ease)', count: '7 Assets', image: 'https://images.unsplash.com/photo-1612817288484-6f916006741a?q=80&w=1600' },
 ];
 
 const CATEGORY_CONTENT: Record<string, { title: string; subtitle: string; description: string; image: string }> = {
@@ -419,9 +561,9 @@ const Navbar = ({ cartCount, onCartOpen }: { cartCount: number, onCartOpen: () =
   const isHome = location.pathname === '/';
 
   const menuItems = [
-    { label: 'The Roster', id: 'shop' },
-    { label: 'Mood Edits', id: 'collections' },
-    { label: 'The Agency', id: 'about' },
+    { label: 'The Roster', id: 'shop', path: '/roster' },
+    { label: 'Mood Edits', id: 'collections', path: '/#collections' },
+    { label: 'The Agency', id: 'about', path: '/agency/philosophy' },
   ];
 
   const toggleMobileMenu = () => setIsMobileMenuOpen(!isMobileMenuOpen);
@@ -479,10 +621,10 @@ const Navbar = ({ cartCount, onCartOpen }: { cartCount: number, onCartOpen: () =
       </div>
 
       <div className="flex justify-end items-center space-x-4 md:space-x-10 text-[11px] font-bold tracking-[0.15em] uppercase">
-        <button className="hover:opacity-50 transition-opacity flex items-center">
+        <Link to="/roster" className="hover:opacity-50 transition-opacity flex items-center">
           <Search size={16} />
           <span className="hidden lg:inline ml-3 font-semibold">Registry</span>
-        </button>
+        </Link>
         <button 
           onClick={() => navigate(user ? '/dashboard' : '/login')}
           className="hover:opacity-50 transition-opacity flex items-center"
@@ -533,7 +675,7 @@ const Navbar = ({ cartCount, onCartOpen }: { cartCount: number, onCartOpen: () =
               {menuItems.map(item => (
                 <Link 
                   key={item.id}
-                  to="/"
+                  to={item.path}
                   onClick={() => setIsMobileMenuOpen(false)}
                   className="text-2xl font-serif italic text-left hover:pl-4 transition-all duration-300"
                 >
@@ -578,20 +720,20 @@ const Navbar = ({ cartCount, onCartOpen }: { cartCount: number, onCartOpen: () =
                 <div className="space-y-6">
                   <p className="text-brand-black font-bold text-[10px] uppercase tracking-widest mb-8">By Demand</p>
                   <Link to="/roster" className="block text-xl font-serif italic hover:opacity-50 cursor-pointer">View Roster</Link>
-                  <Link to="/roster/emerging" className="block text-xl font-serif italic hover:opacity-50 cursor-pointer">Emerging UK Models</Link>
-                  <Link to="/roster/high-earners" className="block text-xl font-serif italic hover:opacity-50 cursor-pointer">Highest Earners</Link>
+                  <Link to="/hubs/emerging" className="block text-xl font-serif italic hover:opacity-50 cursor-pointer">Emerging UK Models</Link>
+                  <Link to="/roster" className="block text-xl font-serif italic hover:opacity-50 cursor-pointer">Highest Earners</Link>
                 </div>
                 <div className="space-y-4">
                   <p className="text-brand-black font-bold text-[10px] uppercase tracking-widest mb-8">UK Hubs</p>
                   {['Greater London', 'Manchester Silk', 'The Midlands', 'The North East', 'Home Counties', 'UK National'].map(type => (
-                    <Link key={type} to={`/hubs/${type.toLowerCase().replace(' ', '-')}`} className="block text-sm font-light hover:opacity-50 cursor-pointer">{type}</Link>
+                    <Link key={type} to={`/hubs/${type.toLowerCase().split(' ')[0] === 'greater' ? 'london' : (type.toLowerCase().split(' ')[0] === 'the' ? type.toLowerCase().split(' ')[1] : type.toLowerCase().split(' ')[0])}`} className="block text-sm font-light hover:opacity-50 cursor-pointer">{type}</Link>
                   ))}
                 </div>
                 <div className="space-y-4 col-span-2">
                   <p className="text-brand-black font-bold text-[10px] uppercase tracking-widest mb-8">OF Specialism</p>
                   <div className="grid grid-cols-2 gap-x-12 gap-y-4">
-                    {['Vocal Signature GFE', 'Luxury Lifestyle', 'Sophisticated UK Wit', 'High-Yield PPV', 'Authentic UK Girlfriend', 'Digital Authority', 'Cultural Signature', 'Aesthetic Excellence'].map(concern => (
-                      <Link key={concern} to={`/specialism/${concern.toLowerCase().replace(' ', '-')}`} className="block text-sm font-light hover:opacity-50 cursor-pointer">{concern}</Link>
+                    {['Management', 'Exclusive', 'Synergy'].map(spec => (
+                      <Link key={spec} to={`/hubs/${spec.toLowerCase()}`} className="block text-sm font-light hover:opacity-50 cursor-pointer">{spec} Specifics</Link>
                     ))}
                   </div>
                 </div>
@@ -599,21 +741,29 @@ const Navbar = ({ cartCount, onCartOpen }: { cartCount: number, onCartOpen: () =
             )}
             {activeMenu === 'collections' && (
               <div className="max-w-7xl mx-auto flex justify-between">
-                {[
-                  { id: 'posh', label: 'The Posh', count: '12 Assets' },
-                  { id: 'bratty', label: 'The Bratty', count: '8 Assets' },
-                  { id: 'girl-next-door', label: 'The Girl Next Door', count: '15 Assets' },
-                  { id: 'sophisticate', label: 'The Sophisticate', count: '10 Assets' },
-                  { id: 'regional', label: 'The Regional Signature', count: '7 Assets' },
-                ].map((c, i) => (
+                {COLLECTIONS.map((c, i) => (
                   <Link key={c.id} to={`/collections/${c.id}`} className="text-center group cursor-pointer block">
                     <div className="w-40 h-40 rounded-full overflow-hidden mb-6 border border-brand-border p-2">
-                       <img src={COLLECTIONS[i].image} className="w-full h-full object-cover rounded-full group-hover:scale-110 transition-transform duration-500" />
+                       <img src={c.image} className="w-full h-full object-cover rounded-full group-hover:scale-110 transition-transform duration-500" />
                     </div>
                     <p className="text-[10px] uppercase tracking-[0.3em] font-bold">{c.label}</p>
                     <p className="text-[9px] text-brand-black/40 mt-1 uppercase tracking-widest italic">{c.count}</p>
                   </Link>
                 ))}
+              </div>
+            )}
+            {activeMenu === 'about' && (
+              <div className="max-w-7xl mx-auto grid grid-cols-3 gap-24">
+                <div className="space-y-6">
+                  <p className="text-brand-black font-bold text-[10px] uppercase tracking-widest mb-8">The Philosophy</p>
+                  <Link to="/agency/philosophy" className="block text-xl font-serif italic hover:opacity-50 cursor-pointer">Bespoke Distinction</Link>
+                  <Link to="/agency/pillars" className="block text-xl font-serif italic hover:opacity-50 cursor-pointer">Three Pillars of Authority</Link>
+                </div>
+                <div className="space-y-6">
+                  <p className="text-brand-black font-bold text-[10px] uppercase tracking-widest mb-8">Performance</p>
+                  <Link to="/agency/management" className="block text-xl font-serif italic hover:opacity-50 cursor-pointer">Elite Management</Link>
+                  <Link to="/agency/strategy" className="block text-xl font-serif italic hover:opacity-50 cursor-pointer">Growth Architecture</Link>
+                </div>
               </div>
             )}
           </motion.div>
@@ -725,7 +875,7 @@ const CollectionsSlider = () => {
   const [active, setActive] = useState(COLLECTIONS[0].id);
 
   return (
-    <section className="relative h-[80vh] flex items-center">
+    <section id="collections" className="relative h-[80vh] flex items-center">
       <div className="absolute inset-0">
         <AnimatePresence mode='wait'>
           <motion.img 
@@ -771,24 +921,6 @@ const CollectionsSlider = () => {
 const Footer = () => {
   return (
     <footer className="bg-brand-offwhite">
-      <div className="relative h-[60vh] w-full mt-24">
-        <img 
-          src="https://images.unsplash.com/photo-1612817288484-6f916006741a?q=80&w=2600&auto=format&fit=crop" 
-          alt="Bramingham Barely Professional Management" 
-          className="w-full h-full object-cover grayscale opacity-60"
-        />
-        <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-6">
-          <h2 className="text-4xl md:text-6xl max-w-2xl leading-tight mb-8 font-serif italic">
-            The British Persona is your most powerful asset. <br />
-            Let us engineer the architecture for your OnlyFans success.
-          </h2>
-          <Link to="/login" className="text-[11px] font-medium tracking-[0.3em] uppercase border-b border-brand-black pb-2 hover:opacity-50 transition-opacity">
-            Apply to the Roster
-          </Link>
-        </div>
-      </div>
-
-      {/* Payment Logos Section */}
       <div className="py-20 px-6 bg-brand-offwhite flex flex-col items-center border-t border-brand-border">
         <motion.p 
           initial={{ opacity: 0, y: 10 }}
@@ -902,31 +1034,44 @@ const Footer = () => {
   );
 };
 
-const ProductDetail = ({ product, onBack, onAddToCart }: { product: Product, onBack: () => void, onAddToCart: () => void }) => {
+const ProductDetail = ({ product, onBack, onAddToCart }: { product?: Product, onBack?: () => void, onAddToCart?: () => void }) => {
+  const { productId } = useParams();
+  const navigate = useNavigate();
+  const activeProduct = product || MODELS.find(m => m.id === productId);
   const [selectedDate, setSelectedDate] = useState('Today');
+
+  const handleBack = () => {
+    if (onBack) {
+      onBack();
+    } else {
+      navigate(-1);
+    }
+  };
+
+  if (!activeProduct) return <Navigate to="/roster" replace />;
   
   return (
     <motion.div 
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      className="min-h-screen pt-12 md:pt-16 px-6 md:px-12 bg-white"
+      className="min-h-screen pt-12 md:pt-32 px-6 md:px-12 bg-white"
     >
-      <button onClick={onBack} className="mb-8 flex items-center space-x-2 text-[10px] uppercase tracking-widest group">
-        <X size={14} className="transition-transform group-hover:rotate-90" />
-        <span>Back to Roster</span>
+      <button onClick={handleBack} className="mb-8 flex items-center space-x-2 text-[10px] uppercase tracking-widest group">
+        <ArrowLeft size={14} className="transition-transform group-hover:-translate-x-1" />
+        <span>Back</span>
       </button>
       
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
         <div className="space-y-8">
           <div className="aspect-[4/5] bg-brand-offwhite rounded-sm overflow-hidden">
             <img 
-              src={product.image} 
-              alt={product.name} 
+              src={activeProduct.image} 
+              alt={activeProduct.name} 
               className="w-full h-full object-cover"
             />
           </div>
           <div className="grid grid-cols-2 gap-4">
-            {product.gallery.map((img, i) => (
+            {activeProduct.gallery.map((img, i) => (
               <div key={i} className="aspect-square bg-brand-offwhite rounded-sm overflow-hidden">
                 <img src={img} className="w-full h-full object-cover" />
               </div>
@@ -938,16 +1083,16 @@ const ProductDetail = ({ product, onBack, onAddToCart }: { product: Product, onB
           <div>
             <div className="flex items-center space-x-3 mb-4">
               <span className="bg-brand-black text-white text-[9px] px-3 py-1 uppercase tracking-widest">Verified Talent</span>
-              <span className="text-[9px] uppercase tracking-widest text-brand-black/40 font-bold">{product.location} Hub</span>
+              <span className="text-[9px] uppercase tracking-widest text-brand-black/40 font-bold">{activeProduct.location} Hub</span>
             </div>
-            <h1 className="text-5xl md:text-6xl mb-4 italic">{product.name}</h1>
-            <p className="text-lg text-brand-black/60 mb-6 font-light">{product.subtitle}</p>
+            <h1 className="text-5xl md:text-6xl mb-4 italic">{activeProduct.name}</h1>
+            <p className="text-lg text-brand-black/60 mb-6 font-light">{activeProduct.subtitle}</p>
           </div>
 
           <div className="space-y-4">
             <h3 className="text-[10px] uppercase tracking-widest font-bold">Biography</h3>
             <p className="text-lg leading-relaxed font-light text-brand-black/80">
-              {product.bio}
+              {activeProduct.bio}
             </p>
           </div>
 
@@ -957,7 +1102,7 @@ const ProductDetail = ({ product, onBack, onAddToCart }: { product: Product, onB
               <div className="grid grid-cols-2 gap-4">
                 <div className="border border-brand-border p-4 rounded-sm">
                   <p className="text-[9px] uppercase tracking-widest text-brand-black/40 mb-1">Fee</p>
-                  <p className="text-xl font-medium">{product.price}</p>
+                  <p className="text-xl font-medium">{activeProduct.price}</p>
                 </div>
                 <div className="border border-brand-border p-4 rounded-sm">
                   <p className="text-[9px] uppercase tracking-widest text-brand-black/40 mb-1">Availability</p>
@@ -968,11 +1113,11 @@ const ProductDetail = ({ product, onBack, onAddToCart }: { product: Product, onB
               <div className="pt-4 space-y-4">
                 <p className="text-[10px] uppercase tracking-widest font-bold">Social Connection</p>
                 <div className="flex space-x-6">
-                   <a href={`https://instagram.com/${product.instagram.replace('@', '')}`} target="_blank" rel="noopener noreferrer" className="flex items-center space-x-2 text-[11px] font-mono hover:text-blue-600 transition-colors">
+                   <a href={`https://instagram.com/${activeProduct.instagram.replace('@', '')}`} target="_blank" rel="noopener noreferrer" className="flex items-center space-x-2 text-[11px] font-mono hover:text-blue-600 transition-colors">
                      <Instagram size={14} />
-                     <span>{product.instagram}</span>
+                     <span>{activeProduct.instagram}</span>
                    </a>
-                   <a href={`https://${product.onlyfans}`} target="_blank" rel="noopener noreferrer" className="flex items-center space-x-2 text-[11px] font-mono hover:text-blue-600 transition-colors">
+                   <a href={`https://${activeProduct.onlyfans}`} target="_blank" rel="noopener noreferrer" className="flex items-center space-x-2 text-[11px] font-mono hover:text-blue-600 transition-colors">
                      <Globe size={14} />
                      <span>OnlyFans Profile</span>
                    </a>
@@ -1123,7 +1268,8 @@ const AppLayout = ({ children, cartCount, onCartOpen }: { children: React.ReactN
   );
 };
 
-const Home = ({ onViewChange, onProductClick }: { onViewChange: (v: ViewState) => void, onProductClick: (p: Product) => void }) => {
+const Home = () => {
+  const navigate = useNavigate();
   return (
     <motion.div 
       key="home"
@@ -1131,27 +1277,26 @@ const Home = ({ onViewChange, onProductClick }: { onViewChange: (v: ViewState) =
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
     >
-      <Hero onShopNow={() => onViewChange('all-products')} />
+      <Hero onShopNow={() => navigate('/roster')} />
       <Philosophy />
       
-      <section className="py-24 px-6 md:px-12 bg-white">
+      <section id="roster" className="py-24 px-6 md:px-12 bg-white">
         <div className="max-w-7xl mx-auto">
           <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 gap-8">
             <div className="space-y-4">
               <h2 className="text-4xl italic">The Lineup</h2>
               <p className="text-lg font-light text-brand-black/60 max-w-md">
-                These are our girls. The sexiest, most obedient, and most insatiable talents we represent. 
-                Pick one. Or pick several. Just know once you enter The Lineup… you won’t want to leave
+                Strategic talent curation for the professional OnlyFans architecture. Pick your signature aesthetic.
               </p>
             </div>
-            <button onClick={() => onViewChange('all-products')} className="text-[11px] font-medium tracking-[0.3em] uppercase border-b border-brand-black pb-2 hover:opacity-50 transition-opacity">
+            <button onClick={() => navigate('/roster')} className="text-[11px] font-medium tracking-[0.3em] uppercase border-b border-brand-black pb-2 hover:opacity-50 transition-opacity">
               View The Full Roster
             </button>
           </div>
           
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-16">
             {MODELS.slice(0, 4).map((p) => (
-              <ProductCard key={p.id} product={p} onClick={() => onProductClick(p)} />
+              <ProductCard key={p.id} product={p} />
             ))}
           </div>
         </div>
@@ -1171,8 +1316,8 @@ const Home = ({ onViewChange, onProductClick }: { onViewChange: (v: ViewState) =
       </section>
 
       <section className="py-24 px-6 md:px-12 grid grid-cols-1 lg:grid-cols-2 gap-24 items-center max-w-7xl mx-auto">
-         <div className="aspect-[16/10] bg-brand-offwhite overflow-hidden">
-            <img src="https://images.unsplash.com/photo-1542314810-9486c40d164a?q=80&w=1600" alt="Reseller imagery" className="w-full h-full object-cover" />
+         <div className="aspect-[16/10] bg-white overflow-hidden flex items-center justify-center p-16 border border-brand-border">
+            <img src="https://raw.githubusercontent.com/oliviabancroft0-prog/marellaagency/main/handshake.png" alt="Partnership handshake" className="max-w-[70%] max-h-full object-contain" />
          </div>
          <div className="space-y-12">
             <h2 className="text-5xl italic">325+ Global Brand Partnerships</h2>
@@ -1197,20 +1342,12 @@ const Home = ({ onViewChange, onProductClick }: { onViewChange: (v: ViewState) =
 };
 
 export default function App() {
-  const [view, setView] = useState<ViewState>('home');
   const [cartOpen, setCartOpen] = useState(false);
   const [cartCount, setCartCount] = useState(0);
-  const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
 
   const handleAddToCart = () => {
     setCartCount(prev => prev + 1);
     setCartOpen(true);
-  };
-
-  const handleProductClick = (product: Product) => {
-    setSelectedProduct(product);
-    setView('product');
-    window.scrollTo(0, 0);
   };
 
   const wrapInLayout = (content: React.ReactNode) => (
@@ -1221,41 +1358,22 @@ export default function App() {
   );
 
   return (
-    <Routes>
-      <Route path="/" element={wrapInLayout(
-        <AnimatePresence mode="wait">
-          {view === 'home' ? (
-            <motion.div key="home">
-              <Home onViewChange={(v) => { setView(v); window.scrollTo(0, 0); }} onProductClick={handleProductClick} />
-            </motion.div>
-          ) : view === 'product' && selectedProduct ? (
-            <motion.div key="product">
-              <ProductDetail 
-                product={selectedProduct} 
-                onBack={() => setView('home')} 
-                onAddToCart={handleAddToCart} 
-              />
-            </motion.div>
-          ) : (
-            <motion.div key="all-products">
-              <AllProductsView onBack={() => setView('home')} onProductClick={handleProductClick} />
-            </motion.div>
-          )}
-        </AnimatePresence>
-      )} />
-      
-      <Route path="/login" element={wrapInLayout(<Login />)} />
-      
-      <Route path="/hubs/:categoryId" element={wrapInLayout(<CategoryPage />)} />
-      <Route path="/collections/:categoryId" element={wrapInLayout(<CategoryPage />)} />
-      <Route path="/roster/:categoryId" element={wrapInLayout(<CategoryPage />)} />
-      <Route path="/philosophy/:categoryId" element={wrapInLayout(<CategoryPage />)} />
-      <Route path="/philosophy" element={<Navigate to="/philosophy/philosophy" replace />} />
-      <Route path="/strategy" element={<Navigate to="/philosophy/strategy" replace />} />
-      
-      <Route path="/dashboard" element={wrapInLayout(<Dashboard />)} />
-
-      <Route path="*" element={<Navigate to="/" replace />} />
-    </Routes>
+    <>
+      <ScrollToTop />
+      <Routes>
+        <Route path="/" element={wrapInLayout(<Home />)} />
+        <Route path="/roster" element={wrapInLayout(<AllProductsView onBack={() => {}} onProductClick={() => {}} />)} />
+        <Route path="/roster/:productId" element={wrapInLayout(<ProductDetail onAddToCart={handleAddToCart} />)} />
+        <Route path="/login" element={wrapInLayout(<Login />)} />
+        <Route path="/hubs/:categoryId" element={wrapInLayout(<CategoryPage />)} />
+        <Route path="/collections/:categoryId" element={wrapInLayout(<CategoryPage />)} />
+        <Route path="/agency/:categoryId" element={wrapInLayout(<CategoryPage />)} />
+        <Route path="/philosophy/:categoryId" element={wrapInLayout(<CategoryPage />)} />
+        <Route path="/philosophy" element={<Navigate to="/philosophy/philosophy" replace />} />
+        <Route path="/strategy" element={<Navigate to="/philosophy/strategy" replace />} />
+        <Route path="/dashboard" element={wrapInLayout(<Dashboard />)} />
+        <Route path="*" element={<Navigate to="/" replace />} />
+      </Routes>
+    </>
   );
 }
