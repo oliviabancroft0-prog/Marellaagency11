@@ -40,7 +40,7 @@ export const Login: React.FC = () => {
       }
     } catch (err: any) {
       if (err.message === 'Failed to fetch' || err.name === 'TypeError') {
-        setError('Connection failed. Please ensure the InsForge URL is configured correctly in Vercel settings.');
+        setError('Connection failed. Please ensure your InsForge URL and Anon Key are correctly configured in the environment variables.');
       } else {
         setError('An unexpected network error occurred.');
       }
