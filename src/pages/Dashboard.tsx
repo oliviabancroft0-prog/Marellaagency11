@@ -43,13 +43,13 @@ export const Dashboard: React.FC = () => {
       <div className="max-w-7xl mx-auto">
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-12 gap-6">
           <div>
-            <h1 className="text-4xl font-serif italic mb-2">Welcome Back, {user?.email?.split('@')[0]}</h1>
+            <h1 className="text-4xl font-serif italic mb-2">Internal Performance: {user?.email?.split('@')[0]}</h1>
             <div className="flex items-center space-x-3 text-sm font-light text-brand-black/50 uppercase tracking-widest">
-              <span>United Kingdom Creator Network</span>
+              <span>Bramingham Barely Creator Network</span>
               <span className="w-4 h-[1px] bg-brand-border"></span>
               <div className="flex items-center space-x-1 text-green-600">
                 <ShieldCheck size={14} />
-                <span>Verified Talent</span>
+                <span>Verified Asset</span>
               </div>
             </div>
           </div>
@@ -168,9 +168,9 @@ export const Dashboard: React.FC = () => {
                  <div className="flex items-start space-x-4 mb-4">
                    <Calendar className="mt-1" size={18} />
                    <div>
-                     <p className="text-sm font-medium">Bramingham Barely Summit</p>
-                     <p className="text-xs text-white/60 mb-2">May 15, 2026 - 10:00 AM</p>
-                     <p className="text-[10px] uppercase tracking-widest text-white/40">Chelsea, London</p>
+                     <p className="text-sm font-medium">Bramingham Barely Intelligence Summit</p>
+                     <p className="text-xs text-white/60 mb-2">June 12, 2026 - 11:00 AM</p>
+                     <p className="text-[10px] uppercase tracking-widest text-white/40">Mayfair, London</p>
                    </div>
                  </div>
                  <button className="w-full mt-4 bg-white text-brand-black py-3 rounded-full text-[10px] font-bold uppercase tracking-widest hover:bg-white/90 transition-colors">

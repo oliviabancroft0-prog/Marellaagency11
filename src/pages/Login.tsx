@@ -134,8 +134,8 @@ export const Login: React.FC = () => {
     <div className="min-h-screen pt-12 md:pt-16 pb-12 px-6 flex flex-col items-center bg-brand-offwhite">
       <div className="w-full max-w-md bg-white border border-brand-border p-12 rounded-sm shadow-sm">
         <div className="text-center mb-12">
-          <h1 className="text-4xl font-serif italic mb-4">Creator Login</h1>
-          <p className="text-sm font-light text-brand-black/50 uppercase tracking-widest">Join our global creator network</p>
+          <h1 className="text-4xl font-serif italic mb-4">Creator Portal</h1>
+          <p className="text-sm font-light text-brand-black/50 uppercase tracking-widest">Scale your digital authority with Bramingham Barely</p>
         </div>
 
         {error && (
