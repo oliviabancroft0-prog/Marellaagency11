@@ -143,7 +143,7 @@ export const Dashboard: React.FC = () => {
               <div className="space-y-6">
                 {[
                   { title: 'New Content Pillar: Posh British Wit', date: '2 hours ago', tag: 'Strategy' },
-                  { title: 'PPV Batch Optimization Scheduled', date: 'Yesterday', tag: 'Operational' },
+                  { title: 'PPV Batch Optimisation Scheduled', date: 'Yesterday', tag: 'Operational' },
                   { title: 'Vocal Signature Session at London Studio', date: '3 days ago', tag: 'Production' },
                 ].map((item, i) => (
                   <div key={i} className="flex justify-between items-center group cursor-pointer text-[10px]">

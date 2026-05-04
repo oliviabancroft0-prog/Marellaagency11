@@ -92,7 +92,7 @@ const MODELS: Product[] = [
     location: 'Leeds', 
     instagram: '@liv_leeds', 
     onlyfans: 'onlyfans.com/oliviamodels',
-    bio: 'A signature blend of natural beauty and sharp northern intellect. Olivia specializes in high-retention fan engagement, proving that personality is the most valuable asset in the digital creator economy.',
+    bio: 'A signature blend of natural beauty and sharp northern intellect. Olivia specialises in high-retention fan engagement, proving that personality is the most valuable asset in the digital creator economy.',
     price: '£350/Session', 
     image: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=1000',
     gallery: []
@@ -247,13 +247,13 @@ const CATEGORY_CONTENT: Record<string, { title: string; subtitle: string; descri
   'london': {
     title: 'London Hub',
     subtitle: 'The Pinnacle of UK Authority',
-    description: 'Central London remains the global epicenter for creative digital assets. Our London hub specializes in high-fashion editorial management, bridging the gap between high-society aesthetics and high-yield digital engagement. We manage the elite, for the elite.',
+    description: 'Central London remains the global epicenter for creative digital assets. Our London hub specialises in high-fashion editorial management, bridging the gap between high-society aesthetics and high-yield digital engagement. We manage the elite, for the elite.',
     image: 'https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?q=80&w=1600'
   },
   'manchester': {
     title: 'Manchester Silk',
     subtitle: 'Northern Industrial Elegance',
-    description: 'Manchester is the heartbeat of Northern authenticity. We leverage the raw, industrial aesthetic of the city to create a unique "Silk" signature—combining organic charm with sophisticated technical optimization. Authenticity is the cornerstone of the Northern brand.',
+    description: 'Manchester is the heartbeat of Northern authenticity. We leverage the raw, industrial aesthetic of the city to create a unique "Silk" signature—combining organic charm with sophisticated technical optimisation. Authenticity is the cornerstone of the Northern brand.',
     image: 'https://images.unsplash.com/photo-1515586067373-95420332756f?q=80&w=1600'
   },
   'birmingham': {
@@ -271,7 +271,7 @@ const CATEGORY_CONTENT: Record<string, { title: string; subtitle: string; descri
   'national': {
     title: 'UK National',
     subtitle: 'The Unified British Signature',
-    description: 'Our national strategy architecture ensures that regardless of location, your brand resonates with the specific cultural nuances of the British audience. We specialize in the "British Signature"—a global mark of quality and distinction.',
+    description: 'Our national strategy architecture ensures that regardless of location, your brand resonates with the specific cultural nuances of the British audience. We specialise in the "British Signature"—a global mark of quality and distinction.',
     image: 'https://images.unsplash.com/photo-1483197452165-7abc1b347947?q=80&w=1600'
   },
   'date-night': {
@@ -307,7 +307,7 @@ const CATEGORY_CONTENT: Record<string, { title: string; subtitle: string; descri
   'management': {
     title: 'Top 0.1% Management',
     subtitle: 'Elite Performance Architecture',
-    description: 'Our top-tier management is reserved for the highest performers. We provide a full-service operational suite, including 24/7 account management, specialized content strategy, and advanced financial optimization.',
+    description: 'Our top-tier management is reserved for the highest performers. We provide a full-service operational suite, including 24/7 account management, specialised content strategy, and advanced financial optimisation.',
     image: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=1600'
   },
   'emerging': {
@@ -414,7 +414,9 @@ const Navbar = ({ cartCount, onCartOpen }: { cartCount: number, onCartOpen: () =
   const [activeMenu, setActiveMenu] = useState<string | null>(null);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation();
   const { user } = useAuth();
+  const isHome = location.pathname === '/';
 
   const menuItems = [
     { label: 'The Roster', id: 'shop' },
@@ -427,10 +429,21 @@ const Navbar = ({ cartCount, onCartOpen }: { cartCount: number, onCartOpen: () =
   return (
     <nav 
       onMouseLeave={() => setActiveMenu(null)}
-      className="fixed top-0 left-0 w-full z-50 bg-brand-offwhite border-b border-brand-border h-12 md:h-16 flex items-center px-4 md:px-12 transition-all duration-300"
+      className="fixed top-0 left-0 w-full z-50 bg-brand-offwhite border-b border-brand-border h-[calc(3rem+env(safe-area-inset-top))] md:h-16 flex items-center pt-[env(safe-area-inset-top)] px-4 md:px-12 transition-all duration-300"
     >
-      <div className="flex-1 flex items-center">
-        <div className="flex items-center">
+      <div className="flex-1 flex items-center h-full">
+        {!isHome && (
+          <button 
+            onClick={() => navigate(-1)}
+            className="mr-6 md:mr-10 flex items-center space-x-2 text-brand-black hover:opacity-50 transition-opacity whitespace-nowrap"
+            aria-label="Go back"
+          >
+            <ArrowLeft size={18} />
+            <span className="text-[10px] uppercase tracking-[0.2em] font-bold">Back</span>
+          </button>
+        )}
+        
+        <div className={`flex items-center transition-all duration-300 ${!isHome ? 'hidden sm:flex' : 'flex'}`}>
           <Link 
             to="/" 
             className="h-32 md:h-56 flex items-center mr-4 md:mr-16 translate-y-2 md:translate-y-4"
@@ -625,27 +638,17 @@ const Hero = ({ onShopNow }: { onShopNow: () => void }) => {
         <div className="absolute inset-0 bg-brand-black/5"></div>
       </div>
       
-      <motion.p
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1, delay: 0.4 }}
-        className="absolute top-[10%] md:top-[12%] right-[15%] md:right-[25%] text-black text-4xl md:text-7xl font-serif italic z-20"
-      >
-        hey im olivia
-      </motion.p>
-
-      <div className="relative z-10 max-w-sm flex flex-col items-start pt-24">
+      <div className="absolute bottom-12 left-6 md:bottom-24 md:left-24 z-20">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0, x: -20 }}
+          animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8, delay: 0.6, ease: "easeOut" }}
         >
           <Link 
             to="/login"
-            className="bg-blue-600 text-white px-10 py-5 text-[12px] font-bold tracking-[0.3em] uppercase hover:bg-blue-700 transition-all duration-300 relative group overflow-hidden shadow-xl inline-block"
+            className="bg-brand-black text-white px-10 py-5 text-[12px] font-bold tracking-[0.3em] uppercase hover:bg-white hover:text-brand-black transition-all duration-300 relative group overflow-hidden shadow-2xl inline-block border border-brand-black"
           >
             <span className="relative z-10">Join the Roster</span>
-            <span className="absolute bottom-3 left-8 right-8 h-[1px] bg-white transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></span>
           </Link>
         </motion.div>
       </div>
@@ -1096,32 +1099,26 @@ const CartDrawer = ({ isOpen, onClose, cartCount }: { isOpen: boolean, onClose: 
 
 // --- Main App ---
 
-const BackButton = () => {
-  const navigate = useNavigate();
+const AppLayout = ({ children, cartCount, onCartOpen }: { children: React.ReactNode, cartCount: number, onCartOpen: () => void }) => {
   const location = useLocation();
   
-  if (location.pathname === '/') return null;
-
   return (
-    <button 
-      onClick={() => navigate(-1)}
-      className="fixed top-0 left-0 z-[60] h-12 md:h-16 px-4 md:px-12 flex items-center space-x-2 text-brand-black hover:opacity-50 transition-opacity"
-      aria-label="Go back"
-    >
-      <div className="w-11 h-11 flex items-center justify-center -ml-2">
-        <ArrowLeft size={20} />
-      </div>
-      <span className="text-[10px] uppercase tracking-[0.2em] font-bold hidden sm:inline">Back</span>
-    </button>
-  );
-};
-
-const AppLayout = ({ children, cartCount, onCartOpen }: { children: React.ReactNode, cartCount: number, onCartOpen: () => void }) => {
-  return (
-    <div className="min-h-screen font-sans selection:bg-brand-black selection:text-white">
+    <div className="min-h-screen font-sans selection:bg-brand-black selection:text-white bg-brand-offwhite">
       <Navbar cartCount={cartCount} onCartOpen={onCartOpen} />
-      <BackButton />
-      {children}
+      <main className="relative">
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={location.pathname}
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: -20 }}
+            transition={{ duration: 0.2 }}
+            className="pt-[env(safe-area-inset-top)]"
+          >
+            {children}
+          </motion.div>
+        </AnimatePresence>
+      </main>
     </div>
   );
 };
@@ -1165,7 +1162,7 @@ const Home = ({ onViewChange, onProductClick }: { onViewChange: (v: ViewState) =
       <section className="py-24 bg-brand-offwhite border-t border-brand-border">
         <div className="max-w-3xl mx-auto text-center px-6">
           <p className="text-2xl md:text-3xl font-light leading-relaxed italic mb-8">
-            The OnlyFans landscape is competitive. Authentic United Kingdom signatures are high-yield assets. Bramingham Barely ensures your account is localized for peak fan LTV.
+            The OnlyFans landscape is competitive. Authentic United Kingdom signatures are high-yield assets. Bramingham Barely ensures your account is localised for peak fan LTV.
           </p>
           <button className="text-[11px] font-medium tracking-[0.3em] uppercase border-b border-brand-black pb-1 hover:opacity-50 transition-opacity">
             The United Kingdom Advantage
