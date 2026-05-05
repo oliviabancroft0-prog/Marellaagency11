@@ -897,15 +897,8 @@ const MoodKitsSection = () => {
       <div className="max-w-7xl mx-auto px-6">
         <div className="text-center mb-20 space-y-4">
           <h2 className="text-5xl md:text-7xl font-serif italic mb-4">Mood Kits for Content</h2>
-          <div className="inline-block bg-brand-black text-white px-6 py-2 rounded-full overflow-hidden relative group">
-            <motion.div
-              animate={{ x: ['100%', '-100%'] }}
-              transition={{ repeat: Infinity, duration: 8, ease: "linear" }}
-              className="whitespace-nowrap flex space-x-12"
-            >
-              <span className="text-[10px] uppercase tracking-[0.4em] font-bold">Special Offer: 25% Off for Managed Models</span>
-              <span className="text-[10px] uppercase tracking-[0.4em] font-bold">Special Offer: 25% Off for Managed Models</span>
-            </motion.div>
+          <div className="inline-block bg-brand-black text-white px-8 py-3 rounded-full relative group">
+            <span className="text-[10px] uppercase tracking-[0.4em] font-bold">Special Offer: 25% Off for Managed Models</span>
           </div>
         </div>
 
