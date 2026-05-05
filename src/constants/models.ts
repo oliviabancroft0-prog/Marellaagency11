@@ -115,8 +115,11 @@ export const MODELS: Product[] = [
     onlyfans: 'onlyfans.com/florence_vibe',
     bio: 'Intellectual elegance meets digital wealth architecture. Florence specializes in the "Academic Chic" narrative, driving high retention through sophisticated dialogue and content.',
     price: '£420/Session', 
-    image: 'https://raw.githubusercontent.com/oliviabancroft0-prog/marellaagency/main/SaveClip.App_669936751_18127658608596915_2519547545830487435_n.jpg',
-    gallery: []
+    image: 'https://raw.githubusercontent.com/oliviabancroft0-prog/5-5-2026/main/SaveVid.Net_641364751_18438118622114372_6598410856411740517_n.jpg',
+    gallery: [
+      'https://raw.githubusercontent.com/oliviabancroft0-prog/5-5-2026/main/SaveVid.Net_641525610_18438120622114372_5872351499013796554_n.jpg',
+      'https://raw.githubusercontent.com/oliviabancroft0-prog/5-5-2026/main/SaveVid.Net_641678253_18438186229114372_6936161493815370732_n.jpg'
+    ]
   },
   { 
     id: 'poppy', 
@@ -127,8 +130,10 @@ export const MODELS: Product[] = [
     onlyfans: 'onlyfans.com/poppy_waves',
     bio: 'Brighton-based and high-spirited. Poppy leverages her vibrant coastal lifestyle to create a unique "Sun-Kissed" brand that consistently ranks high in engagement.',
     price: '£320/Session', 
-    image: 'https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?q=80&w=1000',
-    gallery: []
+    image: 'https://raw.githubusercontent.com/oliviabancroft0-prog/5-5-2026/main/SaveVid.Net_624635425_18057240959667832_3551208334195057168_n.jpg',
+    gallery: [
+      'https://raw.githubusercontent.com/oliviabancroft0-prog/5-5-2026/main/SaveVid.Net_624725910_18057240959667832_1497828121125049968_n.jpg'
+    ]
   },
   { 
     id: 'willow', 
@@ -139,8 +144,10 @@ export const MODELS: Product[] = [
     onlyfans: 'onlyfans.com/willow_scot',
     bio: 'The pinnacle of Scottish talent management. Willow bridges the gap between historical heritage backgrounds and contemporary digital performance.',
     price: '£480/Session', 
-    image: 'https://images.unsplash.com/photo-1531123897727-8f129e1688ce?q=80&w=1000',
-    gallery: []
+    image: 'https://raw.githubusercontent.com/oliviabancroft0-prog/5-5-2026/main/SaveVid.Net_654568608_184299484121186666_1662202469759325116_n.jpg',
+    gallery: [
+      'https://raw.githubusercontent.com/oliviabancroft0-prog/5-5-2026/main/SaveVid.Net_654606843_184299483870186666_8326955274546444668_n.jpg'
+    ]
   },
   { 
     id: 'evie', 
@@ -151,8 +158,10 @@ export const MODELS: Product[] = [
     onlyfans: 'onlyfans.com/evie_sheff',
     bio: 'Sheffield-born grit meets high-fashion management. Evie leverages her industrial-chic aesthetic to dominate the regional market with high-yield results.',
     price: '£260/Session', 
-    image: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=1000',
-    gallery: []
+    image: 'https://raw.githubusercontent.com/oliviabancroft0-prog/5-5-2026/main/SaveVid.Net_656934970_18588581599030209_7953438295540257272_n.jpg',
+    gallery: [
+      'https://raw.githubusercontent.com/oliviabancroft0-prog/5-5-2026/main/SaveVid.Net_657391562_1858858515830209_4862615996964182678_n.jpg'
+    ]
   },
   { 
     id: 'elsie', 
@@ -163,7 +172,7 @@ export const MODELS: Product[] = [
     onlyfans: 'onlyfans.com/elsie_cardiff',
     bio: 'Elsie represents the sovereign Welsh signature. Her presence is a masterclass in regional cultural resonance and high-fidelity subscriber engagement.',
     price: '£310/Session', 
-    image: 'https://images.unsplash.com/photo-1554151228-14d9def656e4?q=80&w=1000',
+    image: 'https://raw.githubusercontent.com/oliviabancroft0-prog/5-5-2026/main/SaveVid.Net_657442568_18575321773035350_621945703115339549_n.jpg',
     gallery: []
   },
   { 
@@ -175,7 +184,7 @@ export const MODELS: Product[] = [
     onlyfans: 'onlyfans.com/sienna_liverpool',
     bio: 'Liverpool charisma paired with professional management architecture. Sienna specializes in the "City Chic" lifestyle, driving record retention rates.',
     price: '£340/Session', 
-    image: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=1000',
+    image: 'https://raw.githubusercontent.com/oliviabancroft0-prog/5-5-2026/main/SaveVid.Net_671755464_18435855697186666_7711171375846725236_n.jpg',
     gallery: []
   },
   { 
@@ -187,7 +196,7 @@ export const MODELS: Product[] = [
     onlyfans: 'onlyfans.com/alice_lace',
     bio: 'The evolution of Midlands industrial elegance. Alice leverages her organic charm and sophisticated content strategy to ensure peak fan lifetime value.',
     price: '£290/Session', 
-    image: 'https://images.unsplash.com/photo-1534751435030-ef479953ee27?q=80&w=1000',
+    image: 'https://raw.githubusercontent.com/oliviabancroft0-prog/5-5-2026/main/SaveVid.Net_520423245_1851669844303561_543134319361614717_n.jpg',
     gallery: []
   },
   { 
@@ -199,7 +208,7 @@ export const MODELS: Product[] = [
     onlyfans: 'onlyfans.com/rose_glasgow',
     bio: 'Unapologetically Glaswegian with a high-fashion edge. Rose combines cultural grit with technical optimisation to create a powerhouse digital brand.',
     price: '£400/Session', 
-    image: 'https://images.unsplash.com/photo-1512413316925-fd4b93f31521?q=80&w=1000',
+    image: 'https://raw.githubusercontent.com/oliviabancroft0-prog/5-5-2026/main/SaveVid.Net_559565502_1804428875066782_1793476918145632975_n.jpg',
     gallery: []
   },
   { 
@@ -211,7 +220,63 @@ export const MODELS: Product[] = [
     onlyfans: 'onlyfans.com/phoebe_fox',
     bio: 'Phoebe bridges traditional East Midlands heritage with a forward-thinking OnlyFans architecture, maximizing engagement through strategic narrative building.',
     price: '£270/Session', 
-    image: 'https://images.unsplash.com/photo-1492106084934-c2d9101d1752?q=80&w=1000',
+    image: 'https://raw.githubusercontent.com/oliviabancroft0-prog/5-5-2026/main/SaveVid.Net_606967640_18546493660049320_4064055082099817529_n.jpg',
+    gallery: []
+  },
+  { 
+    id: 'ruby', 
+    name: 'Ruby', 
+    subtitle: 'Essex Glamour Signature', 
+    location: 'Essex', 
+    instagram: '@ruby_glam', 
+    onlyfans: 'onlyfans.com/ruby_official',
+    bio: 'Ruby defines the new era of Essex glamour. With a focus on high-impact visual storytelling and flawless aesthetic execution, she has quickly become one of the most sought-after creators on our roster.',
+    price: '£360/Session', 
+    image: 'https://raw.githubusercontent.com/oliviabancroft0-prog/5-5-2026/main/SaveVid.Net_476413573_1848719588011641_745131904459808597_n.jpg',
+    gallery: [
+      'https://raw.githubusercontent.com/oliviabancroft0-prog/5-5-2026/main/SaveVid.Net_476475036_1848719518011641_533398151380525356_n.jpg',
+      'https://raw.githubusercontent.com/oliviabancroft0-prog/5-5-2026/main/SaveVid.Net_476476902_1848719598011641_680122159668785578_n.jpg'
+    ]
+  },
+  { 
+    id: 'amelia', 
+    name: 'Amelia', 
+    subtitle: 'Cotswolds Elegance', 
+    location: 'Gloucestershire', 
+    instagram: '@amelia_cotswolds', 
+    onlyfans: 'onlyfans.com/amelia_chic',
+    bio: 'Amelia brings a refined, countryside sophistication to the digital landscape. Her brand architecture leverages the timeless appeal of the British countryside, driving exceptional long-term subscriber engagement.',
+    price: '£440/Session', 
+    image: 'https://raw.githubusercontent.com/oliviabancroft0-prog/5-5-2026/main/SaveVid.Net_626420133_185543629660383761_5189060408682860621_n.jpg',
+    gallery: [
+      'https://raw.githubusercontent.com/oliviabancroft0-prog/5-5-2026/main/SaveVid.Net_626425696_185543629510383761_5478840133781939876_n.jpg',
+      'https://raw.githubusercontent.com/oliviabancroft0-prog/5-5-2026/main/SaveVid.Net_626448497_185543633140383761_5849841865819992521_n.jpg',
+      'https://raw.githubusercontent.com/oliviabancroft0-prog/5-5-2026/main/SaveVid.Net_6265532722_185543631850383761_6344929631091181251_n.jpg'
+    ]
+  },
+  { 
+    id: 'maya', 
+    name: 'Maya', 
+    subtitle: 'Urban Kinetic', 
+    location: 'London', 
+    instagram: '@maya_kinetic', 
+    onlyfans: 'onlyfans.com/maya_moves',
+    bio: 'Maya represents the fast-paced, urban energy of modern London. Her content is defined by its dynamism and sharp, contemporary edge.',
+    price: '£330/Session', 
+    image: 'https://raw.githubusercontent.com/oliviabancroft0-prog/5-5-2026/main/SaveVid.Net_625201286_18100172986851847_672298264950852530_n.jpg',
+    gallery: []
+  },
+  { 
+    id: 'zoe', 
+    name: 'Zoe', 
+    subtitle: 'Creative District', 
+    location: 'Hackney', 
+    instagram: '@zoe_hackney', 
+    onlyfans: 'onlyfans.com/zoe_creates',
+    bio: 'Zoe leverages the raw, creative energy of East London to build a brand that is both authentic and hyper-engaged.',
+    price: '£310/Session', 
+    image: 'https://raw.githubusercontent.com/oliviabancroft0-prog/5-5-2026/main/SaveVid.Net_649123321_18074335631443346_6413183969085282641_n.jpg',
     gallery: []
   }
+
 ];
