@@ -274,6 +274,54 @@ const MODELS: Product[] = [
   }
 ];
 
+const MOOD_KITS = [
+  {
+    id: 'date-night',
+    title: 'Date Night',
+    tagline: 'Seductive. Intimate. Irresistible.',
+    description: 'Sultry reds, glossy lips, and glowy skin that looks incredible in low light. Perfect for spicy solo content, boyfriend experience, or GFE vibes.',
+    bestFor: 'Evening shoots, teasing videos, paid PPV content.',
+    keyProducts: ['Liquid lipsticks', 'body shimmer oils', 'lace lingerie', 'scent layering perfumes', 'nipple covers', 'lighting-friendly highlighters'],
+    image: 'https://images.unsplash.com/photo-1516975080664-ed2fc6a32937?q=80&w=1600'
+  },
+  {
+    id: 'city-chic',
+    title: 'City Chic',
+    tagline: 'Expensive. Polished. Powerful.',
+    description: 'Sharp, high-end aesthetic for the boss babe creator. Think luxury apartment shoots, “day in the life”, and high-value girlfriend content.',
+    bestFor: 'Luxury branding, faceless content, high-ticket subs.',
+    keyProducts: ['Matte liquid liners', 'tailored outfits', 'statement jewelry', 'sleek hairstyling tools', 'premium skincare'],
+    image: 'https://images.unsplash.com/photo-1487222477894-8943e31ef7b2?q=80&w=1600'
+  },
+  {
+    id: 'coastal-ease',
+    title: 'Coastal Ease / Soft Girl',
+    tagline: 'Dreamy. Soft. Addictive.',
+    description: 'Sun-kissed skin, natural glow, flowy outfits and that innocent-but-dangerous energy. Perfect for the soft girl / beachy aesthetic.',
+    bestFor: 'Morning content, pool shoots, “just woke up like this” fantasy.',
+    keyProducts: ['Dewy skin tints', 'body butters', 'wavy hair tools', 'pastel lingerie', 'vanilla scents', 'self-tanners'],
+    image: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=1600'
+  },
+  {
+    id: 'office-siren',
+    title: 'Work Week / Office Siren',
+    tagline: 'Professional by day, dangerous by night.',
+    description: 'Sleek corporate looks that secretly scream dominance. Blazers, pencil skirts, glasses, and flawless “no makeup” makeup.',
+    bestFor: 'Roleplay, secretary fantasy, power play content.',
+    keyProducts: ['Long-wear foundations', 'power brow kits', 'sophisticated fragrances', 'seamless shapewear', 'elegant heels'],
+    image: 'https://images.unsplash.com/photo-1485603673171-4608c028e530?q=80&w=1600'
+  },
+  {
+    id: 'weekend-escape',
+    title: 'Weekend Escape',
+    tagline: 'Wild. Free. Unforgettable.',
+    description: 'Festival-ready, travel content, or “getaway with me” vibes. Think glowing skin, messy hair, and barely-there outfits.',
+    bestFor: 'Vacation content, bikini shoots, adventure-style posts.',
+    keyProducts: ['Waterproof makeup', 'tanning mousse', 'hair repair masks', 'festival glitter', 'sexy sets'],
+    image: 'https://images.unsplash.com/photo-1501426026826-31c667bdf23d?q=80&w=1600'
+  }
+];
+
 interface ProductCardProps {
   key?: string | number;
   product: Product;
@@ -930,52 +978,97 @@ const Philosophy = () => {
   );
 };
 
-const CollectionsSlider = () => {
-  const [active, setActive] = useState(COLLECTIONS[0].id);
-
+const MoodKitsSection = () => {
+  const navigate = useNavigate();
   return (
-    <section id="collections" className="relative h-[80vh] flex items-center">
-      <div className="absolute inset-0">
-        <AnimatePresence mode='wait'>
-          <motion.img 
-            key={active}
-            src={COLLECTIONS.find(c => c.id === active)?.image}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.6 }}
-            className="w-full h-full object-cover"
-          />
-        </AnimatePresence>
-        <div className="absolute inset-0 bg-black/20"></div>
-      </div>
-
-      <div className="relative z-10 w-full px-6 md:px-24 flex flex-col md:flex-row justify-end md:justify-between items-start md:items-end pb-12 md:pb-24 h-full">
-        <div className="flex flex-col space-y-2 md:space-y-4 mb-8 md:mb-0">
-          <span className="text-white/60 text-[10px] md:text-[11px] font-medium tracking-[0.3em] uppercase mb-2 md:mb-4">Mood Edits</span>
-          {COLLECTIONS.map((c) => (
-            <button 
-              key={c.id}
-              onClick={() => setActive(c.id)}
-              onMouseEnter={() => setActive(c.id)}
-              className={`text-2xl sm:text-3xl md:text-7xl italic font-serif text-left transition-all duration-300 ${active === c.id ? 'text-white translate-x-2 md:translate-x-4' : 'text-white/40 hover:text-white/70'}`}
+    <section className="py-24 bg-white">
+      <div className="max-w-7xl mx-auto px-6">
+        <div className="text-center mb-20 space-y-4">
+          <h2 className="text-5xl md:text-7xl font-serif italic mb-4">Mood Kits for Content</h2>
+          <div className="inline-block bg-brand-black text-white px-6 py-2 rounded-full overflow-hidden relative group">
+            <motion.div
+              animate={{ x: ['100%', '-100%'] }}
+              transition={{ repeat: Infinity, duration: 8, ease: "linear" }}
+              className="whitespace-nowrap flex space-x-12"
             >
-              ({c.label})
-            </button>
+              <span className="text-[10px] uppercase tracking-[0.4em] font-bold">Special Offer: 25% Off for Managed Models</span>
+              <span className="text-[10px] uppercase tracking-[0.4em] font-bold">Special Offer: 25% Off for Managed Models</span>
+            </motion.div>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
+          {MOOD_KITS.map((mood) => (
+            <motion.div 
+              key={mood.id}
+              whileHover={{ y: -10 }}
+              className="group bg-brand-offwhite rounded-sm overflow-hidden flex flex-col border border-brand-border hover:shadow-2xl transition-all duration-500"
+            >
+              <div className="aspect-[3/4] overflow-hidden grayscale group-hover:grayscale-0 transition-all duration-700">
+                <img src={mood.image} alt={mood.title} className="w-full h-full object-cover transform scale-105 group-hover:scale-110 transition-transform duration-700" />
+              </div>
+              <div className="p-6 flex-1 flex flex-col justify-between">
+                <div>
+                  <h3 className="text-2xl font-serif italic mb-1">{mood.title}</h3>
+                  <p className="text-[9px] uppercase tracking-[0.2em] font-bold text-brand-black/40 mb-4">{mood.tagline}</p>
+                  <p className="text-xs font-light leading-relaxed text-brand-black/70 mb-4 line-clamp-3 group-hover:line-clamp-none transition-all duration-500">
+                    {mood.description}
+                  </p>
+                  <div className="mb-4">
+                    <p className="text-[8px] uppercase tracking-widest font-bold mb-2">Best For:</p>
+                    <p className="text-[10px] font-medium text-brand-black/60 italic">{mood.bestFor}</p>
+                  </div>
+                  <div className="mb-6">
+                    <p className="text-[8px] uppercase tracking-widest font-bold mb-2">Key Products:</p>
+                    <div className="flex flex-wrap gap-1.5 focus-within:">
+                      {mood.keyProducts.slice(0, 4).map((item, idx) => (
+                        <span key={idx} className="text-[8px] uppercase tracking-tight bg-white border border-brand-border px-2 py-1 rounded-sm whitespace-nowrap">
+                          {item}
+                        </span>
+                      ))}
+                      {mood.keyProducts.length > 4 && <span className="text-[8px] text-brand-black/40 px-1">+ more</span>}
+                    </div>
+                  </div>
+                </div>
+                <button 
+                  onClick={() => navigate('/roster')}
+                  className="w-full py-4 text-[9px] uppercase tracking-[0.3em] font-bold border border-brand-black hover:bg-brand-black hover:text-white transition-all duration-300"
+                >
+                  Shop This Kit
+                </button>
+              </div>
+            </motion.div>
           ))}
         </div>
         
-        <div className="pb-4">
-          <button className="bg-white/10 backdrop-blur-md border border-white/20 text-white px-6 md:px-8 py-3 md:py-4 rounded-full text-[10px] md:text-[11px] font-medium tracking-[0.2em] uppercase hover:bg-white/20 transition-colors">
-            Explore Collection
-          </button>
+        {/* Premium Video Loop Idea Placeholder */}
+        <div className="mt-32 relative aspect-[21/9] w-full overflow-hidden rounded-sm bg-brand-black group cursor-pointer">
+          <div className="absolute inset-0 z-0 overflow-hidden">
+            <video 
+              autoPlay 
+              loop 
+              muted 
+              playsInline 
+              className="w-full h-full object-cover opacity-60 scale-105 group-hover:scale-100 transition-transform duration-[10s]"
+            >
+              <source src="https://raw.githubusercontent.com/oliviabancroft0-prog/marellaagency/main/Sophia_Intro_website_1.mp4" type="video/mp4" />
+            </video>
+          </div>
+          <div className="absolute inset-0 z-10 flex flex-col items-center justify-center text-white bg-black/20">
+            <motion.h3 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              className="text-4xl md:text-6xl font-serif italic mb-6"
+            >
+              The 0.1% Aesthetic
+            </motion.h3>
+            <p className="text-[10px] uppercase tracking-[0.6em] font-bold opacity-70">Seductive. Powerful. Yours.</p>
+          </div>
         </div>
       </div>
     </section>
   );
 };
-
-// Removed ProductCard and props from here - moved to top
 
 const Footer = () => {
   return (
@@ -1011,7 +1104,7 @@ const Footer = () => {
             <span className="text-[10px] font-bold text-gray-700">BTC</span>
           </div>
           <div className="flex items-center space-x-2 opacity-80 hover:opacity-100 transition-opacity bg-white px-3 py-1.5 rounded-lg border border-brand-border shadow-sm">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/5/5c/Tether_logo.svg" alt="USDT" className="h-5 md:h-7 w-auto" />
+            <img src="https://raw.githubusercontent.com/oliviabancroft0-prog/5-5-2026/main/USDT_Logo.png" alt="USDT" className="h-5 md:h-7 w-auto" />
             <span className="text-[10px] font-bold text-gray-700">USDT</span>
           </div>
           <div className="bg-white border border-brand-border px-4 py-2 rounded-lg flex items-center space-x-2 opacity-80 hover:opacity-100 transition-opacity shadow-sm">
@@ -1022,38 +1115,39 @@ const Footer = () => {
 
       <div className="px-6 md:px-12 py-24 border-t border-brand-border grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-12 text-[11px] tracking-widest uppercase text-brand-black/60">
         <div className="space-y-6">
-          <p className="text-brand-black font-bold mb-8">UK Market Hubs</p>
-          <Link to="/hubs/london" className="block hover:text-brand-black cursor-pointer">London Hub</Link>
+          <p className="text-brand-black font-bold mb-8">Performance Hubs</p>
+          <Link to="/hubs/london" className="block hover:text-brand-black cursor-pointer">London Core</Link>
           <Link to="/hubs/manchester" className="block hover:text-brand-black cursor-pointer">Manchester Silk</Link>
-          <Link to="/hubs/birmingham" className="block hover:text-brand-black cursor-pointer">Birmingham Style</Link>
-          <Link to="/hubs/north" className="block hover:text-brand-black cursor-pointer">Northern Authority</Link>
-          <Link to="/hubs/national" className="block hover:text-brand-black cursor-pointer">UK National</Link>
+          <Link to="/hubs/birmingham" className="block hover:text-brand-black cursor-pointer">Midlands Rose</Link>
+          <Link to="/hubs/north" className="block hover:text-brand-black cursor-pointer">Northern Power</Link>
+          <Link to="/hubs/national" className="block hover:text-brand-black cursor-pointer">Global Reach</Link>
         </div>
         <div className="space-y-6">
-          <p className="text-brand-black font-bold mb-8">Mood Edits</p>
-          <Link to="/collections/date-night" className="block hover:text-brand-black cursor-pointer">Date Night</Link>
-          <Link to="/collections/work-week" className="block hover:text-brand-black cursor-pointer">Work Week</Link>
-          <Link to="/collections/weekend-escape" className="block hover:text-brand-black cursor-pointer">Weekend Escape</Link>
-          <Link to="/collections/city-chic" className="block hover:text-brand-black cursor-pointer">City Chic</Link>
-          <Link to="/collections/coastal-ease" className="block hover:text-brand-black cursor-pointer">Coastal Ease</Link>
+          <p className="text-brand-black font-bold mb-8">Aesthetic Edits</p>
+          <Link to="/collections/date-night" className="block hover:text-brand-black cursor-pointer">The Posh</Link>
+          <Link to="/collections/work-week" className="block hover:text-brand-black cursor-pointer">Office Siren</Link>
+          <Link to="/collections/weekend-escape" className="block hover:text-brand-black cursor-pointer">Soft Girl</Link>
+          <Link to="/collections/city-chic" className="block hover:text-brand-black cursor-pointer">Metropolitan</Link>
+          <Link to="/collections/coastal-ease" className="block hover:text-brand-black cursor-pointer">Coastal Glow</Link>
         </div>
         <div className="space-y-6">
-          <p className="text-brand-black font-bold mb-8">Our Roster</p>
-          <Link to="/roster/management" className="block hover:text-brand-black cursor-pointer">Top 0.1% Management</Link>
-          <Link to="/roster/emerging" className="block hover:text-brand-black cursor-pointer">Emerging Creations</Link>
-          <Link to="/roster/exclusive" className="block hover:text-brand-black cursor-pointer">UK Exclusive</Link>
-          <Link to="/roster/synergy" className="block hover:text-brand-black cursor-pointer">Synergy Sync</Link>
+          <p className="text-brand-black font-bold mb-8">Management</p>
+          <Link to="/roster/management" className="block hover:text-brand-black cursor-pointer">0.1% Architecture</Link>
+          <Link to="/roster/emerging" className="block hover:text-brand-black cursor-pointer">Growth Pipeline</Link>
+          <Link to="/roster/exclusive" className="block hover:text-brand-black cursor-pointer">Bespoke Talent</Link>
+          <Link to="/roster/synergy" className="block hover:text-brand-black cursor-pointer">Creator Synergy</Link>
         </div>
         <div className="space-y-6">
-          <p className="text-brand-black font-bold mb-8">Creator Portal</p>
-          <Link to="/login" className="block hover:text-brand-black cursor-pointer">Login</Link>
-          <Link to="/login" className="block hover:text-brand-black cursor-pointer">Join Now</Link>
+          <p className="text-brand-black font-bold mb-8">Private Access</p>
+          <Link to="/login" className="block hover:text-brand-black cursor-pointer">Creator Portal</Link>
+          <Link to="/login" className="block hover:text-brand-black cursor-pointer">Apply to Join</Link>
+          <Link to="/login" className="block hover:text-brand-black cursor-pointer">Client Login</Link>
         </div>
         <div className="space-y-6">
           <p className="text-brand-black font-bold mb-8">The Agency</p>
-          <Link to="/philosophy/philosophy" className="block hover:text-brand-black cursor-pointer">Our Philosophy</Link>
-          <Link to="/philosophy/pillars" className="block hover:text-brand-black cursor-pointer">UK Three Pillars</Link>
-          <Link to="/philosophy/strategy" className="block hover:text-brand-black cursor-pointer">Growth Strategy</Link>
+          <Link to="/philosophy/philosophy" className="block hover:text-brand-black cursor-pointer">Our Distinction</Link>
+          <Link to="/philosophy/pillars" className="block hover:text-brand-black cursor-pointer">Three Pillars</Link>
+          <Link to="/philosophy/strategy" className="block hover:text-brand-black cursor-pointer">Yield Strategy</Link>
         </div>
         <div className="space-y-6">
           <p className="text-brand-black font-bold mb-8">Authority</p>
@@ -1363,39 +1457,9 @@ const Home = () => {
         </div>
       </section>
 
-      <CollectionsSlider />
+      <MoodKitsSection />
 
-      <section className="py-24 bg-brand-offwhite border-t border-brand-border">
-        <div className="max-w-3xl mx-auto text-center px-6">
-          <p className="text-2xl md:text-3xl font-light leading-relaxed italic mb-8">
-            The OnlyFans landscape is competitive. Authentic United Kingdom signatures are high-yield assets. Bramingham Barely ensures your account is localised for peak fan LTV.
-          </p>
-          <button className="text-[11px] font-medium tracking-[0.3em] uppercase border-b border-brand-black pb-1 hover:opacity-50 transition-opacity">
-            The United Kingdom Advantage
-          </button>
-        </div>
-      </section>
 
-      <section className="py-24 px-6 md:px-12 grid grid-cols-1 lg:grid-cols-2 gap-24 items-center max-w-7xl mx-auto">
-         <div className="aspect-[16/10] bg-white overflow-hidden flex items-center justify-center p-16 border border-brand-border">
-            <img src="https://raw.githubusercontent.com/oliviabancroft0-prog/marellaagency/main/handshake.png" alt="Partnership handshake" className="max-w-[70%] max-h-full object-contain" />
-         </div>
-         <div className="space-y-12">
-            <h2 className="text-5xl italic">325+ Global Brand Partnerships</h2>
-            <div className="flex space-x-12 items-start">
-               <div className="w-32 aspect-square bg-brand-offwhite flex items-center justify-center border border-brand-border">
-                  <ShoppingBag className="text-brand-black/20" size={48} strokeWidth={1} />
-               </div>
-               <div className="max-w-sm space-y-6">
-                  <p className="text-lg font-light leading-relaxed">Our network of premium partners and high-LTV brands offer exclusive synergies for our roster, ensuring long-term retention and commercial authority.</p>
-                  <button className="text-[11px] font-medium tracking-[0.3em] uppercase border-b border-brand-black pb-1 flex items-center group">
-                    <span>Partner with us</span>
-                    <ArrowRight size={14} className="ml-2 transition-transform group-hover:translate-x-1" />
-                  </button>
-               </div>
-            </div>
-         </div>
-      </section>
 
       <Footer />
     </motion.div>
