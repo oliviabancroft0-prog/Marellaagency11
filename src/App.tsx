@@ -21,12 +21,20 @@ import {
   Facebook,
   Youtube,
   Twitter,
-  Menu
+  Menu,
+  Trash2,
+  CheckCircle,
+  Search as SearchIcon
 } from 'lucide-react';
 import { Login } from './pages/Login';
 import { Dashboard } from './pages/Dashboard';
 import { ProtectedRoute } from './components/ProtectedRoute';
 import { useAuth } from './context/AuthContext';
+import { Product, CartItem, KitProduct } from './types';
+import { MODELS } from './constants/models';
+import { KIT_PRODUCTS } from './constants/kitProducts';
+import { MoodKitsPage } from './pages/MoodKitsPage';
+import { CheckoutPage } from './pages/CheckoutPage';
 
 const ScrollToTop = () => {
   const { pathname } = useLocation();
@@ -43,238 +51,7 @@ const ScrollToTop = () => {
 
 // --- Types & Constants ---
 
-type ViewState = 'home' | 'product' | 'checkout' | 'all-products';
-
-interface Product {
-  id: string;
-  name: string;
-  subtitle: string;
-  location: string;
-  instagram: string;
-  onlyfans: string;
-  bio: string;
-  price: string;
-  image: string;
-  gallery: string[];
-}
-
-const MODELS: Product[] = [
-  { 
-    id: 'sophia', 
-    name: 'Sophia', 
-    subtitle: 'High-Fashion Editorial', 
-    location: 'Central London', 
-    instagram: '@sophia_elite', 
-    onlyfans: 'onlyfans.com/sophia_elite',
-    bio: 'The archetype of London sophistication. Sophia bridges the gap between high-fashion editorial aesthetics and high-yield digital engagement. Her presence is a masterclass in UK-specific cultural appeal.',
-    price: '£500/Session', 
-    image: 'https://raw.githubusercontent.com/oliviabancroft0-prog/marellaagency/main/SaveClip.App_491446742_18501618415034423_3111310470271486912_n.jpg',
-    gallery: [
-      'https://raw.githubusercontent.com/oliviabancroft0-prog/marellaagency/main/SaveClip.App_491461754_18501618508034423_6390605950729470107_n.jpg',
-      'https://raw.githubusercontent.com/oliviabancroft0-prog/marellaagency/main/SaveClip.App_491463552_18501618517034423_4078345625826757762_n.jpg'
-    ]
-  },
-  { 
-    id: 'isabella', 
-    name: 'Isabella', 
-    subtitle: 'Northern Elegance', 
-    location: 'Manchester', 
-    instagram: '@bella_silk', 
-    onlyfans: 'onlyfans.com/bellas_secrets',
-    bio: 'Authenticity is the cornerstone of the Northern brand. Isabella leverages her organic charm to build deep-rooted subscriber loyalty, achieving retention rates that exceed industry benchmarks.',
-    price: '£450/Session', 
-    image: 'https://raw.githubusercontent.com/oliviabancroft0-prog/marellaagency/main/SaveClip.App_548665373_18532160638022082_1975968607335897241_n.jpg',
-    gallery: [
-      'https://raw.githubusercontent.com/oliviabancroft0-prog/marellaagency/main/SaveClip.App_548713014_18532160620022082_8718994481765078600_n.jpg',
-      'https://raw.githubusercontent.com/oliviabancroft0-prog/marellaagency/main/SaveClip.App_548927413_18532160611022082_6483794292852537256_n.jpg'
-    ]
-  },
-  { 
-    id: 'mia', 
-    name: 'Mia', 
-    subtitle: 'Contemporary Heritage', 
-    location: 'Birmingham', 
-    instagram: '@mia_rose_uk', 
-    onlyfans: 'onlyfans.com/miarose',
-    bio: 'Mia represents the evolution of the Midlands Rose. With a focus on sophisticated wit and high-fidelity production, she is a prime example of the high-earning potential within the UK market.',
-    price: '£400/Session', 
-    image: 'https://raw.githubusercontent.com/oliviabancroft0-prog/marellaagency/main/SaveClip.App_554949057_17982269327874151_6573482796612197502_n.jpg',
-    gallery: [
-      'https://raw.githubusercontent.com/oliviabancroft0-prog/marellaagency/main/SaveClip.App_571606292_18084078739955146_5757480726807502683_n.jpg',
-      'https://raw.githubusercontent.com/oliviabancroft0-prog/marellaagency/main/SaveClip.App_573009488_18084078742955146_8389102421826329187_n.jpg'
-    ]
-  },
-  { 
-    id: 'olivia', 
-    name: 'Olivia', 
-    subtitle: 'Yorkshire Signature', 
-    location: 'Leeds', 
-    instagram: '@liv_leeds', 
-    onlyfans: 'onlyfans.com/oliviamodels',
-    bio: 'A signature blend of natural beauty and sharp northern intellect. Olivia specialises in high-retention fan engagement, proving that personality is the most valuable asset in the digital creator economy.',
-    price: '£350/Session', 
-    image: 'https://raw.githubusercontent.com/oliviabancroft0-prog/marellaagency/main/SaveClip.App_573606007_18084078751955146_5893026456741058341_n.jpg',
-    gallery: [
-      'https://raw.githubusercontent.com/oliviabancroft0-prog/marellaagency/main/SaveClip.App_604188952_17990952302874151_163541047956415390_n.jpg',
-      'https://raw.githubusercontent.com/oliviabancroft0-prog/marellaagency/main/SaveClip.App_621676533_18088745648038103_8427349625796036719_n.jpg'
-    ]
-  },
-  { 
-    id: 'ava', 
-    name: 'Ava', 
-    subtitle: 'Heritage Chic', 
-    location: 'East Midlands', 
-    instagram: '@ava_heritage', 
-    onlyfans: 'onlyfans.com/ava_chic',
-    bio: 'Ava combines traditional British heritage aesthetics with a forward-thinking OnlyFans architecture, maximizing revenue through strategic content distribution.',
-    price: '£380/Session', 
-    image: 'https://raw.githubusercontent.com/oliviabancroft0-prog/marellaagency/main/SaveClip.App_624153366_18081768785230511_5352130957854695705_n.jpg',
-    gallery: [
-      'https://raw.githubusercontent.com/oliviabancroft0-prog/marellaagency/main/SaveClip.App_632929428_18567901351023065_8553227299719445493_n.jpg',
-      'https://raw.githubusercontent.com/oliviabancroft0-prog/marellaagency/main/SaveClip.App_637880064_18567901342023065_189523403290152932_n.jpg'
-    ]
-  },
-  { 
-    id: 'lily', 
-    name: 'Lily', 
-    subtitle: 'Western Creative', 
-    location: 'Bristol', 
-    instagram: '@lily_bristol', 
-    onlyfans: 'onlyfans.com/lilywild',
-    bio: 'Bristol-based and unapologetically creative. Lily leverages her avant-garde aesthetic to dominate the Western market, offering a unique value proposition to her dedicated fanbase.',
-    price: '£300/Session', 
-    image: 'https://raw.githubusercontent.com/oliviabancroft0-prog/marellaagency/main/SaveClip.App_649693363_17955316619940713_8819016588116933630_n.jpg',
-    gallery: [
-      'https://raw.githubusercontent.com/oliviabancroft0-prog/marellaagency/main/SaveClip.App_650068498_18012760112832609_6440838146725050507_n.jpg',
-      'https://raw.githubusercontent.com/oliviabancroft0-prog/marellaagency/main/SaveClip.App_654163537_18109991089773636_3901622141352180096_n.jpg'
-    ]
-  },
-  { 
-    id: 'freya', 
-    name: 'Freya', 
-    subtitle: 'Northern Shores Signature', 
-    location: 'Newcastle', 
-    instagram: '@freya_tyne', 
-    onlyfans: 'onlyfans.com/freya_geordie',
-    bio: 'Freya captures the raw, energetic spirit of the North East. Her branding prioritises high-energy engagement and a relatable, yet polished Northern aesthetic.',
-    price: '£280/Session', 
-    image: 'https://raw.githubusercontent.com/oliviabancroft0-prog/marellaagency/main/SaveClip.App_654791163_18583331857057834_5231813332034557395_n.jpg',
-    gallery: [
-      'https://raw.githubusercontent.com/oliviabancroft0-prog/marellaagency/main/SaveClip.App_656080436_18582720856057834_8120955932024648460_n.jpg',
-      'https://raw.githubusercontent.com/oliviabancroft0-prog/marellaagency/main/SaveClip.App_670282976_18588713566057834_1641427274139472804_n.jpg'
-    ]
-  },
-  { 
-    id: 'florence', 
-    name: 'Florence', 
-    subtitle: 'Oxfordshire Academic', 
-    location: 'Oxford', 
-    instagram: '@flo_oxford', 
-    onlyfans: 'onlyfans.com/florence_vibe',
-    bio: 'Intellectual elegance meets digital wealth architecture. Florence specializes in the "Academic Chic" narrative, driving high retention through sophisticated dialogue and content.',
-    price: '£420/Session', 
-    image: 'https://raw.githubusercontent.com/oliviabancroft0-prog/marellaagency/main/SaveClip.App_669936751_18127658608596915_2519547545830487435_n.jpg',
-    gallery: []
-  },
-  { 
-    id: 'poppy', 
-    name: 'Poppy', 
-    subtitle: 'Coastal Breeze Signature', 
-    location: 'Brighton', 
-    instagram: '@poppy_brighton', 
-    onlyfans: 'onlyfans.com/poppy_waves',
-    bio: 'Brighton-based and high-spirited. Poppy leverages her vibrant coastal lifestyle to create a unique "Sun-Kissed" brand that consistently ranks high in engagement.',
-    price: '£320/Session', 
-    image: 'https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?q=80&w=1000',
-    gallery: []
-  },
-  { 
-    id: 'willow', 
-    name: 'Willow', 
-    subtitle: 'Scottish Heritage Excellence', 
-    location: 'Edinburgh', 
-    instagram: '@willow_edi', 
-    onlyfans: 'onlyfans.com/willow_scot',
-    bio: 'The pinnacle of Scottish talent management. Willow bridges the gap between historical heritage backgrounds and contemporary digital performance.',
-    price: '£480/Session', 
-    image: 'https://images.unsplash.com/photo-1531123897727-8f129e1688ce?q=80&w=1000',
-    gallery: []
-  },
-  { 
-    id: 'evie', 
-    name: 'Evie', 
-    subtitle: 'Lakeside Industrial', 
-    location: 'Sheffield', 
-    instagram: '@evie_steel', 
-    onlyfans: 'onlyfans.com/evie_sheff',
-    bio: 'Sheffield-born grit meets high-fashion management. Evie leverages her industrial-chic aesthetic to dominate the regional market with high-yield results.',
-    price: '£260/Session', 
-    image: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=1000',
-    gallery: []
-  },
-  { 
-    id: 'elsie', 
-    name: 'Elsie', 
-    subtitle: 'Celtic Authority', 
-    location: 'Cardiff', 
-    instagram: '@elsie_welsh', 
-    onlyfans: 'onlyfans.com/elsie_cardiff',
-    bio: 'Elsie represents the sovereign Welsh signature. Her presence is a masterclass in regional cultural resonance and high-fidelity subscriber engagement.',
-    price: '£310/Session', 
-    image: 'https://images.unsplash.com/photo-1554151228-14d9def656e4?q=80&w=1000',
-    gallery: []
-  },
-  { 
-    id: 'sienna', 
-    name: 'Sienna', 
-    subtitle: 'Urban Merseyside', 
-    location: 'Liverpool', 
-    instagram: '@sienna_mersey', 
-    onlyfans: 'onlyfans.com/sienna_liverpool',
-    bio: 'Liverpool charisma paired with professional management architecture. Sienna specializes in the "City Chic" lifestyle, driving record retention rates.',
-    price: '£340/Session', 
-    image: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=1000',
-    gallery: []
-  },
-  { 
-    id: 'alice', 
-    name: 'Alice', 
-    subtitle: 'Nottingham Signature', 
-    location: 'Nottingham', 
-    instagram: '@alice_notts', 
-    onlyfans: 'onlyfans.com/alice_lace',
-    bio: 'The evolution of Midlands industrial elegance. Alice leverages her organic charm and sophisticated content strategy to ensure peak fan lifetime value.',
-    price: '£290/Session', 
-    image: 'https://images.unsplash.com/photo-1534751435030-ef479953ee27?q=80&w=1000',
-    gallery: []
-  },
-  { 
-    id: 'rose', 
-    name: 'Rose', 
-    subtitle: 'Glasgow Grit Signature', 
-    location: 'Glasgow', 
-    instagram: '@rose_clyde', 
-    onlyfans: 'onlyfans.com/rose_glasgow',
-    bio: 'Unapologetically Glaswegian with a high-fashion edge. Rose combines cultural grit with technical optimisation to create a powerhouse digital brand.',
-    price: '£400/Session', 
-    image: 'https://images.unsplash.com/photo-1512413316925-fd4b93f31521?q=80&w=1000',
-    gallery: []
-  },
-  { 
-    id: 'phoebe', 
-    name: 'Phoebe', 
-    subtitle: 'Leicestershire Heritage', 
-    location: 'Leicester', 
-    instagram: '@phoebe_leicester', 
-    onlyfans: 'onlyfans.com/phoebe_fox',
-    bio: 'Phoebe bridges traditional East Midlands heritage with a forward-thinking OnlyFans architecture, maximizing engagement through strategic narrative building.',
-    price: '£270/Session', 
-    image: 'https://images.unsplash.com/photo-1492106084934-c2d9101d1752?q=80&w=1000',
-    gallery: []
-  }
-];
-
-const MOOD_KITS = [
+export const MOOD_KITS = [
   {
     id: 'date-night',
     title: 'Date Night',
@@ -659,7 +436,142 @@ const CategoryPage = () => {
 
 // --- Components ---
 
-const Navbar = ({ cartCount, onCartOpen }: { cartCount: number, onCartOpen: () => void }) => {
+const SearchOverlay = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) => {
+  const [searchTerm, setSearchTerm] = useState('');
+  const navigate = useNavigate();
+
+  const filteredModels = MODELS.filter(m => 
+    m.name.toLowerCase().includes(searchTerm.toLowerCase()) || 
+    m.location.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    m.subtitle.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
+  const filteredKits = MOOD_KITS.filter(k => 
+    k.title.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
+  const filteredProducts = KIT_PRODUCTS.filter(p =>
+    p.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    p.category.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
+  return (
+    <AnimatePresence>
+      {isOpen && (
+        <motion.div 
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          className="fixed inset-0 z-[100] bg-white flex flex-col"
+        >
+          <div className="pt-8 px-6 md:px-12 flex justify-between items-center mb-16">
+            <div className="flex items-center flex-1 max-w-2xl border-b-2 border-brand-black pb-4">
+              <SearchIcon size={24} className="text-brand-black/40 mr-6" />
+              <input 
+                autoFocus
+                type="text" 
+                placeholder="Search talent registry, mood kits, or products..." 
+                className="w-full bg-transparent text-2xl md:text-4xl font-serif italic focus:outline-none"
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+              />
+            </div>
+            <button onClick={onClose} className="ml-8 p-4 hover:rotate-90 transition-transform">
+              <X size={32} />
+            </button>
+          </div>
+
+          <div className="flex-1 overflow-y-auto px-6 md:px-12 pb-24">
+            <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-16">
+              {searchTerm && (
+                <>
+                  <div className="md:col-span-1">
+                    <h3 className="text-[10px] uppercase tracking-[0.4em] font-bold text-brand-black/30 mb-8">Talent ({filteredModels.length})</h3>
+                    <div className="space-y-6">
+                      {filteredModels.map(m => (
+                        <div 
+                          key={m.id} 
+                          onClick={() => { navigate(`/roster/${m.id}`); onClose(); }}
+                          className="flex items-center space-x-6 group cursor-pointer"
+                        >
+                          <div className="w-20 h-20 bg-brand-offwhite rounded-sm overflow-hidden">
+                            <img src={m.image} alt={m.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform" />
+                          </div>
+                          <div>
+                            <h4 className="text-xl font-serif italic">{m.name}</h4>
+                            <p className="text-[10px] uppercase font-bold tracking-widest text-brand-black/40">{m.location}</p>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                  <div className="md:col-span-1">
+                    <h3 className="text-[10px] uppercase tracking-[0.4em] font-bold text-brand-black/30 mb-8">Mood Kits ({filteredKits.length})</h3>
+                    <div className="space-y-6">
+                      {filteredKits.map(k => (
+                        <div 
+                          key={k.id} 
+                          onClick={() => { navigate(`/mood-kits#${k.id}`); onClose(); }}
+                          className="flex items-center space-x-6 group cursor-pointer"
+                        >
+                          <div className="w-20 h-20 bg-brand-offwhite rounded-sm overflow-hidden">
+                            <img src={k.image} alt={k.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform" />
+                          </div>
+                          <div>
+                            <h4 className="text-xl font-serif italic">{k.title}</h4>
+                            <p className="text-[10px] uppercase font-bold tracking-widest text-brand-black/40">Mood Kit for Content</p>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                  <div className="md:col-span-1">
+                    <h3 className="text-[10px] uppercase tracking-[0.4em] font-bold text-brand-black/30 mb-8">Wardrobe ({filteredProducts.length})</h3>
+                    <div className="space-y-6">
+                      {filteredProducts.map(p => (
+                        <div 
+                          key={p.id} 
+                          onClick={() => { navigate(`/mood-kits#${p.kitId}`); onClose(); }}
+                          className="flex items-center space-x-6 group cursor-pointer"
+                        >
+                          <div className="w-20 h-20 bg-brand-offwhite rounded-sm overflow-hidden">
+                            <img src={p.image} alt={p.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform" />
+                          </div>
+                          <div>
+                            <h4 className="text-xl font-serif italic truncate">{p.name}</h4>
+                            <p className="text-[10px] uppercase font-bold tracking-widest text-brand-black/40">£{p.price}</p>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </>
+              )}
+              {!searchTerm && (
+                <div className="col-span-full">
+                  <h3 className="text-[10px] uppercase tracking-[0.4em] font-bold text-brand-black/30 mb-8">Trending Hubs</h3>
+                  <div className="flex flex-wrap gap-4">
+                    {['London', 'Manchester', 'Birmingham', 'Northern'].map(h => (
+                      <button 
+                        key={h}
+                        onClick={() => { navigate(`/hubs/${h.toLowerCase()}`); onClose(); }}
+                        className="text-2xl font-serif italic hover:text-blue-600 transition-colors"
+                      >
+                        {h} Hub.
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>
+        </motion.div>
+      )}
+    </AnimatePresence>
+  );
+};
+
+const Navbar = ({ cartCount, onCartOpen, onSearchOpen }: { cartCount: number, onCartOpen: () => void, onSearchOpen: () => void }) => {
   const [activeMenu, setActiveMenu] = useState<string | null>(null);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const navigate = useNavigate();
@@ -669,7 +581,7 @@ const Navbar = ({ cartCount, onCartOpen }: { cartCount: number, onCartOpen: () =
 
   const menuItems = [
     { label: 'The Roster', id: 'shop', path: '/roster' },
-    { label: 'Mood Edits', id: 'collections', path: '/#collections' },
+    { label: 'Mood Kits for Content', id: 'collections', path: '/mood-kits' },
     { label: 'The Agency', id: 'about', path: '/agency/philosophy' },
   ];
 
@@ -728,10 +640,10 @@ const Navbar = ({ cartCount, onCartOpen }: { cartCount: number, onCartOpen: () =
       </div>
 
       <div className="flex justify-end items-center space-x-4 md:space-x-10 text-[11px] font-bold tracking-[0.15em] uppercase">
-        <Link to="/roster" className="hover:opacity-50 transition-opacity flex items-center">
+        <button onClick={onSearchOpen} className="hover:opacity-50 transition-opacity flex items-center">
           <Search size={16} />
           <span className="hidden lg:inline ml-3 font-semibold">Registry</span>
-        </Link>
+        </button>
         <button 
           onClick={() => navigate(user ? '/dashboard' : '/login')}
           className="hover:opacity-50 transition-opacity flex items-center"
@@ -1031,7 +943,7 @@ const MoodKitsSection = () => {
                   </div>
                 </div>
                 <button 
-                  onClick={() => navigate('/roster')}
+                  onClick={() => navigate('/mood-kits')}
                   className="w-full py-4 text-[9px] uppercase tracking-[0.3em] font-bold border border-brand-black hover:bg-brand-black hover:text-white transition-all duration-300"
                 >
                   Shop This Kit
@@ -1123,12 +1035,12 @@ const Footer = () => {
           <Link to="/hubs/national" className="block hover:text-brand-black cursor-pointer">Global Reach</Link>
         </div>
         <div className="space-y-6">
-          <p className="text-brand-black font-bold mb-8">Aesthetic Edits</p>
-          <Link to="/collections/date-night" className="block hover:text-brand-black cursor-pointer">The Posh</Link>
-          <Link to="/collections/work-week" className="block hover:text-brand-black cursor-pointer">Office Siren</Link>
-          <Link to="/collections/weekend-escape" className="block hover:text-brand-black cursor-pointer">Soft Girl</Link>
-          <Link to="/collections/city-chic" className="block hover:text-brand-black cursor-pointer">Metropolitan</Link>
-          <Link to="/collections/coastal-ease" className="block hover:text-brand-black cursor-pointer">Coastal Glow</Link>
+          <p className="text-brand-black font-bold mb-8">Mood Kits for Content</p>
+          <Link to="/mood-kits#date-night" className="block hover:text-brand-black cursor-pointer">The Posh</Link>
+          <Link to="/mood-kits#office-siren" className="block hover:text-brand-black cursor-pointer">Office Siren</Link>
+          <Link to="/mood-kits#coastal-ease" className="block hover:text-brand-black cursor-pointer">Soft Girl</Link>
+          <Link to="/mood-kits#city-chic" className="block hover:text-brand-black cursor-pointer">Metropolitan</Link>
+          <Link to="/mood-kits#weekend-escape" className="block hover:text-brand-black cursor-pointer">Coastal Glow</Link>
         </div>
         <div className="space-y-6">
           <p className="text-brand-black font-bold mb-8">Management</p>
@@ -1189,7 +1101,7 @@ const Footer = () => {
   );
 };
 
-const ProductDetail = ({ product, onBack, onAddToCart }: { product?: Product, onBack?: () => void, onAddToCart?: () => void }) => {
+const ProductDetail = ({ product, onBack, onAddToCart }: { product?: Product, onBack?: () => void, onAddToCart?: (item: CartItem) => void }) => {
   const { productId } = useParams();
   const navigate = useNavigate();
   const activeProduct = product || MODELS.find(m => m.id === productId);
@@ -1296,7 +1208,18 @@ const ProductDetail = ({ product, onBack, onAddToCart }: { product?: Product, on
             </div>
 
             <button 
-              onClick={onAddToCart}
+              onClick={() => {
+                if (onAddToCart && activeProduct) {
+                  onAddToCart({
+                    id: activeProduct.id,
+                    name: activeProduct.name,
+                    price: parseInt(activeProduct.price.replace(/[^0-9]/g, '')),
+                    quantity: 1,
+                    image: activeProduct.image,
+                    type: 'talent'
+                  });
+                }
+              }}
               className="w-full bg-brand-black text-white py-5 rounded-full text-[11px] uppercase tracking-[0.3em] font-bold hover:bg-brand-black/90 transition-colors"
             >
               Confirm Booking Selection
@@ -1311,7 +1234,24 @@ const ProductDetail = ({ product, onBack, onAddToCart }: { product?: Product, on
   );
 };
 
-const CartDrawer = ({ isOpen, onClose, cartCount }: { isOpen: boolean, onClose: () => void, cartCount: number }) => {
+const CartDrawer = ({ isOpen, onClose, cart, setCart }: { isOpen: boolean, onClose: () => void, cart: CartItem[], setCart: React.Dispatch<React.SetStateAction<CartItem[]>> }) => {
+  const navigate = useNavigate();
+  const cartCount = cart.reduce((acc, item) => acc + item.quantity, 0);
+
+  const updateQuantity = (id: string, delta: number) => {
+    setCart(prev => prev.map(item => {
+      if (item.id === id) {
+        const newQty = Math.max(1, item.quantity + delta);
+        return { ...item, quantity: newQty };
+      }
+      return item;
+    }));
+  };
+
+  const removeItem = (id: string) => {
+    setCart(prev => prev.filter(item => item.id !== id));
+  };
+
   return (
     <AnimatePresence>
       {isOpen && (
@@ -1339,38 +1279,48 @@ const CartDrawer = ({ isOpen, onClose, cartCount }: { isOpen: boolean, onClose: 
             </div>
 
             <div className="flex-1 overflow-y-auto hide-scrollbar space-y-8">
-              {cartCount === 0 ? (
+              {cart.length === 0 ? (
                 <p className="text-center py-24 text-brand-black/40 font-light italic">Your selection is currently empty.</p>
               ) : (
-                <div className="flex items-start space-x-4">
-                  <div className="w-24 aspect-square bg-brand-offwhite">
-                    <img src="https://images.unsplash.com/photo-1556228720-195a672e8a03?q=80&w=400" className="w-full h-full object-cover mix-blend-multiply" />
-                  </div>
-                  <div className="flex-1">
-                    <h4 className="font-serif italic mb-1">Professional Management</h4>
-                    <p className="text-[10px] text-brand-black/50 uppercase tracking-widest mb-4">Scalability / Frictionless</p>
-                    <div className="flex items-center justify-between">
-                       <div className="flex items-center border border-brand-border rounded-full px-3 py-1">
-                          <button><Minus size={12} /></button>
-                          <span className="px-4 text-xs">{cartCount}</span>
-                          <button><Plus size={12} /></button>
-                       </div>
-                       <p className="text-sm font-medium">£1,499</p>
+                cart.map(item => (
+                  <div key={item.id} className="flex items-start space-x-4 border-b border-brand-border pb-4">
+                    <div className="w-20 aspect-square bg-brand-offwhite rounded-sm overflow-hidden border border-brand-border">
+                      <img src={item.image} className="w-full h-full object-cover mix-blend-multiply" />
+                    </div>
+                    <div className="flex-1">
+                      <div className="flex justify-between items-start">
+                        <h4 className="font-serif italic text-sm">{item.name}</h4>
+                        <button onClick={() => removeItem(item.id)} className="text-brand-black/20 hover:text-red-600 transition-colors">
+                          <Trash2 size={12} />
+                        </button>
+                      </div>
+                      <p className="text-[9px] text-brand-black/50 uppercase tracking-widest mb-2">{item.type}</p>
+                      <div className="flex items-center justify-between">
+                         <div className="flex items-center border border-brand-border rounded-sm px-2 py-0.5 scale-90 origin-left">
+                            <button onClick={() => updateQuantity(item.id, -1)}><Minus size={10} /></button>
+                            <span className="px-3 text-[10px] font-mono">{item.quantity}</span>
+                            <button onClick={() => updateQuantity(item.id, 1)}><Plus size={10} /></button>
+                         </div>
+                         <p className="text-xs font-medium">£{(item.price * item.quantity).toLocaleString()}</p>
+                      </div>
                     </div>
                   </div>
-                </div>
+                ))
               )}
 
-              <div className="pt-12 border-t border-brand-border space-y-6">
+              <div className="pt-12 space-y-6">
                 <span className="text-[10px] uppercase tracking-widest text-brand-black/40 font-bold">Recommended Talents</span>
                 <div className="flex space-x-4 overflow-x-auto hide-scrollbar pb-4">
                   {MODELS.slice(1, 4).map(p => (
-                    <div key={p.id} className="min-w-[12rem] group">
-                      <div className="aspect-square bg-brand-offwhite mb-2 overflow-hidden">
-                        <img src={p.image} className="w-full h-full object-cover mix-blend-multiply group-hover:scale-105 transition-transform" />
+                    <div 
+                      key={p.id} 
+                      className="min-w-[10rem] group cursor-pointer"
+                      onClick={() => { navigate(`/roster/${p.id}`); onClose(); }}
+                    >
+                      <div className="aspect-square bg-brand-offwhite mb-2 overflow-hidden border border-brand-border">
+                        <img src={p.image} className="w-full h-full object-cover group-hover:scale-105 transition-transform" />
                       </div>
-                      <p className="text-xs font-serif italic">{p.name}</p>
-                      <button className="text-[9px] uppercase tracking-widest mt-2 border-b border-brand-black">View Profile</button>
+                      <p className="text-[10px] font-serif italic truncate">{p.name}</p>
                     </div>
                   ))}
                 </div>
@@ -1380,15 +1330,16 @@ const CartDrawer = ({ isOpen, onClose, cartCount }: { isOpen: boolean, onClose: 
             <div className="pt-8 border-t border-brand-border space-y-4">
               <div className="flex justify-between items-center text-sm">
                 <span className="uppercase tracking-widest font-bold">Total Retainer</span>
-                <span className="font-medium">£{cartCount > 0 ? (cartCount * 1499).toLocaleString() : '0'}</span>
+                <span className="font-medium">£{cart.reduce((s, i) => s + (i.price * i.quantity), 0).toLocaleString()}</span>
               </div>
               <button 
-                disabled={cartCount === 0}
+                disabled={cart.length === 0}
+                onClick={() => { navigate('/checkout'); onClose(); }}
                 className="w-full bg-brand-black text-white py-5 rounded-full text-[11px] uppercase tracking-[0.3em] font-bold hover:bg-brand-black/90 transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
               >
-                Submit selection
+                Proceed to Settlement
               </button>
-              <p className="text-[9px] text-center text-brand-black/40 uppercase tracking-widest">Calculated at proposal. All figures in GBP.</p>
+              <p className="text-[9px] text-center text-brand-black/40 uppercase tracking-widest">Calculated in GBP. Secure SSL Encryption.</p>
             </div>
           </motion.div>
         </>
@@ -1399,12 +1350,12 @@ const CartDrawer = ({ isOpen, onClose, cartCount }: { isOpen: boolean, onClose: 
 
 // --- Main App ---
 
-const AppLayout = ({ children, cartCount, onCartOpen }: { children: React.ReactNode, cartCount: number, onCartOpen: () => void }) => {
+const AppLayout = ({ children, cartCount, onCartOpen, onSearchOpen }: { children: React.ReactNode, cartCount: number, onCartOpen: () => void, onSearchOpen: () => void }) => {
   const location = useLocation();
   
   return (
     <div className="min-h-screen font-sans selection:bg-brand-black selection:text-white bg-brand-offwhite">
-      <Navbar cartCount={cartCount} onCartOpen={onCartOpen} />
+      <Navbar cartCount={cartCount} onCartOpen={onCartOpen} onSearchOpen={onSearchOpen} />
       <main className="relative">
         <AnimatePresence mode="wait">
           <motion.div
@@ -1468,16 +1419,32 @@ const Home = () => {
 
 export default function App() {
   const [cartOpen, setCartOpen] = useState(false);
-  const [cartCount, setCartCount] = useState(0);
+  const [searchOpen, setSearchOpen] = useState(false);
+  const [cart, setCart] = useState<CartItem[]>([]);
 
-  const handleAddToCart = () => {
-    setCartCount(prev => prev + 1);
+  const handleAddToCart = (items: CartItem | CartItem[]) => {
+    const itemsToAdd = Array.isArray(items) ? items : [items];
+    setCart(prev => {
+      let newCart = [...prev];
+      itemsToAdd.forEach(item => {
+        const existing = newCart.find(i => i.id === item.id);
+        if (existing) {
+          newCart = newCart.map(i => i.id === item.id ? { ...i, quantity: i.quantity + item.quantity } : i);
+        } else {
+          newCart.push(item);
+        }
+      });
+      return newCart;
+    });
     setCartOpen(true);
   };
 
+  const cartCount = cart.reduce((acc, item) => acc + item.quantity, 0);
+
   const wrapInLayout = (content: React.ReactNode) => (
-    <AppLayout cartCount={cartCount} onCartOpen={() => setCartOpen(true)}>
-      <CartDrawer isOpen={cartOpen} onClose={() => setCartOpen(false)} cartCount={cartCount} />
+    <AppLayout cartCount={cartCount} onCartOpen={() => setCartOpen(true)} onSearchOpen={() => setSearchOpen(true)}>
+      <SearchOverlay isOpen={searchOpen} onClose={() => setSearchOpen(false)} />
+      <CartDrawer isOpen={cartOpen} onClose={() => setCartOpen(false)} cart={cart} setCart={setCart} />
       {content}
     </AppLayout>
   );
@@ -1488,7 +1455,9 @@ export default function App() {
       <Routes>
         <Route path="/" element={wrapInLayout(<Home />)} />
         <Route path="/roster" element={wrapInLayout(<AllProductsView onBack={() => {}} onProductClick={() => {}} />)} />
-        <Route path="/roster/:productId" element={wrapInLayout(<ProductDetail onAddToCart={handleAddToCart} />)} />
+        <Route path="/roster/:productId" element={wrapInLayout(<ProductDetail onAddToCart={(item) => handleAddToCart(item)} />)} />
+        <Route path="/mood-kits" element={wrapInLayout(<MoodKitsPage onAddToCart={(items) => handleAddToCart(items)} />)} />
+        <Route path="/checkout" element={wrapInLayout(<CheckoutPage cart={cart} setCart={setCart} />)} />
         <Route path="/login" element={wrapInLayout(<Login />)} />
         <Route path="/hubs/:categoryId" element={wrapInLayout(<CategoryPage />)} />
         <Route path="/collections/:categoryId" element={wrapInLayout(<CategoryPage />)} />
