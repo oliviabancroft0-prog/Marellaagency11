@@ -68,10 +68,10 @@ const MODELS: Product[] = [
     onlyfans: 'onlyfans.com/sophia_elite',
     bio: 'The archetype of London sophistication. Sophia bridges the gap between high-fashion editorial aesthetics and high-yield digital engagement. Her presence is a masterclass in UK-specific cultural appeal.',
     price: '£500/Session', 
-    image: 'https://raw.githubusercontent.com/oliviabancroft0-prog/marellaagency/main/Sophcoverphoto-CGr776cV.png',
+    image: 'https://raw.githubusercontent.com/oliviabancroft0-prog/marellaagency/main/SaveClip.App_491446742_18501618415034423_3111310470271486912_n.jpg',
     gallery: [
-      'https://images.unsplash.com/photo-1596462502278-27bfaf410911?q=80&w=1000',
-      'https://images.unsplash.com/photo-1512496015851-a90fb38ba796?q=80&w=1000'
+      'https://raw.githubusercontent.com/oliviabancroft0-prog/marellaagency/main/SaveClip.App_491461754_18501618508034423_6390605950729470107_n.jpg',
+      'https://raw.githubusercontent.com/oliviabancroft0-prog/marellaagency/main/SaveClip.App_491463552_18501618517034423_4078345625826757762_n.jpg'
     ]
   },
   { 
@@ -83,8 +83,11 @@ const MODELS: Product[] = [
     onlyfans: 'onlyfans.com/bellas_secrets',
     bio: 'Authenticity is the cornerstone of the Northern brand. Isabella leverages her organic charm to build deep-rooted subscriber loyalty, achieving retention rates that exceed industry benchmarks.',
     price: '£450/Session', 
-    image: 'https://images.unsplash.com/photo-1570172234562-969c67678004?q=80&w=1000',
-    gallery: []
+    image: 'https://raw.githubusercontent.com/oliviabancroft0-prog/marellaagency/main/SaveClip.App_548665373_18532160638022082_1975968607335897241_n.jpg',
+    gallery: [
+      'https://raw.githubusercontent.com/oliviabancroft0-prog/marellaagency/main/SaveClip.App_548713014_18532160620022082_8718994481765078600_n.jpg',
+      'https://raw.githubusercontent.com/oliviabancroft0-prog/marellaagency/main/SaveClip.App_548927413_18532160611022082_6483794292852537256_n.jpg'
+    ]
   },
   { 
     id: 'mia', 
@@ -95,8 +98,11 @@ const MODELS: Product[] = [
     onlyfans: 'onlyfans.com/miarose',
     bio: 'Mia represents the evolution of the Midlands Rose. With a focus on sophisticated wit and high-fidelity production, she is a prime example of the high-earning potential within the UK market.',
     price: '£400/Session', 
-    image: 'https://images.unsplash.com/photo-1509631179647-0177331693ae?q=80&w=1000',
-    gallery: []
+    image: 'https://raw.githubusercontent.com/oliviabancroft0-prog/marellaagency/main/SaveClip.App_554949057_17982269327874151_6573482796612197502_n.jpg',
+    gallery: [
+      'https://raw.githubusercontent.com/oliviabancroft0-prog/marellaagency/main/SaveClip.App_571606292_18084078739955146_5757480726807502683_n.jpg',
+      'https://raw.githubusercontent.com/oliviabancroft0-prog/marellaagency/main/SaveClip.App_573009488_18084078742955146_8389102421826329187_n.jpg'
+    ]
   },
   { 
     id: 'olivia', 
@@ -107,8 +113,11 @@ const MODELS: Product[] = [
     onlyfans: 'onlyfans.com/oliviamodels',
     bio: 'A signature blend of natural beauty and sharp northern intellect. Olivia specialises in high-retention fan engagement, proving that personality is the most valuable asset in the digital creator economy.',
     price: '£350/Session', 
-    image: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=1000',
-    gallery: []
+    image: 'https://raw.githubusercontent.com/oliviabancroft0-prog/marellaagency/main/SaveClip.App_573606007_18084078751955146_5893026456741058341_n.jpg',
+    gallery: [
+      'https://raw.githubusercontent.com/oliviabancroft0-prog/marellaagency/main/SaveClip.App_604188952_17990952302874151_163541047956415390_n.jpg',
+      'https://raw.githubusercontent.com/oliviabancroft0-prog/marellaagency/main/SaveClip.App_621676533_18088745648038103_8427349625796036719_n.jpg'
+    ]
   },
   { 
     id: 'ava', 
@@ -119,8 +128,11 @@ const MODELS: Product[] = [
     onlyfans: 'onlyfans.com/ava_chic',
     bio: 'Ava combines traditional British heritage aesthetics with a forward-thinking OnlyFans architecture, maximizing revenue through strategic content distribution.',
     price: '£380/Session', 
-    image: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=1000',
-    gallery: []
+    image: 'https://raw.githubusercontent.com/oliviabancroft0-prog/marellaagency/main/SaveClip.App_624153366_18081768785230511_5352130957854695705_n.jpg',
+    gallery: [
+      'https://raw.githubusercontent.com/oliviabancroft0-prog/marellaagency/main/SaveClip.App_632929428_18567901351023065_8553227299719445493_n.jpg',
+      'https://raw.githubusercontent.com/oliviabancroft0-prog/marellaagency/main/SaveClip.App_637880064_18567901342023065_189523403290152932_n.jpg'
+    ]
   },
   { 
     id: 'lily', 
@@ -131,8 +143,11 @@ const MODELS: Product[] = [
     onlyfans: 'onlyfans.com/lilywild',
     bio: 'Bristol-based and unapologetically creative. Lily leverages her avant-garde aesthetic to dominate the Western market, offering a unique value proposition to her dedicated fanbase.',
     price: '£300/Session', 
-    image: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?q=80&w=1000',
-    gallery: []
+    image: 'https://raw.githubusercontent.com/oliviabancroft0-prog/marellaagency/main/SaveClip.App_649693363_17955316619940713_8819016588116933630_n.jpg',
+    gallery: [
+      'https://raw.githubusercontent.com/oliviabancroft0-prog/marellaagency/main/SaveClip.App_650068498_18012760112832609_6440838146725050507_n.jpg',
+      'https://raw.githubusercontent.com/oliviabancroft0-prog/marellaagency/main/SaveClip.App_654163537_18109991089773636_3901622141352180096_n.jpg'
+    ]
   },
   { 
     id: 'freya', 
@@ -143,8 +158,11 @@ const MODELS: Product[] = [
     onlyfans: 'onlyfans.com/freya_geordie',
     bio: 'Freya captures the raw, energetic spirit of the North East. Her branding prioritises high-energy engagement and a relatable, yet polished Northern aesthetic.',
     price: '£280/Session', 
-    image: 'https://images.unsplash.com/photo-1524250502761-1ac6f2e30d43?q=80&w=1000',
-    gallery: []
+    image: 'https://raw.githubusercontent.com/oliviabancroft0-prog/marellaagency/main/SaveClip.App_654791163_18583331857057834_5231813332034557395_n.jpg',
+    gallery: [
+      'https://raw.githubusercontent.com/oliviabancroft0-prog/marellaagency/main/SaveClip.App_656080436_18582720856057834_8120955932024648460_n.jpg',
+      'https://raw.githubusercontent.com/oliviabancroft0-prog/marellaagency/main/SaveClip.App_670282976_18588713566057834_1641427274139472804_n.jpg'
+    ]
   },
   { 
     id: 'florence', 
@@ -155,7 +173,7 @@ const MODELS: Product[] = [
     onlyfans: 'onlyfans.com/florence_vibe',
     bio: 'Intellectual elegance meets digital wealth architecture. Florence specializes in the "Academic Chic" narrative, driving high retention through sophisticated dialogue and content.',
     price: '£420/Session', 
-    image: 'https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?q=80&w=1000',
+    image: 'https://raw.githubusercontent.com/oliviabancroft0-prog/marellaagency/main/SaveClip.App_669936751_18127658608596915_2519547545830487435_n.jpg',
     gallery: []
   },
   { 
@@ -264,6 +282,23 @@ interface ProductCardProps {
 
 const ProductCard = ({ product, onClick }: ProductCardProps) => {
   const navigate = useNavigate();
+  const [hoverIndex, setHoverIndex] = useState(0);
+  const [isHovered, setIsHovered] = useState(false);
+  
+  const allImages = [product.image, ...product.gallery];
+
+  useEffect(() => {
+    let interval: any;
+    if (isHovered && allImages.length > 1) {
+      interval = setInterval(() => {
+        setHoverIndex((prev) => (prev + 1) % allImages.length);
+      }, 1500);
+    } else {
+      setHoverIndex(0);
+    }
+    return () => clearInterval(interval);
+  }, [isHovered, allImages.length]);
+
   const handleCardClick = () => {
     if (onClick) {
       onClick();
@@ -273,19 +308,43 @@ const ProductCard = ({ product, onClick }: ProductCardProps) => {
   };
 
   return (
-    <div onClick={handleCardClick} className="group cursor-pointer">
+    <div 
+      onClick={handleCardClick} 
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      className="group cursor-pointer"
+    >
       <div className="aspect-[4/5] bg-brand-offwhite mb-4 overflow-hidden relative rounded-sm">
-        <img 
-          src={product.image} 
-          alt={product.name} 
-          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" 
-        />
-        <div className="absolute top-4 left-4">
+        <AnimatePresence mode="wait">
+          <motion.img 
+            key={hoverIndex}
+            src={allImages[hoverIndex]} 
+            alt={product.name} 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.5 }}
+            className="w-full h-full object-cover" 
+          />
+        </AnimatePresence>
+        <div className="absolute top-4 left-4 z-10">
           <span className="bg-white/90 backdrop-blur-sm text-[9px] uppercase tracking-widest px-2 py-1 font-bold rounded-full">
             {product.location}
           </span>
         </div>
-        <div className="absolute bottom-4 right-4 translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300">
+        
+        {allImages.length > 1 && isHovered && (
+          <div className="absolute bottom-20 left-0 w-full flex justify-center space-x-1 z-10">
+            {allImages.map((_, i) => (
+              <div 
+                key={i} 
+                className={`h-1 rounded-full transition-all duration-300 ${i === hoverIndex ? 'w-4 bg-white' : 'w-1 bg-white/40'}`} 
+              />
+            ))}
+          </div>
+        )}
+
+        <div className="absolute bottom-4 right-4 translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300 z-10">
            <button className="bg-white px-4 py-2 rounded-full text-[9px] uppercase tracking-widest font-bold shadow-lg hover:bg-brand-black hover:text-white transition-colors">
             Book Session
            </button>
@@ -946,12 +1005,14 @@ const Footer = () => {
           </div>
           <img src="https://upload.wikimedia.org/wikipedia/commons/b/b5/PayPal.svg" alt="PayPal" className="h-5 md:h-8 w-auto opacity-80 hover:opacity-100 transition-opacity" />
           
-          {/* Klarna & Clearpay boxes */}
-          <div className="opacity-80 hover:opacity-100 transition-opacity">
-            <img src="https://raw.githubusercontent.com/oliviabancroft0-prog/marellaagency/main/Klarna_Payment_Badge.svg.png" alt="Klarna" className="h-8 md:h-12 w-auto rounded-lg" />
+          {/* Crypto Payment methods */}
+          <div className="flex items-center space-x-2 opacity-80 hover:opacity-100 transition-opacity bg-white px-3 py-1.5 rounded-lg border border-brand-border shadow-sm">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/4/46/Bitcoin.svg" alt="Bitcoin" className="h-5 md:h-7 w-auto" />
+            <span className="text-[10px] font-bold text-gray-700">BTC</span>
           </div>
-          <div className="opacity-80 hover:opacity-100 transition-opacity">
-            <img src="https://raw.githubusercontent.com/oliviabancroft0-prog/marellaagency/main/images.png" alt="Clearpay" className="h-8 md:h-12 w-auto rounded-lg" />
+          <div className="flex items-center space-x-2 opacity-80 hover:opacity-100 transition-opacity bg-white px-3 py-1.5 rounded-lg border border-brand-border shadow-sm">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/5/5c/Tether_logo.svg" alt="USDT" className="h-5 md:h-7 w-auto" />
+            <span className="text-[10px] font-bold text-gray-700">USDT</span>
           </div>
           <div className="bg-white border border-brand-border px-4 py-2 rounded-lg flex items-center space-x-2 opacity-80 hover:opacity-100 transition-opacity shadow-sm">
             <img src="https://upload.wikimedia.org/wikipedia/commons/f/f2/Google_Pay_Logo.svg" alt="Google Pay" className="h-5 md:h-7 w-auto" />
