@@ -145,6 +145,7 @@ const ProductCard = ({ product, onClick }: ProductCardProps) => {
             key={hoverIndex}
             src={allImages[hoverIndex]} 
             alt={product.name} 
+            referrerPolicy="no-referrer"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -203,16 +204,22 @@ const AllProductsView = ({ onBack, onProductClick }: { onBack: () => void, onPro
       animate={{ opacity: 1 }}
       className="min-h-screen pt-24 md:pt-32 px-6 md:px-12 bg-white"
     >
-      <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 max-w-7xl mx-auto gap-8">
-        <div>
-          <nav className="flex items-center space-x-2 text-[9px] uppercase tracking-widest text-brand-black/40 mb-4">
-            <Link to="/" className="cursor-pointer hover:text-brand-black">Agency Intelligence</Link>
-            <ChevronRight size={10} />
-            <span className="text-brand-black">The Performance Roster</span>
-          </nav>
-          <h1 className="text-6xl italic">UK Talent Portfolio</h1>
-          <p className="text-brand-black/50 mt-4 text-lg font-light tracking-wide">Strategic United Kingdom management for elite digital creators.</p>
-        </div>
+      <div className="max-w-7xl mx-auto">
+        <button onClick={onBack} className="mb-8 flex items-center space-x-2 text-[10px] uppercase tracking-widest group">
+          <ArrowLeft size={14} className="transition-transform group-hover:-translate-x-1" />
+          <span>Back</span>
+        </button>
+
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 gap-8">
+          <div>
+            <nav className="flex items-center space-x-2 text-[9px] uppercase tracking-widest text-brand-black/40 mb-4">
+              <Link to="/" className="cursor-pointer hover:text-brand-black">Agency Intelligence</Link>
+              <ChevronRight size={10} />
+              <span className="text-brand-black">The Performance Roster</span>
+            </nav>
+            <h1 className="text-6xl italic">UK Talent Portfolio</h1>
+            <p className="text-brand-black/50 mt-4 text-lg font-light tracking-wide">Strategic United Kingdom management for elite digital creators.</p>
+          </div>
         
         <div className="relative">
           <button 
@@ -252,12 +259,13 @@ const AllProductsView = ({ onBack, onProductClick }: { onBack: () => void, onPro
         </div>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-16 max-w-7xl mx-auto pb-24">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-16 pb-24">
         {filteredModels.map((p) => (
           <ProductCard key={p.id} product={p} onClick={() => onProductClick(p)} />
         ))}
       </div>
-    </motion.div>
+    </div>
+  </motion.div>
   );
 };
 
@@ -410,7 +418,7 @@ const CategoryPage = () => {
             </div>
           </div>
           <div className="relative aspect-[4/5] rounded-sm overflow-hidden shadow-2xl">
-            <img src={content.image} alt={content.title} className="w-full h-full object-cover grayscale brightness-90 hover:grayscale-0 transition-all duration-1000" />
+            <img src={content.image} alt={content.title} referrerPolicy="no-referrer" className="w-full h-full object-cover grayscale brightness-90 hover:grayscale-0 transition-all duration-1000" />
             <div className="absolute inset-0 bg-brand-black/5"></div>
           </div>
         </div>
@@ -495,7 +503,7 @@ const SearchOverlay = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => vo
                           className="flex items-center space-x-6 group cursor-pointer"
                         >
                           <div className="w-20 h-20 bg-brand-offwhite rounded-sm overflow-hidden">
-                            <img src={m.image} alt={m.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform" />
+                            <img src={m.image} alt={m.name} referrerPolicy="no-referrer" className="w-full h-full object-cover group-hover:scale-110 transition-transform" />
                           </div>
                           <div>
                             <h4 className="text-xl font-serif italic">{m.name}</h4>
@@ -515,7 +523,7 @@ const SearchOverlay = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => vo
                           className="flex items-center space-x-6 group cursor-pointer"
                         >
                           <div className="w-20 h-20 bg-brand-offwhite rounded-sm overflow-hidden">
-                            <img src={k.image} alt={k.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform" />
+                            <img src={k.image} alt={k.title} referrerPolicy="no-referrer" className="w-full h-full object-cover group-hover:scale-110 transition-transform" />
                           </div>
                           <div>
                             <h4 className="text-xl font-serif italic">{k.title}</h4>
@@ -535,7 +543,7 @@ const SearchOverlay = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => vo
                           className="flex items-center space-x-6 group cursor-pointer"
                         >
                           <div className="w-20 h-20 bg-brand-offwhite rounded-sm overflow-hidden">
-                            <img src={p.image} alt={p.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform" />
+                            <img src={p.image} alt={p.name} referrerPolicy="no-referrer" className="w-full h-full object-cover group-hover:scale-110 transition-transform" />
                           </div>
                           <div>
                             <h4 className="text-xl font-serif italic truncate">{p.name}</h4>
@@ -612,6 +620,7 @@ const Navbar = ({ cartCount, onCartOpen, onSearchOpen }: { cartCount: number, on
             <img 
               src="https://raw.githubusercontent.com/oliviabancroft0-prog/marellaagency/main/ChatGPT%20Image%20Apr%2030%2C%202026%2C%2001_48_30%20AM.png" 
               alt="Bramingham Barely" 
+              referrerPolicy="no-referrer"
               className="h-full w-auto object-contain mix-blend-multiply" 
               fetchPriority="high"
               loading="eager"
@@ -629,7 +638,7 @@ const Navbar = ({ cartCount, onCartOpen, onSearchOpen }: { cartCount: number, on
           {menuItems.map(item => (
             <Link 
               key={item.id}
-              to="/"
+              to={item.path}
               onMouseEnter={() => setActiveMenu(item.id)}
               className={`hover:opacity-50 transition-opacity ${activeMenu === item.id ? 'opacity-50' : ''}`}
             >
@@ -763,7 +772,7 @@ const Navbar = ({ cartCount, onCartOpen, onSearchOpen }: { cartCount: number, on
                 {COLLECTIONS.map((c, i) => (
                   <Link key={c.id} to={`/collections/${c.id}`} className="text-center group cursor-pointer block">
                     <div className="w-40 h-40 rounded-full overflow-hidden mb-6 border border-brand-border p-2">
-                       <img src={c.image} className="w-full h-full object-cover rounded-full group-hover:scale-110 transition-transform duration-500" />
+                       <img src={c.image} referrerPolicy="no-referrer" className="w-full h-full object-cover rounded-full group-hover:scale-110 transition-transform duration-500" />
                     </div>
                     <p className="text-[10px] uppercase tracking-[0.3em] font-bold">{c.label}</p>
                     <p className="text-[9px] text-brand-black/40 mt-1 uppercase tracking-widest italic">{c.count}</p>
@@ -897,9 +906,6 @@ const MoodKitsSection = () => {
       <div className="max-w-7xl mx-auto px-6">
         <div className="text-center mb-20 space-y-4">
           <h2 className="text-5xl md:text-7xl font-serif italic mb-4">Mood Kits for Content</h2>
-          <div className="inline-block bg-brand-black text-white px-8 py-3 rounded-full relative group">
-            <span className="text-[10px] uppercase tracking-[0.4em] font-bold">Special Offer: 25% Off for Managed Models</span>
-          </div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
@@ -1127,13 +1133,14 @@ const ProductDetail = ({ product, onBack, onAddToCart }: { product?: Product, on
             <img 
               src={activeProduct.image} 
               alt={activeProduct.name} 
+              referrerPolicy="no-referrer"
               className="w-full h-full object-cover"
             />
           </div>
           <div className="grid grid-cols-2 gap-4">
             {activeProduct.gallery.map((img, i) => (
               <div key={i} className="aspect-square bg-brand-offwhite rounded-sm overflow-hidden">
-                <img src={img} className="w-full h-full object-cover" />
+                <img src={img} referrerPolicy="no-referrer" className="w-full h-full object-cover" />
               </div>
             ))}
           </div>
@@ -1278,7 +1285,7 @@ const CartDrawer = ({ isOpen, onClose, cart, setCart }: { isOpen: boolean, onClo
                 cart.map(item => (
                   <div key={item.id} className="flex items-start space-x-4 border-b border-brand-border pb-4">
                     <div className="w-20 aspect-square bg-brand-offwhite rounded-sm overflow-hidden border border-brand-border">
-                      <img src={item.image} className="w-full h-full object-cover mix-blend-multiply" />
+                      <img src={item.image} referrerPolicy="no-referrer" className="w-full h-full object-cover mix-blend-multiply" />
                     </div>
                     <div className="flex-1">
                       <div className="flex justify-between items-start">
@@ -1311,7 +1318,7 @@ const CartDrawer = ({ isOpen, onClose, cart, setCart }: { isOpen: boolean, onClo
                       onClick={() => { navigate(`/roster/${p.id}`); onClose(); }}
                     >
                       <div className="aspect-square bg-brand-offwhite mb-2 overflow-hidden border border-brand-border">
-                        <img src={p.image} className="w-full h-full object-cover group-hover:scale-105 transition-transform" />
+                        <img src={p.image} referrerPolicy="no-referrer" className="w-full h-full object-cover group-hover:scale-105 transition-transform" />
                       </div>
                       <p className="text-[10px] font-serif italic truncate">{p.name}</p>
                     </div>
@@ -1411,6 +1418,7 @@ const Home = () => {
 };
 
 export default function App() {
+  const navigate = useNavigate();
   const [cartOpen, setCartOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [cart, setCart] = useState<CartItem[]>([]);
@@ -1447,7 +1455,7 @@ export default function App() {
       <ScrollToTop />
       <Routes>
         <Route path="/" element={wrapInLayout(<Home />)} />
-        <Route path="/roster" element={wrapInLayout(<AllProductsView onBack={() => {}} onProductClick={() => {}} />)} />
+        <Route path="/roster" element={wrapInLayout(<AllProductsView onBack={() => navigate('/')} onProductClick={(p) => navigate(`/roster/${p.id}`)} />)} />
         <Route path="/roster/:productId" element={wrapInLayout(<ProductDetail onAddToCart={(item) => handleAddToCart(item)} />)} />
         <Route path="/mood-kits" element={wrapInLayout(<MoodKitsPage onAddToCart={(items) => handleAddToCart(items)} />)} />
         <Route path="/checkout" element={wrapInLayout(<CheckoutPage cart={cart} setCart={setCart} />)} />

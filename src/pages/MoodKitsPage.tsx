@@ -90,29 +90,31 @@ export const MoodKitsPage: React.FC<MoodKitsPageProps> = ({ onAddToCart }) => {
                       whileHover={{ y: -5 }}
                       className="group"
                     >
-                      <div className="aspect-square bg-brand-offwhite mb-4 overflow-hidden rounded-sm relative">
+                      <div 
+                        className="aspect-square bg-brand-offwhite mb-4 overflow-hidden rounded-sm relative cursor-pointer"
+                        onClick={() => {
+                          onAddToCart([{
+                            id: product.id,
+                            name: product.name,
+                            price: product.price,
+                            quantity: 1,
+                            image: product.image,
+                            type: 'product'
+                          }]);
+                        }}
+                      >
                         <img 
                           src={product.image} 
                           alt={product.name} 
+                          referrerPolicy="no-referrer"
                           className="w-full h-full object-cover mix-blend-multiply opacity-90 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500" 
                         />
-                        <div className="absolute top-3 right-3">
-                          <button 
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              onAddToCart([{
-                                id: product.id,
-                                name: product.name,
-                                price: product.price,
-                                quantity: 1,
-                                image: product.image,
-                                type: 'product'
-                              }]);
-                            }}
-                            className="w-8 h-8 bg-white/80 backdrop-blur-md rounded-full flex items-center justify-center border border-brand-border hover:bg-brand-black hover:text-white transition-colors"
-                          >
-                            <ShoppingBag size={12} />
-                          </button>
+                        <div className="absolute inset-0 bg-brand-black/0 group-hover:bg-brand-black/5 transition-colors flex items-center justify-center">
+                          <div className="opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-300">
+                            <span className="bg-white px-4 py-2 rounded-full text-[9px] uppercase tracking-widest font-bold shadow-sm">
+                              Add to Selection
+                            </span>
+                          </div>
                         </div>
                       </div>
                       <h4 className="text-sm font-medium mb-1 line-clamp-1">{product.name}</h4>
