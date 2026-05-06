@@ -16,6 +16,91 @@ async function startServer() {
   app.use(express.json());
 
   // API Routes
+  app.post('/api/send-welcome', async (req, res) => {
+    const { email, name } = req.body;
+    const apiKey = process.env.BREVO_API_KEY;
+    const senderEmail = 'oliviabancroft@braminghambarely.top';
+
+    if (!apiKey || apiKey.trim() === '') {
+      console.error('BREVO_API_KEY is missing. Add it to Settings.');
+      return res.status(500).json({ error: 'Email configuration missing' });
+    }
+
+    const trimmedKey = apiKey.trim();
+
+    try {
+      const response = await fetch('https://api.brevo.com/v3/smtp/email', {
+        method: 'POST',
+        headers: {
+          'accept': 'application/json',
+          'api-key': trimmedKey,
+          'content-type': 'application/json'
+        },
+        body: JSON.stringify({
+          sender: { name: 'Olivia Bancroft', email: senderEmail },
+          to: [{ email, name: name || email.split('@')[0] }],
+          subject: 'Welcome to Bramingham Barely!',
+          htmlContent: `
+            <!DOCTYPE html>
+            <html>
+            <head>
+              <meta charset="utf-8">
+              <style>
+                @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Playfair+Display:ital,wght@1,400&display=swap');
+              </style>
+            </head>
+            <body style="margin: 0; padding: 0; background-color: #f9f9f9; font-family: 'Inter', Helvetica, Arial, sans-serif;">
+              <table width="100%" border="0" cellspacing="0" cellpadding="0" style="max-width: 600px; margin: 40px auto; background-color: #ffffff; border: 1px solid #eeeeee;">
+                <tr>
+                  <td style="padding: 60px 40px; text-align: center; border-bottom: 1px solid #f0f0f0;">
+                    <h1 style="font-family: 'Playfair Display', serif; font-style: italic; font-weight: 400; font-size: 28px; margin: 0;">Welcome to the Agency</h1>
+                    <p style="text-transform: uppercase; letter-spacing: 0.15em; font-size: 10px; margin-top: 10px; color: #999;">Bramingham Barely</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="padding: 40px;">
+                    <p style="font-size: 16px; color: #333; margin-bottom: 20px;">Hi ${name || 'there'},</p>
+                    <p style="font-size: 14px; line-height: 1.8; color: #666; margin-bottom: 30px;">
+                      I'm thrilled to welcome you to <strong>Bramingham Barely</strong>. We've built this agency to provide creators like you with the professional infrastructure and strategic guidance needed to scale your digital presence.
+                    </p>
+                    <p style="font-size: 14px; line-height: 1.8; color: #666; margin-bottom: 30px;">
+                      Your account is now active. You can explore our creator dashboard to access exclusive kits and management resources.
+                    </p>
+                    <div style="text-align: center; margin: 30px 0;">
+                      <a href="https://${req.headers.host}/dashboard" style="background-color: #000; color: #fff; padding: 15px 30px; text-decoration: none; border-radius: 4px; font-size: 11px; text-transform: uppercase; letter-spacing: 0.2em; font-weight: 600;">Go to Dashboard</a>
+                    </div>
+                    <p style="font-size: 14px; line-height: 1.8; color: #666; margin-bottom: 0;">
+                      Best regards,<br/><br/>
+                      <strong>Olivia Bancroft</strong><br/>
+                      <span style="font-size: 12px; color: #999;">Bramingham Barely</span>
+                    </p>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="padding: 30px; background-color: #000; text-align: center; color: #fff;">
+                    <p style="font-size: 10px; text-transform: uppercase; letter-spacing: 0.2em; margin: 0;">Bramingham Barely</p>
+                  </td>
+                </tr>
+              </table>
+            </body>
+            </html>
+          `
+        })
+      });
+
+      if (!response.ok) {
+        const errorText = await response.text();
+        console.error(`Brevo API Error (${response.status}):`, errorText);
+        throw new Error('Mail delivery failed');
+      }
+
+      res.status(200).json({ success: true });
+    } catch (error) {
+      console.error('Brevo Welcome Error:', error);
+      res.status(500).json({ error: 'Mail delivery failed' });
+    }
+  });
+
   app.post('/api/send-confirmation', async (req, res) => {
     const { email, name, orderDetails, total } = req.body;
     const apiKey = process.env.BREVO_API_KEY;

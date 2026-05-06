@@ -23,7 +23,26 @@ export const Dashboard: React.FC = () => {
 
   useEffect(() => {
     syncUserProfile();
-  }, []);
+
+    // Trigger welcome email for first-time login (especially OAuth)
+    if (user?.email && user?.id) {
+      const welcomeKey = `welcome_sent_${user.id}`;
+      if (!localStorage.getItem(welcomeKey)) {
+        fetch('/api/send-welcome', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ 
+            email: user.email, 
+            name: user.email.split('@')[0] 
+          }),
+        }).then(res => {
+          if (res.ok) {
+            localStorage.setItem(welcomeKey, 'true');
+          }
+        }).catch(err => console.error('Dashboard welcome trigger failed:', err));
+      }
+    }
+  }, [user]);
 
   const stats = [
     { label: 'Total Earnings', value: '£42,910', change: '+12.5%', icon: DollarSign },

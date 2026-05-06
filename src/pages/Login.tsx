@@ -73,6 +73,17 @@ export const Login: React.FC = () => {
           setError('Verification successful. Please sign in now.');
           setShowOtp(false);
         } else {
+          // Send welcome email after first login/signup verification
+          try {
+            fetch('/api/send-welcome', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ email, name: email.split('@')[0] }),
+            });
+          } catch (welcomeErr) {
+            console.error('Welcome email trigger failed:', welcomeErr);
+          }
+          
           navigate(from, { replace: true });
         }
       }
