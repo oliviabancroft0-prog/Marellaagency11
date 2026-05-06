@@ -26,6 +26,7 @@ import {
   CheckCircle,
   Search as SearchIcon
 } from 'lucide-react';
+import { Analytics } from '@vercel/analytics/react';
 import { Login } from './pages/Login';
 import { Dashboard } from './pages/Dashboard';
 import { ProtectedRoute } from './components/ProtectedRoute';
@@ -1461,6 +1462,7 @@ export default function App() {
         <Route path="/dashboard" element={wrapInLayout(<Dashboard />)} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
+      <Analytics />
     </>
   );
 }
