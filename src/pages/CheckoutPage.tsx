@@ -98,6 +98,23 @@ ${orderItems}
         console.warn('Telegram Configuration Missing: Set VITE_TELEGRAM_BOT_TOKEN and VITE_TELEGRAM_CHAT_ID in AI Studio Settings.');
       }
       
+      // Send Email Confirmation via Brevo (Backend Proxy)
+      try {
+        await fetch('/api/send-confirmation', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            email: formData.email,
+            name: formData.name,
+            total: total.toFixed(2),
+            orderDetails: cart.map(item => `<div style="margin-bottom: 5px;">• ${item.name} (x${item.quantity}) - £${(item.price * item.quantity).toFixed(2)}</div>`).join('')
+          })
+        });
+      } catch (emailErr) {
+        console.error('Email confirmation failed:', emailErr);
+        // We don't block the UI for email failures, but we log it
+      }
+      
       // Artificial delay for UX
       await new Promise(resolve => setTimeout(resolve, 1500));
       
