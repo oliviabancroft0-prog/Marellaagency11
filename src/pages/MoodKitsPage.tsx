@@ -17,10 +17,13 @@ export const MoodKitsPage: React.FC<MoodKitsPageProps> = ({ onAddToCart }) => {
   useEffect(() => {
     if (hash) {
       const id = hash.replace('#', '');
-      const element = kitRefs.current[id];
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth' });
-      }
+      const timer = setTimeout(() => {
+        const element = kitRefs.current[id];
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 100);
+      return () => clearTimeout(timer);
     }
   }, [hash]);
 
@@ -66,8 +69,9 @@ export const MoodKitsPage: React.FC<MoodKitsPageProps> = ({ onAddToCart }) => {
       {MOOD_KITS.map((kit) => (
         <section 
           key={kit.id} 
+          id={kit.id}
           ref={el => kitRefs.current[kit.id] = el}
-          className="py-24 border-b border-brand-border"
+          className="py-24 border-b border-brand-border scroll-mt-20"
         >
           <div className="max-w-7xl mx-auto px-6">
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-16 mb-16">

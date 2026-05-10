@@ -37,14 +37,14 @@ import { MoodKitsPage } from './pages/MoodKitsPage';
 import { CheckoutPage } from './pages/CheckoutPage';
 
 const ScrollToTop = () => {
-  const { pathname } = useLocation();
+  const { pathname, hash } = useLocation();
   const navType = useNavigationType() as any;
   
   useEffect(() => {
-    if (navType !== 'POP') {
+    if (navType !== 'POP' && !hash) {
       window.scrollTo(0, 0);
     }
-  }, [pathname, navType]);
+  }, [pathname, hash, navType]);
   
   return null;
 };
@@ -835,9 +835,8 @@ const Philosophy = () => {
     <section className="py-24 px-6 md:px-12 bg-brand-offwhite">
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 items-start">
         <div className="space-y-12">
-          <h2 className="text-4xl md:text-5xl leading-tight uppercase font-serif tracking-tight">
-            High-Yield Management <br />
-            for the Anonymous British Creator
+          <h2 className="text-3xl md:text-4xl leading-tight font-serif tracking-tight">
+            We turn ambitious girls in the United Kingdom into high earning OnlyFans sensations and connect gentlemen with the perfect model for their fantasies.
           </h2>
           <div className="relative aspect-[4/5] w-full max-w-sm overflow-hidden rounded-sm bg-black/5 shadow-2xl">
             <video 
@@ -854,19 +853,13 @@ const Philosophy = () => {
         <div className="md:pt-32 space-y-12 flex flex-col">
           <div className="max-w-md order-1">
             <p className="text-lg leading-relaxed font-light text-brand-black/80 mb-6 font-serif italic border-l-2 border-brand-black pl-6">
-              "We believe the beautiful part of the human form is that there's room for everyone. Distinction is our speciality."
+              “Proper girls who know what they want… and blokes who know exactly what they like. We make both sides very happy indeed.”
             </p>
             <p className="text-lg leading-relaxed font-light text-brand-black/80 mb-6">
-              Bramingham Barely is the United Kingdom's premier management firm. We architecture the business behind the beauty, transforming creative potential into high-yield digital assets.
-            </p>
-            <p className="text-lg leading-relaxed font-light text-brand-black/80 mb-6">
-              In a crowded market, cultural resonance is currency. Whether you prefer the "Faceless" approach or a high-fashion signature, we specialise in scaling your reach without compromising your professional boundaries.
+              We take care of the strategy and growth so you can focus on cashing in. Many of our girls now earning five and six figures a month.
             </p>
             <p className="text-lg leading-relaxed font-light text-brand-black/80 mb-6 font-medium italic">
-              Our bespoke strategy centres on the three pillars of British digital authority: Cultural Resonance, Technical Optimisation, and Financial Scalability.
-            </p>
-            <p className="text-2xl font-serif italic text-brand-black mb-8">
-              Empowering the next generation of UK creative wealth.
+              Gentlemen: Private bookings and unforgettable experiences with our exclusive models. Discretion assured, kinks catered for.
             </p>
           </div>
           
@@ -950,7 +943,7 @@ const MoodKitsSection = () => {
                   </div>
                 </div>
                 <button 
-                  onClick={() => navigate('/mood-kits')}
+                  onClick={() => navigate(`/mood-kits#${mood.id}`)}
                   className="w-full py-4 text-[9px] uppercase tracking-[0.3em] font-bold border border-brand-black hover:bg-brand-black hover:text-white transition-all duration-300"
                 >
                   {(mood as any).buttonText || 'Shop This Kit'}
@@ -960,28 +953,31 @@ const MoodKitsSection = () => {
           ))}
         </div>
         
-        {/* Premium Video Loop Idea Placeholder */}
-        <div className="mt-32 relative aspect-[21/9] w-full overflow-hidden rounded-sm bg-brand-black group cursor-pointer">
-          <div className="absolute inset-0 z-0 overflow-hidden">
-            <video 
-              autoPlay 
-              loop 
-              muted 
-              playsInline 
-              className="w-full h-full object-cover opacity-60 scale-105 group-hover:scale-100 transition-transform duration-[10s]"
-            >
-              <source src="https://raw.githubusercontent.com/oliviabancroft0-prog/marellaagency/main/Sophia_Intro_website_1.mp4" type="video/mp4" />
-            </video>
+        {/* Premium Aesthetic Section */}
+        <div className="mt-32 relative w-full overflow-hidden rounded-sm bg-brand-black group cursor-pointer">
+          <div className="relative z-0">
+            <img 
+              src="https://cdn.jsdelivr.net/gh/oliviabancroft0-prog/5-5-2026@main/SaveClip.App_670429324_18589534078057834_4582045167655223070_n.jpg" 
+              alt="Aesthetic background"
+              className="w-full h-auto opacity-90 transition-transform duration-[10s]"
+            />
           </div>
-          <div className="absolute inset-0 z-10 flex flex-col items-center justify-center text-white bg-black/20">
+          <div className="absolute inset-0 z-10 flex flex-col items-center justify-center text-white bg-black/10">
             <motion.h3 
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              className="text-4xl md:text-6xl font-serif italic mb-6"
+              className="text-4xl md:text-6xl font-serif italic mb-6 text-center"
             >
               The 0.1% Aesthetic
             </motion.h3>
-            <p className="text-[10px] uppercase tracking-[0.6em] font-bold opacity-70">Seductive. Powerful. Yours.</p>
+            <motion.p
+              initial={{ opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2 }}
+              className="text-[10px] md:text-xs uppercase tracking-[0.4em] font-medium opacity-80 text-center"
+            >
+              Made in the UK 🇬🇧 led by Olivia M. Bancroft
+            </motion.p>
           </div>
         </div>
       </div>
@@ -1080,15 +1076,8 @@ const Footer = () => {
       </div>
 
       <div className="px-6 md:px-12 py-12 border-t border-brand-border flex flex-col lg:flex-row justify-between items-center space-y-12 lg:space-y-0">
-        <div className="flex flex-col space-y-4">
-          <p className="text-[11px] tracking-widest uppercase">Join the Bramingham Barely United Kingdom Roster</p>
-          <div className="flex border-b border-brand-black pb-2">
-            <input type="email" placeholder="OnlyFans Link / Social Footprint" className="bg-transparent text-sm w-64 focus:outline-none" />
-            <button className="text-[10px] tracking-widest uppercase font-bold">Join</button>
-          </div>
-        </div>
-        
-        <div className="h-24 md:h-48 flex items-center select-none opacity-10 grayscale">
+
+        <div className="h-24 md:h-48 flex items-center select-none opacity-100">
           <img 
             src="https://raw.githubusercontent.com/oliviabancroft0-prog/marellaagency/main/ChatGPT%20Image%20Apr%2030%2C%202026%2C%2001_48_30%20AM.png" 
             alt="Bramingham Barely Logo" 
@@ -1097,11 +1086,7 @@ const Footer = () => {
         </div>
 
         <div className="text-[10px] tracking-widest uppercase text-brand-black/50 text-right space-y-2">
-          <p>&copy; 2024, Bramingham Barely. All rights reserved.</p>
-          <div className="flex space-x-4 justify-end">
-            <Link to="/terms" className="hover:text-brand-black cursor-pointer">Terms of Service</Link>
-            <Link to="/privacy" className="hover:text-brand-black cursor-pointer">Privacy Policy</Link>
-          </div>
+          <p>&copy; 2026, Bramingham Barely.</p>
         </div>
       </div>
     </footer>
@@ -1345,7 +1330,7 @@ const CartDrawer = ({ isOpen, onClose, cart, setCart }: { isOpen: boolean, onClo
                 onClick={() => { navigate('/checkout'); onClose(); }}
                 className="w-full bg-brand-black text-white py-5 rounded-full text-[11px] uppercase tracking-[0.3em] font-bold hover:bg-brand-black/90 transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
               >
-                Proceed to Settlement
+                Pay
               </button>
               <p className="text-[9px] text-center text-brand-black/40 uppercase tracking-widest">Calculated in GBP. Secure SSL Encryption.</p>
             </div>
@@ -1400,7 +1385,7 @@ const Home = () => {
             <div className="space-y-4">
               <h2 className="text-4xl italic">The Lineup</h2>
               <p className="text-lg font-light text-brand-black/60 max-w-md">
-                Strategic talent curation for the professional OnlyFans architecture. Pick your signature aesthetic.
+                Britain’s finest OnlyFans talent. Carefully chosen, professionally managed, and ready to deliver.
               </p>
             </div>
             <button onClick={() => navigate('/roster')} className="text-[11px] font-medium tracking-[0.3em] uppercase border-b border-brand-black pb-2 hover:opacity-50 transition-opacity">

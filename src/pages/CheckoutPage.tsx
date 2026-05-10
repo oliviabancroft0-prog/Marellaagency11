@@ -182,13 +182,13 @@ ${orderItems}
               className="group flex items-center space-x-2 text-brand-black/50 hover:text-brand-black transition-colors mb-12"
             >
               <ArrowLeft size={18} className="group-hover:-translate-x-1 transition-transform" />
-              <div className="w-8 h-8 bg-brand-black rounded-lg flex items-center justify-center text-white font-serif italic text-lg">M</div>
-              <span className="text-sm font-semibold tracking-tight">Marella Agency</span>
+              <div className="w-8 h-8 bg-brand-black rounded-lg flex items-center justify-center text-white font-serif italic text-lg">B</div>
+              <span className="text-sm font-semibold tracking-tight">Bramingham Barely</span>
               <span className="bg-[#fff1e0] text-[#8c5a1a] text-[10px] px-1.5 py-0.5 rounded font-bold uppercase tracking-wider">Test Mode</span>
             </button>
 
             <div className="mb-12">
-              <p className="text-brand-black/60 text-sm font-medium mb-1">Pay Marella Agency</p>
+              <p className="text-brand-black/60 text-sm font-medium mb-1">Pay Bramingham Barely</p>
               <h1 className="text-5xl font-bold tracking-tight">£{total.toFixed(2)}</h1>
             </div>
 
@@ -239,10 +239,7 @@ ${orderItems}
             </div>
 
             <div className="mt-auto pt-16 flex items-center space-x-4 text-xs text-brand-black/30 font-medium">
-              <span>Powered by <span className="font-bold text-brand-black/50">Marella</span></span>
-              <span>•</span>
-              <span className="cursor-pointer hover:text-brand-black/60">Terms</span>
-              <span className="cursor-pointer hover:text-brand-black/60">Privacy</span>
+              <span>Powered by <span className="font-bold text-brand-black/50">Stripe</span></span>
             </div>
           </div>
         </div>
