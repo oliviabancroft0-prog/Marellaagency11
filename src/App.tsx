@@ -826,20 +826,6 @@ const Hero = ({ onShopNow }: { onShopNow: () => void }) => {
         <div className="absolute inset-0 bg-brand-black/5"></div>
       </div>
       
-      <div className="absolute bottom-12 left-6 md:bottom-24 md:left-24 z-20">
-        <motion.div
-          initial={{ opacity: 0, x: -20 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.8, delay: 0.6, ease: "easeOut" }}
-        >
-          <Link 
-            to="/login"
-            className="bg-brand-black text-white px-10 py-5 text-[12px] font-bold tracking-[0.3em] uppercase hover:bg-white hover:text-brand-black transition-all duration-300 relative group overflow-hidden shadow-2xl inline-block border border-brand-black"
-          >
-            <span className="relative z-10">Join the Roster</span>
-          </Link>
-        </motion.div>
-      </div>
     </section>
   );
 };
@@ -882,9 +868,6 @@ const Philosophy = () => {
             <p className="text-2xl font-serif italic text-brand-black mb-8">
               Empowering the next generation of UK creative wealth.
             </p>
-            <Link to="/login" className="text-[11px] font-bold tracking-[0.3em] uppercase border-b border-brand-black pb-2 hover:opacity-50 transition-opacity mb-12 inline-block">
-              Explore Our Management Pillars
-            </Link>
           </div>
           
           <div className="space-y-4 order-2 flex flex-col items-center md:items-start">
@@ -902,6 +885,14 @@ const Philosophy = () => {
             <p className="text-[10px] tracking-[0.4em] uppercase font-bold text-brand-black/40 text-center w-full max-w-[320px] md:text-left">
               Creator Testimonial: Performance & Privacy
             </p>
+            <div className="pt-8 w-full max-w-[320px]">
+              <Link 
+                to="/login"
+                className="w-full bg-brand-black text-white px-8 py-5 text-[11px] font-bold tracking-[0.3em] uppercase hover:bg-white hover:text-brand-black transition-all duration-300 relative group overflow-hidden shadow-2xl inline-block border border-brand-black text-center"
+              >
+                <span className="relative z-10">Join the Roster</span>
+              </Link>
+            </div>
           </div>
         </div>
       </div>
