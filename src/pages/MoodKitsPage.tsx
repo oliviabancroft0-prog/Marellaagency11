@@ -45,16 +45,24 @@ export const MoodKitsPage: React.FC<MoodKitsPageProps> = ({ onAddToCart }) => {
           <nav className="flex items-center justify-center md:justify-start space-x-2 text-[10px] uppercase tracking-[0.3em] text-brand-black/40 mb-8">
             <span className="cursor-pointer hover:text-brand-black" onClick={() => navigate('/')}>Home</span>
             <ChevronRight size={12} />
-            <span className="text-brand-black">Mood Kits for Content</span>
+            <span className="text-brand-black">Vibe Kits</span>
           </nav>
-          <h1 className="text-6xl md:text-8xl font-serif italic mb-6">The Wardrobe Architecture</h1>
-          <p className="text-lg md:text-xl font-light text-brand-black/60 max-w-2xl leading-relaxed">
+          <h1 className="text-6xl md:text-8xl font-serif italic mb-6">Vibe Kits</h1>
+          <div className="space-y-2 mb-8">
+            <p className="text-lg md:text-xl font-light text-brand-black/80 max-w-2xl leading-relaxed">
+              Curated glow kits for the content you actually want to create.
+            </p>
+            <p className="text-brand-black/50 text-xs uppercase tracking-[0.2em] font-bold">
+              Free UK shipping on orders over £150 • Vegan & cruelty free.
+            </p>
+          </div>
+          <p className="text-sm md:text-base font-light text-brand-black/60 max-w-2xl leading-relaxed">
             Essential physical assets curated for the elite British OnlyFans creator. Every item is selected for cultural resonance and technical camera compatibility.
           </p>
         </div>
       </section>
 
-      {/* Mood Kits Sections */}
+      {/* Vibe Kits Sections */}
       {MOOD_KITS.map((kit) => (
         <section 
           key={kit.id} 
@@ -65,7 +73,10 @@ export const MoodKitsPage: React.FC<MoodKitsPageProps> = ({ onAddToCart }) => {
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-16 mb-16">
               <div className="lg:col-span-1 space-y-6">
                 <span className="text-[10px] uppercase tracking-[0.4em] font-bold text-brand-black/30">Mood Selection</span>
-                <h2 className="text-4xl md:text-6xl font-serif italic leading-tight">{kit.title}</h2>
+                <div className="flex justify-between items-start mb-2">
+                  <h2 className="text-4xl md:text-6xl font-serif italic leading-tight">{kit.title}</h2>
+                  <p className="text-2xl font-medium">{kit.price}</p>
+                </div>
                 <p className="text-brand-black/40 uppercase tracking-[0.2em] text-[10px] font-bold">{kit.tagline}</p>
                 <p className="text-sm font-light leading-relaxed text-brand-black/70">
                   {kit.description}
@@ -75,7 +86,7 @@ export const MoodKitsPage: React.FC<MoodKitsPageProps> = ({ onAddToCart }) => {
                     onClick={() => handleBuyKit(kit.id)}
                     className="flex items-center space-x-4 bg-brand-black text-white px-8 py-4 rounded-full text-[10px] font-bold uppercase tracking-[0.3em] hover:bg-brand-black/90 transition-all shadow-xl group"
                   >
-                    <span>Buy Complete Kit</span>
+                    <span>{kit.buttonText || 'Buy Complete Kit'}</span>
                     <ShoppingBag size={14} className="transition-transform group-hover:scale-110" />
                   </button>
                   <p className="mt-4 text-[9px] uppercase tracking-widest text-brand-black/40 font-bold italic">*Save 15% when ordering the full collection</p>

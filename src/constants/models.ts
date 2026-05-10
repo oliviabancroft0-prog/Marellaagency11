@@ -12,10 +12,10 @@ export const MODELS: Product[] = [
     onlyfans: 'onlyfans.com/sophia_elite',
     bio: 'The archetype of London sophistication. Sophia bridges the gap between high-fashion editorial aesthetics and high-yield digital engagement. Her presence is a masterclass in UK-specific cultural appeal.',
     price: '£500/Session', 
-    image: `${BASE_URL}SaveVid.Net_476413573_1848719588011641_745131904459808597_n.jpg`,
+    image: `${BASE_URL}SaveClip.App_669057226_18588713620057834_5412382173996123645_n.jpg`,
     gallery: [
-      `${BASE_URL}SaveVid.Net_476475036_1848719518011641_533398151380525356_n.jpg`,
-      `${BASE_URL}SaveVid.Net_476476902_1848719598011641_680122159668785578_n.jpg`
+      `${BASE_URL}SaveClip.App_670282976_18588713566057834_1641427274139472804_n.jpg`,
+      `${BASE_URL}SaveClip.App_656080436_18582720856057834_8120955932024648460_n.jpg`
     ]
   },
   { 
@@ -27,11 +27,8 @@ export const MODELS: Product[] = [
     onlyfans: 'onlyfans.com/bellas_secrets',
     bio: 'Authenticity is the cornerstone of the Northern brand. Isabella leverages her organic charm to build deep-rooted subscriber loyalty, achieving retention rates that exceed industry benchmarks.',
     price: '£450/Session', 
-    image: `${BASE_URL}SaveVid.Net_626420133_185543629660383761_5189060408682860621_n.jpg`,
+    image: `${BASE_URL}SaveVid.Net_626420133_18554362966038761_5189060408826806621_n.jpg`,
     gallery: [
-      `${BASE_URL}SaveVid.Net_626425696_185543629510383761_5478840133781939876_n.jpg`,
-      `${BASE_URL}SaveVid.Net_626448497_185543633140383761_5849841865819992521_n.jpg`,
-      `${BASE_URL}SaveVid.Net_626420133_18554362966038761_5189060408826806621_n.jpg`,
       `${BASE_URL}SaveVid.Net_626425696_18554362951038761_5478840133781939876_n.jpg`
     ]
   },
@@ -44,11 +41,8 @@ export const MODELS: Product[] = [
     onlyfans: 'onlyfans.com/florence_vibe',
     bio: 'Intellectual elegance meets digital wealth architecture. Florence specializes in the "Academic Chic" narrative, driving high retention through sophisticated dialogue and content.',
     price: '£420/Session', 
-    image: `${BASE_URL}SaveVid.Net_641364751_18438118622114372_6598410856411740517_n.jpg`,
+    image: `${BASE_URL}SaveVid.Net_641364751_18438186238114372_4206339166443000172_n.jpg`,
     gallery: [
-      `${BASE_URL}SaveVid.Net_641525610_18438120622114372_5872351499013796554_n.jpg`,
-      `${BASE_URL}SaveVid.Net_641678253_18438186229114372_6936161493815370732_n.jpg`,
-      `${BASE_URL}SaveVid.Net_641364751_18438186238114372_4206339166443000172_n.jpg`,
       `${BASE_URL}SaveVid.Net_641603106_18438186226114372_5972351498012705558_n.jpg`,
       `${BASE_URL}SaveVid.Net_641670253_18438186229114372_6936161493815370732_n.jpg`
     ]
@@ -62,11 +56,8 @@ export const MODELS: Product[] = [
     onlyfans: 'onlyfans.com/miarose',
     bio: 'Mia represents the evolution of the Midlands Rose. With a focus on sophisticated wit and high-fidelity production, she is a prime example of the high-earning potential within the UK market.',
     price: '£400/Session', 
-    image: `${BASE_URL}SaveVid.Net_520423245_1851669844303561_543134319361614717_n.jpg`,
+    image: `${BASE_URL}SaveVid.Net_520432345_18516698443053501_5431343193616147170_n.jpg`,
     gallery: [
-      `${BASE_URL}SaveVid.Net_6265532722_185543631850383761_6344929631091181251_n.jpg`,
-      `${BASE_URL}SaveVid.Net_649123321_18074335631443346_6413183969085282641_n.jpg`,
-      `${BASE_URL}SaveVid.Net_520432345_18516698443053501_5431343193616147170_n.jpg`,
       `${BASE_URL}SaveVid.Net_626532722_18554363185038761_6344926331031101231_n.jpg`,
       `${BASE_URL}SaveVid.Net_649123231_18074335631443346_6413189369052828641_n.jpg`
     ]
@@ -82,10 +73,7 @@ export const MODELS: Product[] = [
     price: '£320/Session', 
     image: `${BASE_URL}SaveVid.Net_624635425_18057240959667832_3551208334195057168_n.jpg`,
     gallery: [
-      `${BASE_URL}SaveVid.Net_624725910_18057240959667832_1497828121125049968_n.jpg`,
-      `${BASE_URL}SaveVid.Net_625201286_18100172986851847_672298264950852530_n.jpg`,
-      `${BASE_URL}SaveVid.Net_624725910_18057240950667832_1497828121125049068_n.jpg`,
-      `${BASE_URL}SaveVid.Net_625201286_18100172986851847_672298264950852530_n.jpg`
+      `${BASE_URL}SaveVid.Net_624725910_18057240950667832_1497828121125049068_n.jpg`
     ]
   },
   { 
@@ -97,11 +85,8 @@ export const MODELS: Product[] = [
     onlyfans: 'onlyfans.com/freya_geordie',
     bio: 'Freya captures the raw, energetic spirit of the North East. Her branding prioritises high-energy engagement and a relatable, yet polished Northern aesthetic.',
     price: '£280/Session', 
-    image: `${BASE_URL}SaveVid.Net_654568608_184299484121186666_1662202469759325116_n.jpg`,
+    image: `${BASE_URL}SaveVid.Net_654568608_18429948412186666_1662202469759325118_n.jpg`,
     gallery: [
-      `${BASE_URL}SaveVid.Net_654606843_184299483870186666_8326955274546444668_n.jpg`,
-      `${BASE_URL}SaveVid.Net_671755464_18435855697186666_7711171375846725236_n.jpg`,
-      `${BASE_URL}SaveVid.Net_654568608_18429948412186666_1662202469759325118_n.jpg`,
       `${BASE_URL}SaveVid.Net_654606843_18429948307186666_8326955274544644666_n.jpg`,
       `${BASE_URL}SaveVid.Net_671753464_18435855697186666_7711171375846725236_n.jpg`
     ]
@@ -115,13 +100,9 @@ export const MODELS: Product[] = [
     onlyfans: 'onlyfans.com/evie_sheff',
     bio: 'Sheffield-born grit meets high-fashion management. Evie leverages her industrial-chic aesthetic to dominate the regional market with high-yield results.',
     price: '£260/Session', 
-    image: `${BASE_URL}SaveVid.Net_656934970_18588581599030209_7953438295540257272_n.jpg`,
+    image: `${BASE_URL}SaveVid.Net_649123231_18074335631443346_6413189369052828641_n.jpg`,
     gallery: [
-      `${BASE_URL}SaveVid.Net_657391562_1858858515830209_4862615996964182678_n.jpg`,
-      `${BASE_URL}SaveVid.Net_657442568_18575321773035350_621945703115339549_n.jpg`,
-      `${BASE_URL}SaveVid.Net_656934970_18585851509030209_7953438295540257727_n.jpg`,
-      `${BASE_URL}SaveVid.Net_657391562_18585851518030209_4862615996964182678_n.jpg`,
-      `${BASE_URL}SaveVid.Net_657442568_18575321773053501_621945703115339549_n.jpg`
+      `${BASE_URL}SaveVid.Net_657391562_18585851518030209_4862615996964182678_n.jpg`
     ]
   },
   { 
@@ -133,9 +114,9 @@ export const MODELS: Product[] = [
     onlyfans: 'onlyfans.com/oliviamodels',
     bio: 'A signature blend of natural beauty and sharp northern intellect. Olivia specialises in high-retention fan engagement, proving that personality is the most valuable asset in the digital creator economy.',
     price: '£350/Session', 
-    image: `${BASE_URL}SaveVid.Net_559565502_1804428875066782_1793476918145632975_n.jpg`,
+    image: `${BASE_URL}SaveClip.App_624153366_18081768785230511_5352130957854695705_n.jpg`,
     gallery: [
-      `${BASE_URL}SaveVid.Net_559565502_18044288750667832_1793476918416362975_n.jpg`
+      `${BASE_URL}SaveClip.App_621676533_18088745648038103_8427349625796036719_n.jpg`
     ]
   },
   { 
@@ -147,10 +128,10 @@ export const MODELS: Product[] = [
     onlyfans: 'onlyfans.com/ruby_official',
     bio: 'Ruby defines the new era of Essex glamour. With a focus on high-impact visual storytelling and flawless aesthetic execution, she has quickly become one of the most sought-after creators on our roster.',
     price: '£360/Session', 
-    image: `${BASE_URL}SaveVid.Net_476475036_1848719518011641_533398151380525356_n.jpg`,
+    image: `${BASE_URL}SaveClip.App_669936751_18127658608596915_2519547545830487435_n.jpg`,
     gallery: [
-      `${BASE_URL}SaveVid.Net_476413573_1848719588011641_745131904459808597_n.jpg`,
-      `${BASE_URL}SaveVid.Net_476476902_1848719598011641_680122159668785578_n.jpg`
+      `${BASE_URL}SaveClip.App_670297462_18127658581596915_6275588591278048165_n.jpg`,
+      `${BASE_URL}SaveClip.App_671059154_18127658590596915_8264267633244035203_n.jpg`
     ]
   },
   { 
@@ -162,11 +143,10 @@ export const MODELS: Product[] = [
     onlyfans: 'onlyfans.com/ava_chic',
     bio: 'Ava combines traditional British heritage aesthetics with a forward-thinking OnlyFans architecture, maximizing revenue through strategic content distribution.',
     price: '£380/Session', 
-    image: `${BASE_URL}SaveVid.Net_606967640_18546493660049320_4064055082099817529_n.jpg`,
+    image: `${BASE_URL}SaveClip.App_491463552_18501618517034423_4078345625826757762_n.jpg`,
     gallery: [
-      `${BASE_URL}SaveVid.Net_559565502_1804428875066782_1793476918145632975_n.jpg`,
-      `${BASE_URL}SaveVid.Net_520423245_1851669844303561_543134319361614717_n.jpg`,
-      `${BASE_URL}SaveVid.Net_606967640_18546493660049320_4064055002099817520_n.jpg`
+      `${BASE_URL}SaveClip.App_491446742_18501618415034423_3111310470271486912_n.jpg`,
+      `${BASE_URL}SaveClip.App_491461754_18501618508034423_6390605950729470107_n.jpg`
     ]
   },
   { 

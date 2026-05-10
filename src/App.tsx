@@ -55,47 +55,57 @@ export const MOOD_KITS = [
   {
     id: 'date-night',
     title: 'Date Night',
-    tagline: 'Seductive. Intimate. Irresistible.',
-    description: 'Sultry reds, glossy lips, and glowy skin that looks incredible in low light. Perfect for spicy solo content, boyfriend experience, or GFE vibes.',
-    bestFor: 'Evening shoots, teasing videos, paid PPV content.',
+    tagline: 'Sultry. Magnetic. After Dark.',
+    price: '£89',
+    description: 'Sultry reds, glossy lips and dewy skin that looks expensive even in dim lighting.',
+    bestFor: 'Evening reels, teasing videos, paid PPV',
+    buttonText: 'Shop Date Night Kit →',
     keyProducts: ['Liquid lipsticks', 'body shimmer oils', 'lace lingerie', 'scent layering perfumes', 'nipple covers', 'lighting-friendly highlighters'],
-    image: 'https://images.unsplash.com/photo-1516975080664-ed2fc6a32937?q=80&w=1600'
+    image: 'https://cdn.jsdelivr.net/gh/oliviabancroft0-prog/10-5-26@main/logan-weaver-lgnwvr-9rEDN5Ilthc-unsplash.jpg'
   },
   {
     id: 'city-chic',
     title: 'City Chic',
-    tagline: 'Expensive. Polished. Powerful.',
-    description: 'Sharp, high-end aesthetic for the boss babe creator. Think luxury apartment shoots, “day in the life”, and high-value girlfriend content.',
-    bestFor: 'Luxury branding, faceless content, high-ticket subs.',
+    tagline: 'Sharp. Expensive. Boss Energy.',
+    price: '£95',
+    description: 'Polished looks for the city girl who means business.',
+    bestFor: 'Luxury branding, high-ticket content, city aesthetics',
+    buttonText: 'Shop City Chic Kit →',
     keyProducts: ['Matte liquid liners', 'tailored outfits', 'statement jewelry', 'sleek hairstyling tools', 'premium skincare'],
-    image: 'https://images.unsplash.com/photo-1487222477894-8943e31ef7b2?q=80&w=1600'
+    image: 'https://cdn.jsdelivr.net/gh/oliviabancroft0-prog/10-5-26@main/timur-m-atqKVJgSllU-unsplash.jpg'
   },
   {
     id: 'coastal-ease',
-    title: 'Coastal Ease / Soft Girl',
-    tagline: 'Dreamy. Soft. Addictive.',
-    description: 'Sun-kissed skin, natural glow, flowy outfits and that innocent-but-dangerous energy. Perfect for the soft girl / beachy aesthetic.',
-    bestFor: 'Morning content, pool shoots, “just woke up like this” fantasy.',
+    title: 'Coastal Ease',
+    tagline: 'Dreamy. Soft. Sun-Kissed.',
+    price: '£79',
+    description: 'Natural glow, breezy outfits and that innocent-but-dangerous softness.',
+    bestFor: 'Morning content, beach shoots, soft girl era',
+    buttonText: 'Shop Coastal Kit →',
     keyProducts: ['Dewy skin tints', 'body butters', 'wavy hair tools', 'pastel lingerie', 'vanilla scents', 'self-tanners'],
-    image: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=1600'
+    image: 'https://cdn.jsdelivr.net/gh/oliviabancroft0-prog/10-5-26@main/daniela-araya-dth2uJGiECw-unsplash.jpg'
   },
   {
     id: 'office-siren',
-    title: 'Work Week / Office Siren',
-    tagline: 'Professional by day, dangerous by night.',
-    description: 'Sleek corporate looks that secretly scream dominance. Blazers, pencil skirts, glasses, and flawless “no makeup” makeup.',
-    bestFor: 'Roleplay, secretary fantasy, power play content.',
+    title: 'Office Siren',
+    tagline: 'Professional by Day. Dangerous by Night.',
+    price: '£99',
+    description: 'Sleek corporate pieces that secretly scream power and seduction.',
+    bestFor: 'Office siren content, roleplay & power play',
+    buttonText: 'Shop Office Siren Kit →',
     keyProducts: ['Long-wear foundations', 'power brow kits', 'sophisticated fragrances', 'seamless shapewear', 'elegant heels'],
-    image: 'https://images.unsplash.com/photo-1485603673171-4608c028e530?q=80&w=1600'
+    image: 'https://cdn.jsdelivr.net/gh/oliviabancroft0-prog/10-5-26@main/ramin-turne-Bgmb0DB2Fwo-unsplash.jpg'
   },
   {
     id: 'weekend-escape',
     title: 'Weekend Escape',
     tagline: 'Wild. Free. Unforgettable.',
-    description: 'Festival-ready, travel content, or “getaway with me” vibes. Think glowing skin, messy hair, and barely-there outfits.',
-    bestFor: 'Vacation content, bikini shoots, adventure-style posts.',
+    price: '£85',
+    description: 'Festival-ready, travel content and “getaway with me” vibes.',
+    bestFor: 'Vacation shoots, bikini content, festival looks',
+    buttonText: 'Shop Weekend Escape Kit →',
     keyProducts: ['Waterproof makeup', 'tanning mousse', 'hair repair masks', 'festival glitter', 'sexy sets'],
-    image: 'https://images.unsplash.com/photo-1501426026826-31c667bdf23d?q=80&w=1600'
+    image: 'https://cdn.jsdelivr.net/gh/oliviabancroft0-prog/10-5-26@main/richmond-fajardo-8wuuoW5XgiU-unsplash.jpg'
   }
 ];
 
@@ -110,7 +120,7 @@ const ProductCard = ({ product, onClick }: ProductCardProps) => {
   const [hoverIndex, setHoverIndex] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
   
-  const allImages = [product.image, ...product.gallery];
+  const allImages = [product.image, ...product.gallery].slice(0, 3);
 
   useEffect(() => {
     let interval: any;
@@ -514,7 +524,7 @@ const SearchOverlay = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => vo
                     </div>
                   </div>
                   <div className="md:col-span-1">
-                    <h3 className="text-[10px] uppercase tracking-[0.4em] font-bold text-brand-black/30 mb-8">Mood Kits ({filteredKits.length})</h3>
+                    <h3 className="text-[10px] uppercase tracking-[0.4em] font-bold text-brand-black/30 mb-8">Vibe Kits ({filteredKits.length})</h3>
                     <div className="space-y-6">
                       {filteredKits.map(k => (
                         <div 
@@ -527,7 +537,7 @@ const SearchOverlay = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => vo
                           </div>
                           <div>
                             <h4 className="text-xl font-serif italic">{k.title}</h4>
-                            <p className="text-[10px] uppercase font-bold tracking-widest text-brand-black/40">Mood Kit for Content</p>
+                            <p className="text-[10px] uppercase font-bold tracking-widest text-brand-black/40">Vibe Kit</p>
                           </div>
                         </div>
                       ))}
@@ -589,7 +599,7 @@ const Navbar = ({ cartCount, onCartOpen, onSearchOpen }: { cartCount: number, on
 
   const menuItems = [
     { label: 'The Roster', id: 'shop', path: '/roster' },
-    { label: 'Mood Kits for Content', id: 'collections', path: '/mood-kits' },
+    { label: 'Vibe Kits', id: 'collections', path: '/mood-kits' },
     { label: 'The Agency', id: 'about', path: '/agency/philosophy' },
   ];
 
@@ -905,7 +915,11 @@ const MoodKitsSection = () => {
     <section className="py-24 bg-white">
       <div className="max-w-7xl mx-auto px-6">
         <div className="text-center mb-20 space-y-4">
-          <h2 className="text-5xl md:text-7xl font-serif italic mb-4">Mood Kits for Content</h2>
+          <h2 className="text-5xl md:text-7xl font-serif italic mb-4">Vibe Kits</h2>
+          <div className="space-y-1">
+            <p className="text-brand-black font-light text-lg">Curated glow kits for the content you actually want to create.</p>
+            <p className="text-brand-black/50 text-[10px] uppercase tracking-widest font-bold">Free UK shipping on orders over £150 • Vegan & cruelty free.</p>
+          </div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
@@ -920,7 +934,10 @@ const MoodKitsSection = () => {
               </div>
               <div className="p-6 flex-1 flex flex-col justify-between">
                 <div>
-                  <h3 className="text-2xl font-serif italic mb-1">{mood.title}</h3>
+                  <div className="flex justify-between items-start mb-1">
+                    <h3 className="text-2xl font-serif italic">{mood.title}</h3>
+                    <p className="text-lg font-medium">{mood.price}</p>
+                  </div>
                   <p className="text-[9px] uppercase tracking-[0.2em] font-bold text-brand-black/40 mb-4">{mood.tagline}</p>
                   <p className="text-xs font-light leading-relaxed text-brand-black/70 mb-4 line-clamp-3 group-hover:line-clamp-none transition-all duration-500">
                     {mood.description}
@@ -945,7 +962,7 @@ const MoodKitsSection = () => {
                   onClick={() => navigate('/mood-kits')}
                   className="w-full py-4 text-[9px] uppercase tracking-[0.3em] font-bold border border-brand-black hover:bg-brand-black hover:text-white transition-all duration-300"
                 >
-                  Shop This Kit
+                  {(mood as any).buttonText || 'Shop This Kit'}
                 </button>
               </div>
             </motion.div>
@@ -1034,7 +1051,7 @@ const Footer = () => {
           <Link to="/hubs/national" className="block hover:text-brand-black cursor-pointer">Global Reach</Link>
         </div>
         <div className="space-y-6">
-          <p className="text-brand-black font-bold mb-8">Mood Kits for Content</p>
+          <p className="text-brand-black font-bold mb-8">Vibe Kits</p>
           <Link to="/mood-kits#date-night" className="block hover:text-brand-black cursor-pointer">The Posh</Link>
           <Link to="/mood-kits#office-siren" className="block hover:text-brand-black cursor-pointer">Office Siren</Link>
           <Link to="/mood-kits#coastal-ease" className="block hover:text-brand-black cursor-pointer">Soft Girl</Link>
