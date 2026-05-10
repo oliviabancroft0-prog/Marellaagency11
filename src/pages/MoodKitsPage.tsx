@@ -59,9 +59,7 @@ export const MoodKitsPage: React.FC<MoodKitsPageProps> = ({ onAddToCart }) => {
               Free UK shipping on orders over £150 • Vegan & cruelty free.
             </p>
           </div>
-          <p className="text-sm md:text-base font-light text-brand-black/60 max-w-2xl leading-relaxed">
-            Essential physical assets curated for the elite British OnlyFans creator. Every item is selected for cultural resonance and technical camera compatibility.
-          </p>
+
         </div>
       </section>
 
@@ -146,19 +144,6 @@ export const MoodKitsPage: React.FC<MoodKitsPageProps> = ({ onAddToCart }) => {
         </section>
       ))}
 
-      {/* Footer CTA */}
-      <section className="py-24 px-6 text-center bg-brand-offwhite">
-        <h3 className="text-4xl italic font-serif mb-8">Need Bespoke Advice?</h3>
-        <p className="text-lg font-light text-brand-black/60 mb-12 max-w-xl mx-auto">
-          Our management firm offers professional wardrobe consultations for top-tier creators. Let us architect your visual narrative.
-        </p>
-        <button 
-          onClick={() => navigate('/login')}
-          className="text-[11px] font-bold tracking-[0.4em] uppercase border-b border-brand-black pb-2 hover:opacity-50 transition-opacity"
-        >
-          Apply for Private Consultation
-        </button>
-      </section>
     </div>
   );
 };

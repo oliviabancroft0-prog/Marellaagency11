@@ -228,7 +228,7 @@ const AllProductsView = ({ onBack, onProductClick }: { onBack: () => void, onPro
               <span className="text-brand-black">The Performance Roster</span>
             </nav>
             <h1 className="text-6xl italic">UK Talent Portfolio</h1>
-            <p className="text-brand-black/50 mt-4 text-lg font-light tracking-wide">Strategic United Kingdom management for elite digital creators.</p>
+
           </div>
         
         <div className="relative">
@@ -418,14 +418,7 @@ const CategoryPage = () => {
             <p className="text-lg md:text-xl font-light leading-relaxed text-brand-black/80 max-w-xl">
               {content.description}
             </p>
-            <div className="pt-8">
-              <Link 
-                to="/login"
-                className="bg-brand-black text-white px-10 py-5 text-[11px] font-bold tracking-[0.3em] uppercase hover:bg-brand-black/90 transition-all rounded-sm shadow-xl"
-              >
-                Apply for Consultation
-              </Link>
-            </div>
+
           </div>
           <div className="relative aspect-[4/5] rounded-sm overflow-hidden shadow-2xl">
             <img src={content.image} alt={content.title} referrerPolicy="no-referrer" className="w-full h-full object-cover grayscale brightness-90 hover:grayscale-0 transition-all duration-1000" />
@@ -599,8 +592,6 @@ const Navbar = ({ cartCount, onCartOpen, onSearchOpen }: { cartCount: number, on
 
   const menuItems = [
     { label: 'The Roster', id: 'shop', path: '/roster' },
-    { label: 'Vibe Kits', id: 'collections', path: '/mood-kits' },
-    { label: 'The Agency', id: 'about', path: '/agency/philosophy' },
   ];
 
   const toggleMobileMenu = () => setIsMobileMenuOpen(!isMobileMenuOpen);
@@ -649,8 +640,7 @@ const Navbar = ({ cartCount, onCartOpen, onSearchOpen }: { cartCount: number, on
             <Link 
               key={item.id}
               to={item.path}
-              onMouseEnter={() => setActiveMenu(item.id)}
-              className={`hover:opacity-50 transition-opacity ${activeMenu === item.id ? 'opacity-50' : ''}`}
+              className={`hover:opacity-50 transition-opacity`}
             >
               {item.label}
             </Link>
@@ -753,30 +743,6 @@ const Navbar = ({ cartCount, onCartOpen, onSearchOpen }: { cartCount: number, on
             transition={{ duration: 0.3, ease: 'easeOut' }}
             className="absolute top-full left-0 w-full bg-brand-offwhite border-b border-brand-border py-16 px-12 z-40 hidden lg:block"
           >
-            {activeMenu === 'shop' && (
-              <div className="max-w-7xl mx-auto grid grid-cols-4 gap-24">
-                <div className="space-y-6">
-                  <p className="text-brand-black font-bold text-[10px] uppercase tracking-widest mb-8">By Demand</p>
-                  <Link to="/roster" className="block text-xl font-serif italic hover:opacity-50 cursor-pointer">View Roster</Link>
-                  <Link to="/hubs/emerging" className="block text-xl font-serif italic hover:opacity-50 cursor-pointer">Emerging UK Models</Link>
-                  <Link to="/roster" className="block text-xl font-serif italic hover:opacity-50 cursor-pointer">Highest Earners</Link>
-                </div>
-                <div className="space-y-4">
-                  <p className="text-brand-black font-bold text-[10px] uppercase tracking-widest mb-8">UK Hubs</p>
-                  {['Greater London', 'Manchester Silk', 'The Midlands', 'The North East', 'Home Counties', 'UK National'].map(type => (
-                    <Link key={type} to={`/hubs/${type.toLowerCase().split(' ')[0] === 'greater' ? 'london' : (type.toLowerCase().split(' ')[0] === 'the' ? type.toLowerCase().split(' ')[1] : type.toLowerCase().split(' ')[0])}`} className="block text-sm font-light hover:opacity-50 cursor-pointer">{type}</Link>
-                  ))}
-                </div>
-                <div className="space-y-4 col-span-2">
-                  <p className="text-brand-black font-bold text-[10px] uppercase tracking-widest mb-8">OF Specialism</p>
-                  <div className="grid grid-cols-2 gap-x-12 gap-y-4">
-                    {['Management', 'Exclusive', 'Synergy'].map(spec => (
-                      <Link key={spec} to={`/hubs/${spec.toLowerCase()}`} className="block text-sm font-light hover:opacity-50 cursor-pointer">{spec} Specifics</Link>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            )}
             {activeMenu === 'collections' && (
               <div className="max-w-7xl mx-auto flex justify-between">
                 {COLLECTIONS.map((c, i) => (
@@ -1028,30 +994,7 @@ const Footer = () => {
         </motion.div>
       </div>
 
-      <div className="px-6 md:px-12 py-24 border-t border-brand-border grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-12 text-[11px] tracking-widest uppercase text-brand-black/60">
-        <div className="space-y-6">
-          <p className="text-brand-black font-bold mb-8">Performance Hubs</p>
-          <Link to="/hubs/london" className="block hover:text-brand-black cursor-pointer">London Core</Link>
-          <Link to="/hubs/manchester" className="block hover:text-brand-black cursor-pointer">Manchester Silk</Link>
-          <Link to="/hubs/birmingham" className="block hover:text-brand-black cursor-pointer">Midlands Rose</Link>
-          <Link to="/hubs/north" className="block hover:text-brand-black cursor-pointer">Northern Power</Link>
-          <Link to="/hubs/national" className="block hover:text-brand-black cursor-pointer">Global Reach</Link>
-        </div>
-        <div className="space-y-6">
-          <p className="text-brand-black font-bold mb-8">Vibe Kits</p>
-          <Link to="/mood-kits#date-night" className="block hover:text-brand-black cursor-pointer">The Posh</Link>
-          <Link to="/mood-kits#office-siren" className="block hover:text-brand-black cursor-pointer">Office Siren</Link>
-          <Link to="/mood-kits#coastal-ease" className="block hover:text-brand-black cursor-pointer">Soft Girl</Link>
-          <Link to="/mood-kits#city-chic" className="block hover:text-brand-black cursor-pointer">Metropolitan</Link>
-          <Link to="/mood-kits#weekend-escape" className="block hover:text-brand-black cursor-pointer">Coastal Glow</Link>
-        </div>
-        <div className="space-y-6">
-          <p className="text-brand-black font-bold mb-8">Management</p>
-          <Link to="/roster/management" className="block hover:text-brand-black cursor-pointer">0.1% Architecture</Link>
-          <Link to="/roster/emerging" className="block hover:text-brand-black cursor-pointer">Growth Pipeline</Link>
-          <Link to="/roster/exclusive" className="block hover:text-brand-black cursor-pointer">Bespoke Talent</Link>
-          <Link to="/roster/synergy" className="block hover:text-brand-black cursor-pointer">Creator Synergy</Link>
-        </div>
+      <div className="px-6 md:px-12 py-24 border-t border-brand-border grid grid-cols-2 md:grid-cols-3 gap-12 text-[11px] tracking-widest uppercase text-brand-black/60">
         <div className="space-y-6">
           <p className="text-brand-black font-bold mb-8">Private Access</p>
           <Link to="/login" className="block hover:text-brand-black cursor-pointer">Creator Portal</Link>

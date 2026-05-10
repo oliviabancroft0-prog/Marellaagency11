@@ -184,7 +184,6 @@ ${orderItems}
               <ArrowLeft size={18} className="group-hover:-translate-x-1 transition-transform" />
               <div className="w-8 h-8 bg-brand-black rounded-lg flex items-center justify-center text-white font-serif italic text-lg">B</div>
               <span className="text-sm font-semibold tracking-tight">Bramingham Barely</span>
-              <span className="bg-[#fff1e0] text-[#8c5a1a] text-[10px] px-1.5 py-0.5 rounded font-bold uppercase tracking-wider">Test Mode</span>
             </button>
 
             <div className="mb-12">

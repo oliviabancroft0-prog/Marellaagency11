@@ -8,7 +8,7 @@ export const KIT_PRODUCTS: KitProduct[] = [
     name: 'Luxury Red Liquid Lipstick',
     price: 28,
     description: 'Ultra-pigmented, long-wear red for that seductive evening look.',
-    image: 'https://images.unsplash.com/photo-1586776977607-310e9c725c37?q=80&w=400',
+    image: 'https://raw.githubusercontent.com/oliviabancroft0-prog/10-5-26/main/mercy-nQWBQdapsVc-unsplash.jpg',
     category: 'Makeup'
   },
   {
@@ -17,7 +17,7 @@ export const KIT_PRODUCTS: KitProduct[] = [
     name: 'Body Glow Shimmer Oil',
     price: 35,
     description: 'Glossy, non-greasy oil for an irresistible low-light glow.',
-    image: 'https://images.unsplash.com/photo-1556228852-80b6e5eeff06?q=80&w=400',
+    image: 'https://raw.githubusercontent.com/oliviabancroft0-prog/10-5-26/main/hanna-balan-EKxX0O3sR4U-unsplash.jpg',
     category: 'Body Care'
   },
   {
@@ -26,7 +26,7 @@ export const KIT_PRODUCTS: KitProduct[] = [
     name: 'Black Lace Lingerie Set',
     price: 65,
     description: 'Elegant British-designed lace for intimate shoots.',
-    image: 'https://images.unsplash.com/photo-1551488831-00ddcb6c6bd3?q=80&w=400',
+    image: 'https://raw.githubusercontent.com/oliviabancroft0-prog/10-5-26/main/uliana-kopanytsia-HjZwhXuRf3Q-unsplash.jpg',
     category: 'Apparel'
   },
   {
@@ -35,7 +35,7 @@ export const KIT_PRODUCTS: KitProduct[] = [
     name: 'Vanilla & Musk Scent layering',
     price: 45,
     description: 'Seductive perfume layering for the direct fan experience.',
-    image: 'https://images.unsplash.com/photo-1547887538-e3a2f32cb1cc?q=80&w=400',
+    image: 'https://raw.githubusercontent.com/oliviabancroft0-prog/10-5-26/main/sherise-van-dyk-dn1HwF3ioTE-unsplash.jpg',
     category: 'Fragrance'
   },
   {
@@ -44,7 +44,7 @@ export const KIT_PRODUCTS: KitProduct[] = [
     name: 'Silicone Nipple Covers',
     price: 15,
     description: 'Seamless coverage for teasing content.',
-    image: 'https://images.unsplash.com/photo-1556228578-0d85b1a4d571?q=80&w=400',
+    image: 'https://raw.githubusercontent.com/oliviabancroft0-prog/10-5-26/main/sincerely-media-AdNV3IoVUk8-unsplash.jpg',
     category: 'Accessories'
   },
   {
@@ -62,7 +62,7 @@ export const KIT_PRODUCTS: KitProduct[] = [
     name: 'Silk After-Shoot Robe',
     price: 55,
     description: 'Luxurious silk for lounging between takes.',
-    image: 'https://images.unsplash.com/photo-1518310383802-640c2de31012?q=80&w=400',
+    image: 'https://raw.githubusercontent.com/oliviabancroft0-prog/10-5-26/main/graphe-tween-hyKZsXIs3x8-unsplash.jpg',
     category: 'Apparel'
   },
 
@@ -73,7 +73,7 @@ export const KIT_PRODUCTS: KitProduct[] = [
     name: 'Matte Liquid Eyeliner',
     price: 20,
     description: 'Sharp precision for the powerful boss babe look.',
-    image: 'https://images.unsplash.com/photo-1625093742435-6fa192b6fb10?q=80&w=400',
+    image: 'https://raw.githubusercontent.com/oliviabancroft0-prog/10-5-26/main/ashley-piszek-IvcnaVvg6ZY-unsplash.jpg',
     category: 'Makeup'
   },
   {
@@ -82,7 +82,7 @@ export const KIT_PRODUCTS: KitProduct[] = [
     name: 'Tailored London Blazer',
     price: 85,
     description: 'Sharp tailoring for luxury apartment shoots.',
-    image: 'https://images.unsplash.com/photo-1591047139829-d91aecb6caea?q=80&w=400',
+    image: 'https://raw.githubusercontent.com/oliviabancroft0-prog/10-5-26/main/logan-weaver-lgnwvr-JqRQtSr2MCI-unsplash.jpg',
     category: 'Apparel'
   },
   {
@@ -91,7 +91,7 @@ export const KIT_PRODUCTS: KitProduct[] = [
     name: 'Statement Gold Hoops',
     price: 30,
     description: 'High-end jewelry accents for expensive vibes.',
-    image: 'https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?q=80&w=400',
+    image: 'https://raw.githubusercontent.com/oliviabancroft0-prog/10-5-26/main/r-g-CWMaUIivGMM-unsplash.jpg',
     category: 'Jewelry'
   },
   {
@@ -109,7 +109,7 @@ export const KIT_PRODUCTS: KitProduct[] = [
     name: 'Vitamin C Skincare Kit',
     price: 45,
     description: 'Premium skincare for that rich girl skin glow.',
-    image: 'https://images.unsplash.com/photo-1556228578-0d85b1a4d571?q=80&w=400',
+    image: 'https://raw.githubusercontent.com/oliviabancroft0-prog/10-5-26/main/simran-sood-VNYcdB-Xu00-unsplash.jpg',
     category: 'Skincare'
   },
   {
@@ -118,7 +118,7 @@ export const KIT_PRODUCTS: KitProduct[] = [
     name: 'Metropolitan Pencil Skirt',
     price: 40,
     description: 'Power-dressing piece for high-value content.',
-    image: 'https://images.unsplash.com/photo-1551488831-00ddcb6c6bd3?q=80&w=400',
+    image: 'https://raw.githubusercontent.com/oliviabancroft0-prog/10-5-26/main/ruslan-mingazhov-wvrSYRSxuZE-unsplash.jpg',
     category: 'Apparel'
   },
   {
