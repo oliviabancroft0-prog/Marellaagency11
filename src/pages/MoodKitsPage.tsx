@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import { motion } from 'motion/react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { KIT_PRODUCTS } from '../constants/kitProducts';
-import { MOOD_KITS } from '../App';
+import { MOOD_KITS } from '../constants/moodKits';
 import { ShoppingBag, ChevronRight, ArrowRight } from 'lucide-react';
 
 interface MoodKitsPageProps {
@@ -28,11 +28,14 @@ export const MoodKitsPage: React.FC<MoodKitsPageProps> = ({ onAddToCart }) => {
   }, [hash]);
 
   const handleBuyKit = (kitId: string) => {
+    const kit = MOOD_KITS.find(k => k.id === kitId);
+    if (!kit) return;
+    
     const products = KIT_PRODUCTS.filter(p => p.kitId === kitId);
     onAddToCart(products.map(p => ({
       id: p.id,
       name: p.name,
-      price: p.price,
+      price: Math.floor(p.price * 0.85), // Apply 15% discount for whole kit order
       quantity: 1,
       image: p.image,
       type: 'product'
@@ -75,9 +78,13 @@ export const MoodKitsPage: React.FC<MoodKitsPageProps> = ({ onAddToCart }) => {
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-16 mb-16">
               <div className="lg:col-span-1 space-y-6">
                 <span className="text-[10px] uppercase tracking-[0.4em] font-bold text-brand-black/30">Mood Selection</span>
-                <div className="flex justify-between items-start mb-2">
-                  <h2 className="text-4xl md:text-6xl font-serif italic leading-tight">{kit.title}</h2>
-                  <p className="text-2xl font-medium">{kit.price}</p>
+                <div className="flex flex-col items-end mb-2">
+                  <h2 className="text-4xl md:text-6xl font-serif italic leading-tight w-full">{kit.title}</h2>
+                  <div className="flex items-center space-x-3 w-full mt-2">
+                    <p className="text-brand-black/40 line-through text-lg">£{kit.originalPrice}</p>
+                    <p className="text-2xl font-bold text-brand-black">£{kit.discountedPrice}</p>
+                    <span className="text-[10px] bg-brand-black text-white px-2 py-1 font-bold rounded-sm">15% OFF</span>
+                  </div>
                 </div>
                 <p className="text-brand-black/40 uppercase tracking-[0.2em] text-[10px] font-bold">{kit.tagline}</p>
                 <p className="text-sm font-light leading-relaxed text-brand-black/70">

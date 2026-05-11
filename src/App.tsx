@@ -33,6 +33,7 @@ import { useAuth } from './context/AuthContext';
 import { Product, CartItem, KitProduct } from './types';
 import { MODELS } from './constants/models';
 import { KIT_PRODUCTS } from './constants/kitProducts';
+import { MOOD_KITS } from './constants/moodKits';
 import { MoodKitsPage } from './pages/MoodKitsPage';
 import { CheckoutPage } from './pages/CheckoutPage';
 
@@ -50,64 +51,6 @@ const ScrollToTop = () => {
 };
 
 // --- Types & Constants ---
-
-export const MOOD_KITS = [
-  {
-    id: 'date-night',
-    title: 'Date Night',
-    tagline: 'Sultry. Magnetic. After Dark.',
-    price: '£89',
-    description: 'Sultry reds, glossy lips and dewy skin that looks expensive even in dim lighting.',
-    bestFor: 'Evening reels, teasing videos, paid PPV',
-    buttonText: 'Shop Date Night Kit →',
-    keyProducts: ['Liquid lipsticks', 'body shimmer oils', 'lace lingerie', 'scent layering perfumes', 'nipple covers', 'lighting-friendly highlighters'],
-    image: 'https://cdn.jsdelivr.net/gh/oliviabancroft0-prog/10-5-26@main/logan-weaver-lgnwvr-9rEDN5Ilthc-unsplash.jpg'
-  },
-  {
-    id: 'city-chic',
-    title: 'City Chic',
-    tagline: 'Sharp. Expensive. Boss Energy.',
-    price: '£95',
-    description: 'Polished looks for the city girl who means business.',
-    bestFor: 'Luxury branding, high-ticket content, city aesthetics',
-    buttonText: 'Shop City Chic Kit →',
-    keyProducts: ['Matte liquid liners', 'tailored outfits', 'statement jewelry', 'sleek hairstyling tools', 'premium skincare'],
-    image: 'https://cdn.jsdelivr.net/gh/oliviabancroft0-prog/10-5-26@main/timur-m-atqKVJgSllU-unsplash.jpg'
-  },
-  {
-    id: 'coastal-ease',
-    title: 'Coastal Ease',
-    tagline: 'Dreamy. Soft. Sun-Kissed.',
-    price: '£79',
-    description: 'Natural glow, breezy outfits and that innocent-but-dangerous softness.',
-    bestFor: 'Morning content, beach shoots, soft girl era',
-    buttonText: 'Shop Coastal Kit →',
-    keyProducts: ['Dewy skin tints', 'body butters', 'wavy hair tools', 'pastel lingerie', 'vanilla scents', 'self-tanners'],
-    image: 'https://cdn.jsdelivr.net/gh/oliviabancroft0-prog/10-5-26@main/daniela-araya-dth2uJGiECw-unsplash.jpg'
-  },
-  {
-    id: 'office-siren',
-    title: 'Office Siren',
-    tagline: 'Professional by Day. Dangerous by Night.',
-    price: '£99',
-    description: 'Sleek corporate pieces that secretly scream power and seduction.',
-    bestFor: 'Office siren content, roleplay & power play',
-    buttonText: 'Shop Office Siren Kit →',
-    keyProducts: ['Long-wear foundations', 'power brow kits', 'sophisticated fragrances', 'seamless shapewear', 'elegant heels'],
-    image: 'https://cdn.jsdelivr.net/gh/oliviabancroft0-prog/10-5-26@main/ramin-turne-Bgmb0DB2Fwo-unsplash.jpg'
-  },
-  {
-    id: 'weekend-escape',
-    title: 'Weekend Escape',
-    tagline: 'Wild. Free. Unforgettable.',
-    price: '£85',
-    description: 'Festival-ready, travel content and “getaway with me” vibes.',
-    bestFor: 'Vacation shoots, bikini content, festival looks',
-    buttonText: 'Shop Weekend Escape Kit →',
-    keyProducts: ['Waterproof makeup', 'tanning mousse', 'hair repair masks', 'festival glitter', 'sexy sets'],
-    image: 'https://cdn.jsdelivr.net/gh/oliviabancroft0-prog/10-5-26@main/richmond-fajardo-8wuuoW5XgiU-unsplash.jpg'
-  }
-];
 
 interface ProductCardProps {
   key?: string | number;
@@ -884,9 +827,13 @@ const MoodKitsSection = () => {
               </div>
               <div className="p-6 flex-1 flex flex-col justify-between">
                 <div>
-                  <div className="flex justify-between items-start mb-1">
-                    <h3 className="text-2xl font-serif italic">{mood.title}</h3>
-                    <p className="text-lg font-medium">{mood.price}</p>
+                  <div className="flex flex-col items-end mb-1">
+                    <h3 className="text-2xl font-serif italic w-full">{mood.title}</h3>
+                    <div className="flex items-center space-x-2 w-full">
+                      <p className="text-brand-black/40 line-through text-sm">£{mood.originalPrice}</p>
+                      <p className="text-lg font-bold text-brand-black">£{mood.discountedPrice}</p>
+                      <span className="text-[8px] bg-brand-black text-white px-1.5 py-0.5 font-bold rounded-sm">15% OFF</span>
+                    </div>
                   </div>
                   <p className="text-[9px] uppercase tracking-[0.2em] font-bold text-brand-black/40 mb-4">{mood.tagline}</p>
                   <p className="text-xs font-light leading-relaxed text-brand-black/70 mb-4 line-clamp-3 group-hover:line-clamp-none transition-all duration-500">
@@ -959,7 +906,7 @@ const Footer = () => {
           initial={{ opacity: 0, y: 10 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-[10px] tracking-[0.4em] uppercase font-bold text-brand-black/30 mb-12"
+          className="text-[10px] tracking-[0.4em] uppercase font-bold text-brand-black/80 mb-12"
         >
           Secure Payment Methods
         </motion.p>

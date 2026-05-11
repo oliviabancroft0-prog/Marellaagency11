@@ -100,7 +100,7 @@ export const KIT_PRODUCTS: KitProduct[] = [
     name: 'Sleek Styler Pro',
     price: 120,
     description: 'Professional tool for polished, straight hair.',
-    image: 'https://images.unsplash.com/photo-1522338242992-e1a54906a8da?q=80&w=400',
+    image: 'https://raw.githubusercontent.com/oliviabancroft0-prog/10-5-26/main/pexels-konrads-photo-14615064.jpg',
     category: 'Hair Care'
   },
   {
@@ -127,7 +127,7 @@ export const KIT_PRODUCTS: KitProduct[] = [
     name: 'Sharp Leather Heels',
     price: 95,
     description: 'Classic professional footwear for roleplay.',
-    image: 'https://images.unsplash.com/photo-1543163521-1bf539c55dd2?q=80&w=400',
+    image: 'https://raw.githubusercontent.com/oliviabancroft0-prog/10-5-26/main/pexels-jose-martin-segura-benites-1422456152-27204266.jpg',
     category: 'Apparel'
   },
 
@@ -138,7 +138,7 @@ export const KIT_PRODUCTS: KitProduct[] = [
     name: 'Dewy Skin Tint',
     price: 32,
     description: 'Sun-kissed glow for that innocent energy.',
-    image: 'https://images.unsplash.com/photo-1596462502278-27bfaf410911?q=80&w=400',
+    image: 'https://raw.githubusercontent.com/oliviabancroft0-prog/10-5-26/main/ela-de-pure-A84yx9vp2gk-unsplash.jpg',
     category: 'Makeup'
   },
   {
@@ -147,7 +147,7 @@ export const KIT_PRODUCTS: KitProduct[] = [
     name: 'Coconut Body Butter',
     price: 24,
     description: 'Deeply moisturizing for soft girl skin.',
-    image: 'https://images.unsplash.com/photo-1556228720-195a672e8a03?q=80&w=400',
+    image: 'https://raw.githubusercontent.com/oliviabancroft0-prog/10-5-26/main/viva-lui-ZALQcS2-oZ8-unsplash.jpg',
     category: 'Body Care'
   },
   {
@@ -156,7 +156,7 @@ export const KIT_PRODUCTS: KitProduct[] = [
     name: 'Beach Wave Hair Tool',
     price: 89,
     description: 'Effortless dreamy waves for pool shoots.',
-    image: 'https://images.unsplash.com/photo-1522338242992-e1a54906a8da?q=80&w=400',
+    image: 'https://raw.githubusercontent.com/oliviabancroft0-prog/10-5-26/main/pexels-rdne-7755669.jpg',
     category: 'Hair Care'
   },
   {
@@ -165,7 +165,7 @@ export const KIT_PRODUCTS: KitProduct[] = [
     name: 'Pastel Blue Lingerie Set',
     price: 58,
     description: 'Soft girl aesthetic lingerie.',
-    image: 'https://images.unsplash.com/photo-1551488831-00ddcb6c6bd3?q=80&w=400',
+    image: 'https://raw.githubusercontent.com/oliviabancroft0-prog/10-5-26/main/katy-scsrlett-za_cPgJOnSg-unsplash.jpg',
     category: 'Apparel'
   },
   {
@@ -174,7 +174,7 @@ export const KIT_PRODUCTS: KitProduct[] = [
     name: 'Vanilla Bean Fragrance',
     price: 40,
     description: 'Dreamy and addictive morning scent.',
-    image: 'https://images.unsplash.com/photo-1547887538-e3a2f32cb1cc?q=80&w=400',
+    image: 'https://raw.githubusercontent.com/oliviabancroft0-prog/10-5-26/main/cosmin-ursea-om36HPHTTRg-unsplash.jpg',
     category: 'Fragrance'
   },
   {
@@ -183,7 +183,7 @@ export const KIT_PRODUCTS: KitProduct[] = [
     name: 'Self-Tanning Mousse',
     price: 22,
     description: 'Natural sun-kissed tan for year-round beach vibes.',
-    image: 'https://images.unsplash.com/photo-1556228578-0d85b1a4d571?q=80&w=400',
+    image: 'https://raw.githubusercontent.com/oliviabancroft0-prog/10-5-26/main/karly-jones-xBqYLnRhfaI-unsplash.jpg',
     category: 'Body Care'
   },
   {
@@ -192,7 +192,7 @@ export const KIT_PRODUCTS: KitProduct[] = [
     name: 'Flowy Linen Sundress',
     price: 65,
     description: 'Just-woke-up fantasy apparel.',
-    image: 'https://images.unsplash.com/photo-1518310383802-640c2de31012?q=80&w=400',
+    image: 'https://raw.githubusercontent.com/oliviabancroft0-prog/10-5-26/main/manish-jangid-bPOHTf7Hye4-unsplash.jpg',
     category: 'Apparel'
   },
 
@@ -203,7 +203,7 @@ export const KIT_PRODUCTS: KitProduct[] = [
     name: 'Long-wear Matte Foundation',
     price: 42,
     description: 'Flawless no-makeup look for dominance roleplay.',
-    image: 'https://images.unsplash.com/photo-1625093742435-6fa192b6fb10?q=80&w=400',
+    image: 'https://raw.githubusercontent.com/oliviabancroft0-prog/10-5-26/main/pexels-amit-tiwari-1141367609-20903471.jpg',
     category: 'Makeup'
   },
   {
@@ -212,7 +212,7 @@ export const KIT_PRODUCTS: KitProduct[] = [
     name: 'Power Brow Styling Kit',
     price: 28,
     description: 'Defined brows for a professional by day look.',
-    image: 'https://images.unsplash.com/photo-1625093742435-6fa192b6fb10?q=80&w=400',
+    image: 'https://raw.githubusercontent.com/oliviabancroft0-prog/10-5-26/main/pexels-shiny-diamond-3762664.jpg',
     category: 'Makeup'
   },
   {
@@ -221,7 +221,7 @@ export const KIT_PRODUCTS: KitProduct[] = [
     name: 'Sophisticated Oud Fragrance',
     price: 75,
     description: 'Scent of authority and professional success.',
-    image: 'https://images.unsplash.com/photo-1547887538-e3a2f32cb1cc?q=80&w=400',
+    image: 'https://raw.githubusercontent.com/oliviabancroft0-prog/10-5-26/main/pexels-khulood-abdulghani-195928257-11482468.jpg',
     category: 'Fragrance'
   },
   {
@@ -230,7 +230,7 @@ export const KIT_PRODUCTS: KitProduct[] = [
     name: 'Seamless Shapewear Bodysuit',
     price: 48,
     description: 'The foundation for professional secretary fantasies.',
-    image: 'https://images.unsplash.com/photo-1551488831-00ddcb6c6bd3?q=80&w=400',
+    image: 'https://raw.githubusercontent.com/oliviabancroft0-prog/10-5-26/main/pexels-shvets-production-7506907.jpg',
     category: 'Apparel'
   },
   {
@@ -239,7 +239,7 @@ export const KIT_PRODUCTS: KitProduct[] = [
     name: 'Pointed Slate Heels',
     price: 95,
     description: 'Elegant footwear for office power plays.',
-    image: 'https://images.unsplash.com/photo-1543163521-1bf539c55dd2?q=80&w=400',
+    image: 'https://raw.githubusercontent.com/oliviabancroft0-prog/10-5-26/main/pexels-pedrofurtadoo-31450995.jpg',
     category: 'Apparel'
   },
   {
@@ -248,7 +248,7 @@ export const KIT_PRODUCTS: KitProduct[] = [
     name: 'Chic Blue Light Glasses',
     price: 35,
     description: 'Essential accessory for the Office Siren look.',
-    image: 'https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?q=80&w=400',
+    image: 'https://raw.githubusercontent.com/oliviabancroft0-prog/10-5-26/main/pexels-glassesshop-gs-1317359316-28368511.jpg',
     category: 'Accessories'
   },
   {
@@ -257,7 +257,7 @@ export const KIT_PRODUCTS: KitProduct[] = [
     name: 'Structured Professional Tote',
     price: 110,
     description: 'High-end briefcase alternative for corporate chic.',
-    image: 'https://images.unsplash.com/photo-1591047139829-d91aecb6caea?q=80&w=400',
+    image: 'https://raw.githubusercontent.com/oliviabancroft0-prog/10-5-26/main/pexels-valentin-ivantsov-2154772556-36364964.jpg',
     category: 'Apparel'
   },
 
@@ -268,7 +268,7 @@ export const KIT_PRODUCTS: KitProduct[] = [
     name: 'Waterproof Content Makeup',
     price: 45,
     description: 'Stays perfect for vacation and adventure shoots.',
-    image: 'https://images.unsplash.com/photo-1625093742435-6fa192b6fb10?q=80&w=400',
+    image: 'https://raw.githubusercontent.com/oliviabancroft0-prog/10-5-26/main/pexels-freestockpro-12955707.jpg',
     category: 'Makeup'
   },
   {
@@ -277,7 +277,7 @@ export const KIT_PRODUCTS: KitProduct[] = [
     name: 'Express Tanning Mousse',
     price: 24,
     description: 'Instant getaway glow in under 2 hours.',
-    image: 'https://images.unsplash.com/photo-1556228578-0d85b1a4d571?q=80&w=400',
+    image: 'https://raw.githubusercontent.com/oliviabancroft0-prog/10-5-26/main/pexels-madalina-enache-1540051428-27357176.jpg',
     category: 'Body Care'
   },
   {
@@ -286,7 +286,7 @@ export const KIT_PRODUCTS: KitProduct[] = [
     name: 'Hair Repair Treatment Mask',
     price: 28,
     description: 'Deep repair after sun and saltwater exposure.',
-    image: 'https://images.unsplash.com/photo-1522338242992-e1a54906a8da?q=80&w=400',
+    image: 'https://raw.githubusercontent.com/oliviabancroft0-prog/10-5-26/main/pexels-behrouz-alimardani-152148858-10644997.jpg',
     category: 'Hair Care'
   },
   {
@@ -295,7 +295,7 @@ export const KIT_PRODUCTS: KitProduct[] = [
     name: 'Iridescent Festival Glitter',
     price: 12,
     description: 'Unforgettable shimmer for festival content.',
-    image: 'https://images.unsplash.com/photo-1512413316925-fd4b93f31521?q=80&w=400',
+    image: 'https://raw.githubusercontent.com/oliviabancroft0-prog/10-5-26/main/pexels-alena-shekhovtcova-6074965.jpg',
     category: 'Accessories'
   },
   {
@@ -304,7 +304,7 @@ export const KIT_PRODUCTS: KitProduct[] = [
     name: 'Seamless Sexy Set',
     price: 42,
     description: 'Comfortable yet barely-there for travel posts.',
-    image: 'https://images.unsplash.com/photo-1551488831-00ddcb6c6bd3?q=80&w=400',
+    image: 'https://raw.githubusercontent.com/oliviabancroft0-prog/10-5-26/main/pexels-alina-orlova-60711511-8032253.jpg',
     category: 'Apparel'
   },
   {
@@ -313,7 +313,7 @@ export const KIT_PRODUCTS: KitProduct[] = [
     name: 'Retro Destination Sunnies',
     price: 25,
     description: 'Wild and free accessory for vacation vibes.',
-    image: 'https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?q=80&w=400',
+    image: 'https://raw.githubusercontent.com/oliviabancroft0-prog/10-5-26/main/pexels-mikee-gagarin-2149163776-30459187.jpg',
     category: 'Accessories'
   },
   {
@@ -322,7 +322,7 @@ export const KIT_PRODUCTS: KitProduct[] = [
     name: 'Travel Beauty Organiser',
     price: 30,
     description: 'The archetype of on-the-go efficiency.',
-    image: 'https://images.unsplash.com/photo-1522338140262-f46f59120182?q=80&w=400',
+    image: 'https://raw.githubusercontent.com/oliviabancroft0-prog/10-5-26/main/pexels-timur-weber-9185864.jpg',
     category: 'Accessories'
   }
 ];
