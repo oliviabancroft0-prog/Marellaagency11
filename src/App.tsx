@@ -30,6 +30,10 @@ import {
 } from 'lucide-react';
 import { Login } from './pages/Login';
 import { Dashboard } from './pages/Dashboard';
+import { RoleSelection } from './pages/RoleSelection';
+import { CreatorOnboarding } from './pages/onboarding/CreatorOnboarding';
+import { FanOnboarding } from './pages/onboarding/FanOnboarding';
+import { FanDashboard } from './pages/FanDashboard';
 import { ProtectedRoute } from './components/ProtectedRoute';
 import { useAuth } from './context/AuthContext';
 import { Product, CartItem, KitProduct } from './types';
@@ -38,6 +42,46 @@ import { KIT_PRODUCTS } from './constants/kitProducts';
 import { MOOD_KITS } from './constants/moodKits';
 import { MoodKitsPage } from './pages/MoodKitsPage';
 import { CheckoutPage } from './pages/CheckoutPage';
+
+const CompleteDashboard = () => {
+  const { profile, loading, user } = useAuth();
+  
+  if (loading) return (
+    <div className="min-h-screen bg-brand-offwhite flex items-center justify-center">
+      <div className="flex flex-col items-center">
+        <div className="w-12 h-12 border-2 border-brand-black border-t-transparent rounded-full animate-spin mb-4"></div>
+        <p className="text-[10px] uppercase tracking-widest font-bold text-brand-black/40">Authenticating Architecture...</p>
+      </div>
+    </div>
+  );
+
+  if (!user) return <Navigate to="/login" replace />;
+
+  if (!profile) {
+    return (
+      <div className="min-h-screen bg-brand-offwhite flex items-center justify-center">
+        <div className="flex flex-col items-center">
+          <div className="w-12 h-12 border-2 border-brand-black border-t-transparent rounded-full animate-spin mb-4"></div>
+          <p className="text-[10px] uppercase tracking-widest font-bold text-brand-black/40">Loading Profile Architecture...</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (profile.role === null || profile.role === undefined) {
+    return <Navigate to="/role-selection" replace />;
+  }
+
+  if (!profile.onboarding_completed) {
+    return <Navigate to={`/onboarding/${profile.role}`} replace />;
+  }
+
+  if (profile.role === 'fan') {
+    return <FanDashboard />;
+  }
+
+  return <Dashboard />;
+};
 
 const ScrollToTop = () => {
   const { pathname, hash } = useLocation();
@@ -532,7 +576,7 @@ const Navbar = ({ cartCount, onCartOpen, onSearchOpen }: { cartCount: number, on
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
-  const { user } = useAuth();
+  const { user, profile } = useAuth();
   const isHome = location.pathname === '/';
 
   const menuItems = [
@@ -599,11 +643,27 @@ const Navbar = ({ cartCount, onCartOpen, onSearchOpen }: { cartCount: number, on
           <span className="hidden lg:inline ml-3 font-semibold">Registry</span>
         </button>
         <button 
-          onClick={() => navigate(user ? '/dashboard' : '/login')}
+          onClick={() => {
+            if (!user) {
+              navigate('/login');
+            } else if (!profile || profile.role === null || profile.role === undefined) {
+              navigate('/role-selection');
+            } else if (!profile.onboarding_completed) {
+              navigate(`/onboarding/${profile.role}`);
+            } else {
+              navigate('/dashboard');
+            }
+          }}
           className="hover:opacity-50 transition-opacity flex items-center"
         >
           <User size={16} />
-          <span className="hidden lg:inline ml-3 font-semibold">{user ? 'Portal' : 'Creator Login'}</span>
+          <span className="hidden lg:inline ml-3 font-semibold">
+            {user 
+              ? (profile?.onboarding_completed 
+                  ? (profile.role === 'fan' ? 'Member Portal' : 'Creator Portal') 
+                  : 'Complete Setup') 
+              : 'Login'}
+          </span>
         </button>
         <button onClick={onCartOpen} className="hover:opacity-50 transition-opacity flex items-center">
           <ShoppingBag size={16} />
@@ -728,16 +788,12 @@ const FloatingElement = ({ children, delay = 0, x = 0, y = 0, rotate = 0, scale 
     animate={{ 
       opacity, 
       scale, 
-      rotate,
-      y: [0, -15, 0],
-      x: [0, 10, 0]
+      rotate
     }}
     transition={{
       opacity: { duration: 1, delay },
       scale: { duration: 1, delay },
-      rotate: { duration: 1, delay },
-      y: { duration: 4, repeat: Infinity, ease: "easeInOut", delay },
-      x: { duration: 5, repeat: Infinity, ease: "easeInOut", delay }
+      rotate: { duration: 1, delay }
     }}
     style={{ position: 'absolute', left: x, top: y, zIndex: 10 }}
     className="drop-shadow-2xl filter"
@@ -751,40 +807,50 @@ const Hero = ({ onShopNow }: { onShopNow: () => void }) => {
     <section className="relative h-screen w-full flex items-center px-6 md:px-24 overflow-hidden pt-12 md:pt-16 bg-brand-offwhite">
       {/* Decorative Elements */}
       <div className="absolute inset-0 pointer-events-none z-10">
-        {/* UK Heart Flag Top Left */}
-        <FloatingElement x="10%" y="15%" scale={1.2} opacity={0.9} rotate={-10}>
-          <div className="relative w-12 h-12 flex items-center justify-center">
-            <svg viewBox="0 0 100 100" className="w-full h-full drop-shadow-xl">
-              <defs>
-                <linearGradient id="gloss" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stopColor="white" stopOpacity="0.4" />
-                  <stop offset="50%" stopColor="white" stopOpacity="0" />
-                  <stop offset="100%" stopColor="white" stopOpacity="0.1" />
-                </linearGradient>
-                <clipPath id="heartPath">
-                  <path d="M50,30 C35,10 10,25 10,45 C10,70 50,90 50,90 C50,90 90,70 90,45 C90,25 65,10 50,30 Z" />
-                </clipPath>
-              </defs>
-              <g clipPath="url(#heartPath)">
-                {/* UK Flag Pattern */}
-                <rect width="100" height="100" fill="#00247d" />
-                <path d="M0,0 L100,100 M100,0 L0,100" stroke="white" strokeWidth="12" />
-                <path d="M0,0 L100,100 M100,0 L0,100" stroke="#cf142b" strokeWidth="6" />
-                <path d="M50,0 V100 M0,50 H100" stroke="white" strokeWidth="20" />
-                <path d="M50,0 V100 M0,50 H100" stroke="#cf142b" strokeWidth="12" />
-              </g>
-              {/* Gloss Overlay */}
-              <path d="M50,30 C35,10 10,25 10,45 C10,70 50,90 50,90 C50,90 90,70 90,45 C90,25 65,10 50,30 Z" fill="url(#gloss)" />
-            </svg>
-          </div>
+        {/* New Icons */}
+        <FloatingElement x="10%" y="15%" scale={1.2} opacity={1} rotate={-10}>
+          <img 
+            src="https://raw.githubusercontent.com/oliviabancroft0-prog/iconzz/main/bus.png" 
+            alt="Bus Icon" 
+            className="w-12 h-12 object-contain"
+            referrerPolicy="no-referrer"
+          />
         </FloatingElement>
 
-        {/* Small Cluster */}
-        <FloatingElement x="8%" y="30%" opacity={0.15} delay={1.2} rotate={15}>
-          <span className="text-2xl">🍒</span>
+        <FloatingElement x="8%" y="30%" opacity={1} delay={1.2} rotate={15}>
+          <img 
+            src="https://raw.githubusercontent.com/oliviabancroft0-prog/iconzz/main/courage.png" 
+            alt="Courage Icon" 
+            className="w-10 h-10 object-contain"
+            referrerPolicy="no-referrer"
+          />
         </FloatingElement>
-        <FloatingElement x="12%" y="40%" opacity={0.15} delay={2} rotate={20}>
-          <span className="text-2xl">❤️</span>
+
+        <FloatingElement x="12%" y="45%" opacity={1} delay={2} rotate={20}>
+          <img 
+            src="https://raw.githubusercontent.com/oliviabancroft0-prog/iconzz/main/telephone.png" 
+            alt="Telephone Icon" 
+            className="w-12 h-12 object-contain"
+            referrerPolicy="no-referrer"
+          />
+        </FloatingElement>
+
+        <FloatingElement x="5%" y="55%" opacity={1} delay={0.5} rotate={-5}>
+          <img 
+            src="https://raw.githubusercontent.com/oliviabancroft0-prog/iconzz/main/underground.png" 
+            alt="Underground Icon" 
+            className="w-12 h-12 object-contain"
+            referrerPolicy="no-referrer"
+          />
+        </FloatingElement>
+
+        <FloatingElement x="15%" y="25%" opacity={1} delay={1.5} rotate={5}>
+          <img 
+            src="https://raw.githubusercontent.com/oliviabancroft0-prog/iconzz/main/flag%20(1).png" 
+            alt="Flag Icon" 
+            className="w-12 h-12 object-contain"
+            referrerPolicy="no-referrer"
+          />
         </FloatingElement>
       </div>
 
@@ -1425,13 +1491,32 @@ export default function App() {
         <Route path="/mood-kits" element={wrapInLayout(<MoodKitsPage onAddToCart={(items) => handleAddToCart(items)} />)} />
         <Route path="/checkout" element={wrapInLayout(<CheckoutPage cart={cart} setCart={setCart} />)} />
         <Route path="/login" element={wrapInLayout(<Login />)} />
+        <Route path="/dashboard" element={
+          <ProtectedRoute>
+            {wrapInLayout(<CompleteDashboard />)}
+          </ProtectedRoute>
+        } />
+        <Route path="/role-selection" element={
+          <ProtectedRoute>
+            {wrapInLayout(<RoleSelection />)}
+          </ProtectedRoute>
+        } />
+        <Route path="/onboarding/creator" element={
+          <ProtectedRoute>
+            {wrapInLayout(<CreatorOnboarding />)}
+          </ProtectedRoute>
+        } />
+        <Route path="/onboarding/fan" element={
+          <ProtectedRoute>
+            {wrapInLayout(<FanOnboarding />)}
+          </ProtectedRoute>
+        } />
         <Route path="/hubs/:categoryId" element={wrapInLayout(<CategoryPage />)} />
         <Route path="/collections/:categoryId" element={wrapInLayout(<CategoryPage />)} />
         <Route path="/agency/:categoryId" element={wrapInLayout(<CategoryPage />)} />
         <Route path="/philosophy/:categoryId" element={wrapInLayout(<CategoryPage />)} />
         <Route path="/philosophy" element={<Navigate to="/philosophy/philosophy" replace />} />
         <Route path="/strategy" element={<Navigate to="/philosophy/strategy" replace />} />
-        <Route path="/dashboard" element={wrapInLayout(<Dashboard />)} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </>

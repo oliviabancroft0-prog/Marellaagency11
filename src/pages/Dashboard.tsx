@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { syncUserProfile } from '../lib/setup';
 import { 
@@ -20,6 +21,16 @@ import { motion } from 'motion/react';
 
 export const Dashboard: React.FC = () => {
   const { user, signOut } = useAuth();
+  const navigate = useNavigate();
+
+  const handleSignOut = async () => {
+    try {
+      await signOut();
+      navigate('/', { replace: true });
+    } catch (error) {
+      console.error('Sign out failed:', error);
+    }
+  };
 
   useEffect(() => {
     syncUserProfile();
@@ -73,7 +84,7 @@ export const Dashboard: React.FC = () => {
             </div>
           </div>
           <button 
-            onClick={signOut}
+            onClick={handleSignOut}
             className="flex items-center space-x-2 text-[11px] font-bold uppercase tracking-widest text-brand-black/60 hover:text-brand-black transition-colors px-6 py-3 border border-brand-border rounded-full hover:bg-white"
           >
             <LogOut size={16} />

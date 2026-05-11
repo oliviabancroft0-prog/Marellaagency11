@@ -8,6 +8,9 @@
  *   full_name TEXT,
  *   avatar_url TEXT,
  *   role TEXT DEFAULT 'talent',
+ *   onboarding_completed BOOLEAN DEFAULT FALSE,
+ *   creator_profile JSONB,
+ *   fan_profile JSONB,
  *   created_at TIMESTAMPTZ DEFAULT NOW(),
  *   updated_at TIMESTAMPTZ DEFAULT NOW()
  * );
@@ -36,17 +39,54 @@ export const syncUserProfile = async () => {
     const { data: { user } } = await insforge.auth.getCurrentUser();
     if (!user) return;
 
-    // Attempt to upsert profile
-    const { error } = await insforge.database
+    // Check if profile exists first
+    const { data: existingProfile } = await insforge.database
       .from('users')
-      .upsert({
-        id: user.id,
-        full_name: (user as any).name || user.email,
-        updated_at: new Date().toISOString()
-      });
+      .select('id, role')
+      .eq('id', user.id)
+      .single();
 
-    if (error) {
-      console.error('Error syncing user profile:', error.message);
+    if (!existingProfile) {
+      // First time sync - we use a prefix in full_name to track onboarding status 
+      // without requiring a new database column that might be missing
+      let { error } = await insforge.database
+        .from('users')
+        .insert({
+          id: user.id,
+          full_name: `ROLE_PENDING:ONBOARDING_PENDING:${(user as any).name || user.email}`,
+          role: null,
+          created_at: new Date().toISOString(),
+          updated_at: new Date().toISOString()
+        });
+
+      // Handle race condition: if another process created the profile in the meantime, 
+      // we'll get a duplicate key error which we can safely ignore
+      if (error && (error.message.includes('duplicate key') || (error as any).code === '23505')) {
+        console.log('Profile already exists (concurrent creation), ignoring duplicate key error.');
+        error = null;
+      }
+
+      if (error && (error.message.includes('column') || error.message.includes('role'))) {
+        console.warn('Column "role" or others missing, attempting minimal profile creation');
+        // Try minimal insert
+        const { error: minimalError } = await insforge.database
+          .from('users')
+          .insert({
+            id: user.id,
+            full_name: `ROLE_PENDING:ONBOARDING_PENDING:${(user as any).name || user.email}`
+          });
+        error = minimalError;
+      }
+
+      if (error) {
+        console.error('Error creating initial user profile:', error.message);
+      }
+    } else {
+      // Update last login / sync
+      await insforge.database
+        .from('users')
+        .update({ updated_at: new Date().toISOString() })
+        .eq('id', user.id);
     }
   } catch (err) {
     console.error('Network error syncing profile:', err);
