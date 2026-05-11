@@ -1300,9 +1300,11 @@ const CartDrawer = ({ isOpen, onClose, cart, setCart }: { isOpen: boolean, onClo
                 onClick={() => { navigate('/checkout'); onClose(); }}
                 className="w-full bg-brand-black text-white py-5 rounded-full text-[11px] uppercase tracking-[0.3em] font-bold hover:bg-brand-black/90 transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
               >
-                Pay
+                Go to Checkout
               </button>
-              <p className="text-[9px] text-center text-brand-black/40 uppercase tracking-widest">Calculated in GBP. Secure SSL Encryption.</p>
+              <p className="text-[9px] text-center text-brand-black/40 uppercase tracking-widest leading-relaxed">
+                Prices displayed in GBP. Secure SSL Encryption.
+              </p>
             </div>
           </motion.div>
         </>
