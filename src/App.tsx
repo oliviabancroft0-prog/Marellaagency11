@@ -813,7 +813,8 @@ const Philosophy = () => {
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 items-start">
         <div className="space-y-12">
           <h2 className="text-3xl md:text-4xl leading-tight font-serif tracking-tight">
-            We turn ambitious girls in the United Kingdom into high earning OnlyFans sensations and connect gentlemen with the perfect model for their fantasies.
+            <span className="block font-black not-italic mb-1 tracking-tighter">Bramingham Barely</span>
+            UK OnlyFans Management That Delivers
           </h2>
           <div className="relative aspect-[4/5] w-full max-w-sm overflow-hidden rounded-sm bg-black/5 shadow-2xl group">
             <video 
@@ -836,14 +837,11 @@ const Philosophy = () => {
         </div>
         <div className="md:pt-32 space-y-12 flex flex-col">
           <div className="max-w-md order-1">
-            <p className="text-lg leading-relaxed font-light text-brand-black/80 mb-6 font-serif italic border-l-2 border-brand-black pl-6">
-              “Proper girls who know what they want… and blokes who know exactly what they like. We make both sides very happy indeed.”
+            <p className="text-lg leading-relaxed font-light text-brand-black/80 mb-6 font-sans">
+              £millions+ processed for creators. Thousands of verified client bookings completed through our secure platform.
             </p>
-            <p className="text-lg leading-relaxed font-light text-brand-black/80 mb-6">
-              We take care of the strategy and growth so you can focus on cashing in. Many of our girls now earning five and six figures a month.
-            </p>
-            <p className="text-lg leading-relaxed font-light text-brand-black/80 mb-6 font-medium italic">
-              Gentlemen: Private bookings and unforgettable experiences with our exclusive models. Discretion assured, kinks catered for.
+            <p className="text-lg leading-relaxed font-bold text-brand-black mb-6 font-sans">
+              Full compliance, discretion, and dedicated account managers. Operational 24/7.
             </p>
           </div>
           
