@@ -24,6 +24,8 @@ import {
   Menu,
   Trash2,
   CheckCircle,
+  Volume2,
+  VolumeX,
   Search as SearchIcon
 } from 'lucide-react';
 import { Login } from './pages/Login';
@@ -789,7 +791,7 @@ const Hero = ({ onShopNow }: { onShopNow: () => void }) => {
       <div className="absolute inset-0 z-0 pt-12 md:pt-20">
         <img 
           src="https://raw.githubusercontent.com/oliviabancroft0-prog/marellaagency/main/Sophcoverphoto-CGr776cV.png" 
-          alt="Sophia - Bramingham Barely"
+          alt="Olivia - Bramingham Barely"
           className="w-full h-full object-contain object-bottom md:object-right"
           fetchPriority="high"
           loading="eager"
@@ -803,6 +805,9 @@ const Hero = ({ onShopNow }: { onShopNow: () => void }) => {
 };
 
 const Philosophy = () => {
+  const [isIntroMuted, setIsIntroMuted] = useState(true);
+  const [isReviewMuted, setIsReviewMuted] = useState(true);
+
   return (
     <section className="py-24 px-6 md:px-12 bg-brand-offwhite">
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 items-start">
@@ -810,16 +815,23 @@ const Philosophy = () => {
           <h2 className="text-3xl md:text-4xl leading-tight font-serif tracking-tight">
             We turn ambitious girls in the United Kingdom into high earning OnlyFans sensations and connect gentlemen with the perfect model for their fantasies.
           </h2>
-          <div className="relative aspect-[4/5] w-full max-w-sm overflow-hidden rounded-sm bg-black/5 shadow-2xl">
+          <div className="relative aspect-[4/5] w-full max-w-sm overflow-hidden rounded-sm bg-black/5 shadow-2xl group">
             <video 
               autoPlay 
               loop 
-              muted
+              muted={isIntroMuted}
               playsInline 
-              className="w-full h-full object-cover grayscale brightness-90"
+              className="w-full h-full object-cover brightness-90"
             >
-              <source src="https://raw.githubusercontent.com/oliviabancroft0-prog/marellaagency/main/Sophia_Intro_website_1.mp4#t=5" type="video/mp4" />
+              <source src="https://raw.githubusercontent.com/oliviabancroft0-prog/videosbram/main/Untitled%20design%20(3).mp4" type="video/mp4" />
             </video>
+            <button 
+              onClick={() => setIsIntroMuted(!isIntroMuted)}
+              className="absolute bottom-4 right-4 p-2.5 bg-black/50 backdrop-blur-md text-white rounded-full hover:bg-black/70 transition-all z-20 border border-white/10"
+              aria-label={isIntroMuted ? "Unmute" : "Mute"}
+            >
+              {isIntroMuted ? <VolumeX size={18} /> : <Volume2 size={18} />}
+            </button>
           </div>
         </div>
         <div className="md:pt-32 space-y-12 flex flex-col">
@@ -836,19 +848,26 @@ const Philosophy = () => {
           </div>
           
           <div className="space-y-4 order-2 flex flex-col items-center md:items-start">
-            <div className="aspect-[9/16] w-full max-w-[320px] bg-black/5 rounded-lg overflow-hidden shadow-2xl mx-auto md:mx-0">
+            <div className="relative aspect-[9/16] w-full max-w-[320px] bg-black/5 rounded-lg overflow-hidden shadow-2xl mx-auto md:mx-0 group">
               <video 
                 autoPlay 
                 loop 
-                muted
+                muted={isReviewMuted}
                 playsInline 
                 className="w-full h-full object-cover"
               >
-                <source src="https://raw.githubusercontent.com/oliviabancroft0-prog/marellaagency/main/gia_review%20(1).mp4" type="video/mp4" />
+                <source src="https://raw.githubusercontent.com/oliviabancroft0-prog/videosbram/main/Untitled%20design%20(1).mp4" type="video/mp4" />
               </video>
+              <button 
+                onClick={() => setIsReviewMuted(!isReviewMuted)}
+                className="absolute bottom-4 right-4 p-2 bg-black/50 backdrop-blur-md text-white rounded-full hover:bg-black/70 transition-all z-20 border border-white/10"
+                aria-label={isReviewMuted ? "Unmute" : "Mute"}
+              >
+                {isReviewMuted ? <VolumeX size={14} /> : <Volume2 size={14} />}
+              </button>
             </div>
             <p className="text-[10px] tracking-[0.4em] uppercase font-bold text-brand-black/40 text-center w-full max-w-[320px] md:text-left">
-              Creator Testimonial: Performance & Privacy
+              Creator Testimonial: Gia
             </p>
             <div className="pt-8 w-full max-w-[320px]">
               <Link 

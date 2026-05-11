@@ -5,12 +5,12 @@ const BASE_URL = 'https://cdn.jsdelivr.net/gh/oliviabancroft0-prog/5-5-2026@main
 export const MODELS: Product[] = [
   { 
     id: 'sophia', 
-    name: 'Sophia', 
+    name: 'Olivia', 
     subtitle: 'High-Fashion Editorial', 
     location: 'Central London', 
     instagram: '@sophia_elite', 
     onlyfans: 'onlyfans.com/sophia_elite',
-    bio: 'The archetype of London sophistication. Sophia bridges the gap between high-fashion editorial aesthetics and high-yield digital engagement. Her presence is a masterclass in UK-specific cultural appeal.',
+    bio: 'The archetype of London sophistication. Olivia bridges the gap between high-fashion editorial aesthetics and high-yield digital engagement. Her presence is a masterclass in UK-specific cultural appeal.',
     price: '£500/Session', 
     image: `${BASE_URL}SaveClip.App_669057226_18588713620057834_5412382173996123645_n.jpg`,
     gallery: [
@@ -106,12 +106,12 @@ export const MODELS: Product[] = [
   },
   { 
     id: 'olivia', 
-    name: 'Olivia', 
+    name: 'Sophia', 
     subtitle: 'Yorkshire Signature', 
     location: 'Leeds', 
     instagram: '@liv_leeds', 
     onlyfans: 'onlyfans.com/oliviamodels',
-    bio: 'A signature blend of natural beauty and sharp northern intellect. Olivia specialises in high-retention fan engagement, proving that personality is the most valuable asset in the digital creator economy.',
+    bio: 'A signature blend of natural beauty and sharp northern intellect. Sophia specialises in high-retention fan engagement, proving that personality is the most valuable asset in the digital creator economy.',
     price: '£350/Session', 
     image: `${BASE_URL}SaveClip.App_624153366_18081768785230511_5352130957854695705_n.jpg`,
     gallery: [
