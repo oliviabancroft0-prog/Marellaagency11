@@ -29,7 +29,8 @@ export const CreatorOnboarding: React.FC = () => {
   const [formData, setFormData] = useState({
     stageName: '',
     bio: '',
-    photos: [] as string[],
+    photos: [] as { file: File, preview: string }[],
+    idFile: null as { file: File, preview: string } | null,
     idVerified: false,
     ageVerified: false,
     payoutProvider: 'bank' as 'bank' | 'paypal',
@@ -61,6 +62,9 @@ export const CreatorOnboarding: React.FC = () => {
     setLoading(true);
 
     try {
+      // Note: Real file upload would go here to a storage bucket
+      // For now, we store metadata and clean full_name
+
       // 1. Try to update DB with full details.
       const { error: fullUpdateError } = await insforge.database
         .from('users')
@@ -70,6 +74,10 @@ export const CreatorOnboarding: React.FC = () => {
             stage_name: formData.stageName,
             bio: formData.bio,
             payout_provider: formData.payoutProvider,
+            payout_details: formData.payoutDetails,
+            // Store number of photos uploaded and verification status
+            photos_count: formData.photos.length,
+            id_verification_pending: !!formData.idFile,
           },
           onboarding_completed: true,
           updated_at: new Date().toISOString()
@@ -117,12 +125,40 @@ export const CreatorOnboarding: React.FC = () => {
   const isStepValid = () => {
     switch (STEPS[currentStep].id) {
       case 'identity': return formData.stageName.length > 2 && formData.bio.length > 10;
-      case 'visuals': return true; // Simulated for now
-      case 'security': return formData.idVerified && formData.ageVerified;
+      case 'visuals': return formData.photos.length >= 4;
+      case 'security': return formData.idFile !== null && formData.ageVerified;
       case 'financials': return formData.payoutDetails.length > 5;
       case 'agreement': return formData.termsAccepted;
       default: return false;
     }
+  };
+
+  const handlePhotoUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = e.target.files;
+    if (!files) return;
+
+    const newPhotos = Array.from(files).map((file: File) => ({
+      file,
+      preview: URL.createObjectURL(file)
+    }));
+
+    setFormData(prev => ({
+      ...prev,
+      photos: [...prev.photos, ...newPhotos].slice(0, 8) // Limit to 8
+    }));
+  };
+
+  const handleIdUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    setFormData(prev => ({
+      ...prev,
+      idFile: {
+        file,
+        preview: URL.createObjectURL(file as Blob)
+      }
+    }));
   };
 
   return (
@@ -202,12 +238,31 @@ export const CreatorOnboarding: React.FC = () => {
               </div>
 
               <div className="grid grid-cols-2 gap-4">
-                {[1, 2, 3, 4].map(i => (
-                  <div key={i} className="aspect-[3/4] bg-brand-offwhite border-2 border-dashed border-brand-border flex flex-col items-center justify-center group cursor-pointer hover:border-brand-black transition-colors rounded-sm">
-                    <Camera size={24} className="text-brand-black/20 group-hover:text-brand-black transition-colors mb-2" />
-                    <span className="text-[9px] uppercase tracking-widest font-bold text-brand-black/30">Upload Slot {i}</span>
+                {formData.photos.map((photo, i) => (
+                  <div key={i} className="relative aspect-[3/4] bg-brand-offwhite border border-brand-border overflow-hidden rounded-sm group">
+                    <img src={photo.preview} alt={`Upload ${i}`} className="w-full h-full object-cover" />
+                    <button 
+                      onClick={() => setFormData(p => ({...p, photos: p.photos.filter((_, idx) => idx !== i)}))}
+                      className="absolute top-2 right-2 p-1.5 bg-brand-black/80 text-white rounded-full opacity-0 group-hover:opacity-100 transition-opacity"
+                    >
+                      <Check size={12} className="rotate-45" /> {/* Use as close mark */}
+                    </button>
                   </div>
                 ))}
+                
+                {formData.photos.length < 8 && (
+                  <label className="aspect-[3/4] bg-brand-offwhite border-2 border-dashed border-brand-border flex flex-col items-center justify-center group cursor-pointer hover:border-brand-black transition-colors rounded-sm">
+                    <Camera size={24} className="text-brand-black/20 group-hover:text-brand-black transition-colors mb-2" />
+                    <span className="text-[9px] uppercase tracking-widest font-bold text-brand-black/30">Upload Asset</span>
+                    <input 
+                      type="file" 
+                      multiple 
+                      accept="image/*" 
+                      className="hidden" 
+                      onChange={handlePhotoUpload}
+                    />
+                  </label>
+                )}
               </div>
               <p className="text-[10px] text-center italic text-brand-black/40">Minimum 4 professional/clear shots required for baseline assessment.</p>
             </div>
@@ -226,16 +281,31 @@ export const CreatorOnboarding: React.FC = () => {
               </div>
 
               <div className="space-y-4">
-                <div 
-                  onClick={() => setFormData(p => ({...p, idVerified: !p.idVerified}))}
-                  className={`p-6 border rounded-sm cursor-pointer transition-all flex items-center justify-between ${formData.idVerified ? 'border-brand-black bg-brand-offwhite' : 'border-brand-border bg-white hover:border-brand-black/40'}`}
+                <label 
+                  className={`p-6 border rounded-sm cursor-pointer transition-all flex items-center justify-between group ${formData.idFile ? 'border-brand-black bg-brand-offwhite' : 'border-brand-border bg-white hover:border-brand-black/40'}`}
                 >
                   <div className="flex items-center space-x-4">
-                    <Check size={18} className={formData.idVerified ? 'text-brand-black' : 'text-brand-black/10'} />
-                    <span className="text-sm font-medium">Government Issued ID (Passport/Driving Licence)</span>
+                    <Check size={18} className={formData.idFile ? 'text-brand-black' : 'text-brand-black/10'} />
+                    <div className="flex flex-col">
+                      <span className="text-sm font-medium">Government Issued ID</span>
+                      <span className="text-[9px] uppercase tracking-widest text-brand-black/40">{formData.idFile ? formData.idFile.file.name : 'Upload Passport/Driving Licence'}</span>
+                    </div>
                   </div>
-                  {formData.idVerified && <ShieldCheck size={18} className="text-green-600" />}
-                </div>
+                  {formData.idFile ? (
+                    <div className="flex items-center space-x-2">
+                       {formData.idFile.preview && <img src={formData.idFile.preview} className="w-8 h-8 object-cover rounded-sm border border-brand-border" />}
+                       <ShieldCheck size={18} className="text-green-600" />
+                    </div>
+                  ) : (
+                    <ArrowRight size={16} className="text-brand-black/20 group-hover:text-brand-black group-hover:translate-x-1 transition-all" />
+                  )}
+                  <input 
+                    type="file" 
+                    accept="image/*,.pdf" 
+                    className="hidden" 
+                    onChange={handleIdUpload}
+                  />
+                </label>
 
                 <div 
                   onClick={() => setFormData(p => ({...p, ageVerified: !p.ageVerified}))}
