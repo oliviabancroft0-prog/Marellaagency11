@@ -720,9 +720,72 @@ const Navbar = ({ cartCount, onCartOpen, onSearchOpen }: { cartCount: number, on
   );
 };
 
+const FloatingElement = ({ children, delay = 0, x = 0, y = 0, rotate = 0, scale = 1, opacity = 0.2 }: { children: React.ReactNode, delay?: number, x?: string | number, y?: string | number, rotate?: number, scale?: number, opacity?: number }) => (
+  <motion.div
+    initial={{ opacity: 0, scale: 0, rotate: rotate - 10 }}
+    animate={{ 
+      opacity, 
+      scale, 
+      rotate,
+      y: [0, -15, 0],
+      x: [0, 10, 0]
+    }}
+    transition={{
+      opacity: { duration: 1, delay },
+      scale: { duration: 1, delay },
+      rotate: { duration: 1, delay },
+      y: { duration: 4, repeat: Infinity, ease: "easeInOut", delay },
+      x: { duration: 5, repeat: Infinity, ease: "easeInOut", delay }
+    }}
+    style={{ position: 'absolute', left: x, top: y, zIndex: 10 }}
+    className="drop-shadow-2xl filter"
+  >
+    {children}
+  </motion.div>
+);
+
 const Hero = ({ onShopNow }: { onShopNow: () => void }) => {
   return (
     <section className="relative h-screen w-full flex items-center px-6 md:px-24 overflow-hidden pt-12 md:pt-16 bg-brand-offwhite">
+      {/* Decorative Elements */}
+      <div className="absolute inset-0 pointer-events-none z-10">
+        {/* UK Heart Flag Top Left */}
+        <FloatingElement x="10%" y="15%" scale={1.2} opacity={0.9} rotate={-10}>
+          <div className="relative w-12 h-12 flex items-center justify-center">
+            <svg viewBox="0 0 100 100" className="w-full h-full drop-shadow-xl">
+              <defs>
+                <linearGradient id="gloss" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stopColor="white" stopOpacity="0.4" />
+                  <stop offset="50%" stopColor="white" stopOpacity="0" />
+                  <stop offset="100%" stopColor="white" stopOpacity="0.1" />
+                </linearGradient>
+                <clipPath id="heartPath">
+                  <path d="M50,30 C35,10 10,25 10,45 C10,70 50,90 50,90 C50,90 90,70 90,45 C90,25 65,10 50,30 Z" />
+                </clipPath>
+              </defs>
+              <g clipPath="url(#heartPath)">
+                {/* UK Flag Pattern */}
+                <rect width="100" height="100" fill="#00247d" />
+                <path d="M0,0 L100,100 M100,0 L0,100" stroke="white" strokeWidth="12" />
+                <path d="M0,0 L100,100 M100,0 L0,100" stroke="#cf142b" strokeWidth="6" />
+                <path d="M50,0 V100 M0,50 H100" stroke="white" strokeWidth="20" />
+                <path d="M50,0 V100 M0,50 H100" stroke="#cf142b" strokeWidth="12" />
+              </g>
+              {/* Gloss Overlay */}
+              <path d="M50,30 C35,10 10,25 10,45 C10,70 50,90 50,90 C50,90 90,70 90,45 C90,25 65,10 50,30 Z" fill="url(#gloss)" />
+            </svg>
+          </div>
+        </FloatingElement>
+
+        {/* Small Cluster */}
+        <FloatingElement x="8%" y="30%" opacity={0.15} delay={1.2} rotate={15}>
+          <span className="text-2xl">🍒</span>
+        </FloatingElement>
+        <FloatingElement x="12%" y="40%" opacity={0.15} delay={2} rotate={20}>
+          <span className="text-2xl">❤️</span>
+        </FloatingElement>
+      </div>
+
       <div className="absolute inset-0 z-0 pt-12 md:pt-20">
         <img 
           src="https://raw.githubusercontent.com/oliviabancroft0-prog/marellaagency/main/Sophcoverphoto-CGr776cV.png" 
