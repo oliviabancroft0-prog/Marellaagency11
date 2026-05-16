@@ -65,7 +65,44 @@ export const CreatorOnboarding: React.FC = () => {
       // Note: Real file upload would go here to a storage bucket
       // For now, we store metadata and clean full_name
 
-      // 1. Try to update DB with full details.
+      // 1. Upload files to storage (if storage is available in the SDK)
+      const photoUrls: string[] = [];
+      let idUrl: string | null = null;
+
+      try {
+        // We attempt to upload each photo. If storage fails, we continue with metadata.
+        for (const photo of formData.photos) {
+          const fileName = `${user.id}/${Date.now()}-${photo.file.name}`;
+          const { data, error } = await (insforge as any).storage
+            .from('onboarding')
+            .upload(fileName, photo.file);
+          
+          if (!error && data) {
+            const { data: { publicUrl } } = (insforge as any).storage
+              .from('onboarding')
+              .getPublicUrl(fileName);
+            photoUrls.push(publicUrl);
+          }
+        }
+
+        if (formData.idFile) {
+          const fileName = `${user.id}/id-${Date.now()}-${formData.idFile.file.name}`;
+          const { data, error } = await (insforge as any).storage
+            .from('verifications')
+            .upload(fileName, formData.idFile.file);
+          
+          if (!error && data) {
+            const { data: { publicUrl } } = (insforge as any).storage
+              .from('verifications')
+              .getPublicUrl(fileName);
+            idUrl = publicUrl;
+          }
+        }
+      } catch (uploadErr) {
+        console.warn('Storage buckets might not be configured. Proceeding with database metadata only.', uploadErr);
+      }
+
+      // 2. Try to update DB with full details.
       const { error: fullUpdateError } = await insforge.database
         .from('users')
         .update({
@@ -75,7 +112,10 @@ export const CreatorOnboarding: React.FC = () => {
             bio: formData.bio,
             payout_provider: formData.payoutProvider,
             payout_details: formData.payoutDetails,
-            // Store number of photos uploaded and verification status
+            // Store the actual file URLs
+            photos: photoUrls,
+            id_url: idUrl,
+            // Fallback counts for older schema support
             photos_count: formData.photos.length,
             id_verification_pending: !!formData.idFile,
           },

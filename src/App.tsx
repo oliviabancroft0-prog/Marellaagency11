@@ -34,6 +34,7 @@ import { RoleSelection } from './pages/RoleSelection';
 import { CreatorOnboarding } from './pages/onboarding/CreatorOnboarding';
 import { FanOnboarding } from './pages/onboarding/FanOnboarding';
 import { FanDashboard } from './pages/FanDashboard';
+import { AgencyRoster } from './pages/AgencyRoster';
 import { ProtectedRoute } from './components/ProtectedRoute';
 import { useAuth } from './context/AuthContext';
 import { Product, CartItem, KitProduct } from './types';
@@ -78,6 +79,10 @@ const CompleteDashboard = () => {
 
   if (profile.role === 'fan') {
     return <FanDashboard />;
+  }
+
+  if (profile.role === 'admin' || profile.isAdmin) {
+    return <AgencyRoster />;
   }
 
   return <Dashboard />;
@@ -808,42 +813,6 @@ const Hero = ({ onShopNow }: { onShopNow: () => void }) => {
       {/* Decorative Elements */}
       <div className="absolute inset-0 pointer-events-none z-10">
         {/* New Icons */}
-        <FloatingElement x="10%" y="15%" scale={1.2} opacity={1} rotate={-10}>
-          <img 
-            src="https://raw.githubusercontent.com/oliviabancroft0-prog/iconzz/main/bus.png" 
-            alt="Bus Icon" 
-            className="w-12 h-12 object-contain"
-            referrerPolicy="no-referrer"
-          />
-        </FloatingElement>
-
-        <FloatingElement x="8%" y="30%" opacity={1} delay={1.2} rotate={15}>
-          <img 
-            src="https://raw.githubusercontent.com/oliviabancroft0-prog/iconzz/main/courage.png" 
-            alt="Courage Icon" 
-            className="w-10 h-10 object-contain"
-            referrerPolicy="no-referrer"
-          />
-        </FloatingElement>
-
-        <FloatingElement x="12%" y="45%" opacity={1} delay={2} rotate={20}>
-          <img 
-            src="https://raw.githubusercontent.com/oliviabancroft0-prog/iconzz/main/telephone.png" 
-            alt="Telephone Icon" 
-            className="w-12 h-12 object-contain"
-            referrerPolicy="no-referrer"
-          />
-        </FloatingElement>
-
-        <FloatingElement x="5%" y="55%" opacity={1} delay={0.5} rotate={-5}>
-          <img 
-            src="https://raw.githubusercontent.com/oliviabancroft0-prog/iconzz/main/underground.png" 
-            alt="Underground Icon" 
-            className="w-12 h-12 object-contain"
-            referrerPolicy="no-referrer"
-          />
-        </FloatingElement>
-
         <FloatingElement x="15%" y="25%" opacity={1} delay={1.5} rotate={5}>
           <img 
             src="https://raw.githubusercontent.com/oliviabancroft0-prog/iconzz/main/flag%20(1).png" 
@@ -1022,13 +991,6 @@ const MoodKitsSection = () => {
             />
           </div>
           <div className="absolute inset-0 z-10 flex flex-col items-center justify-center text-white bg-black/10">
-            <motion.h3 
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              className="text-4xl md:text-6xl font-serif italic mb-6 text-center"
-            >
-              The 0.1% Aesthetic
-            </motion.h3>
             <motion.p
               initial={{ opacity: 0, y: 10 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -1048,41 +1010,82 @@ const Footer = () => {
   return (
     <footer className="bg-brand-offwhite">
       <div className="py-20 px-6 bg-brand-offwhite flex flex-col items-center border-t border-brand-border">
-        <motion.p 
+        <motion.div
           initial={{ opacity: 0, y: 10 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-[10px] tracking-[0.4em] uppercase font-bold text-brand-black/80 mb-12"
+          className="text-center space-y-12 w-full max-w-6xl"
         >
-          Secure Payment Methods
-        </motion.p>
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.2 }}
-          className="flex flex-wrap justify-center items-center gap-6 md:gap-12 max-w-6xl"
-        >
-          <img src="https://raw.githubusercontent.com/oliviabancroft0-prog/marellaagency/main/41fe5e9d3f2cd4474a88020f15561b6eda43ebef-3840x2160.png" alt="Visa" className="h-6 md:h-8 w-auto opacity-80 hover:opacity-100 transition-opacity" />
-          <img src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg" alt="Mastercard" className="h-6 md:h-10 w-auto opacity-80 hover:opacity-100 transition-opacity" />
-          <img src="https://upload.wikimedia.org/wikipedia/commons/f/fa/American_Express_logo_%282018%29.svg" alt="AMEX" className="h-5 md:h-8 w-auto opacity-80 hover:opacity-100 transition-opacity" />
-          <img src="https://upload.wikimedia.org/wikipedia/commons/b/b0/Apple_Pay_logo.svg" alt="Apple Pay" className="h-6 md:h-9 w-auto opacity-80 hover:opacity-100 transition-opacity" />
-          <div className="bg-[#003087] px-3 py-1 rounded-md opacity-80 hover:opacity-100 transition-opacity">
-            <span className="text-white font-bold italic text-sm md:text-lg">Pay+</span>
+          <div>
+            <p className="text-[10px] tracking-[0.4em] uppercase font-bold text-brand-black/80 mb-8">
+              Funded by Global VC Capital Firms
+            </p>
+            <div className="flex flex-wrap justify-center items-center gap-8 md:gap-16 opacity-60">
+               {/* Global VC Logos */}
+               <img 
+                 src="input_file_0.png" 
+                 alt="Index Ventures" 
+                 className="h-5 md:h-7 w-auto grayscale hover:grayscale-0 transition-all cursor-pointer" 
+               />
+               <img 
+                 src="input_file_1.png" 
+                 alt="Balderton Capital" 
+                 className="h-5 md:h-7 w-auto grayscale hover:grayscale-0 transition-all cursor-pointer" 
+               />
+               <img 
+                 src="input_file_2.png" 
+                 alt="Accel" 
+                 className="h-5 md:h-7 w-auto grayscale hover:grayscale-0 transition-all cursor-pointer" 
+               />
+               <img 
+                 src="input_file_3.png" 
+                 alt="Orange Ventures" 
+                 className="h-5 md:h-7 w-auto grayscale hover:grayscale-0 transition-all cursor-pointer" 
+               />
+            </div>
           </div>
-          <img src="https://upload.wikimedia.org/wikipedia/commons/b/b5/PayPal.svg" alt="PayPal" className="h-5 md:h-8 w-auto opacity-80 hover:opacity-100 transition-opacity" />
-          
-          {/* Crypto Payment methods */}
-          <div className="flex items-center space-x-2 opacity-80 hover:opacity-100 transition-opacity bg-white px-3 py-1.5 rounded-lg border border-brand-border shadow-sm">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/4/46/Bitcoin.svg" alt="Bitcoin" className="h-5 md:h-7 w-auto" />
-            <span className="text-[10px] font-bold text-gray-700">BTC</span>
-          </div>
-          <div className="flex items-center space-x-2 opacity-80 hover:opacity-100 transition-opacity bg-white px-3 py-1.5 rounded-lg border border-brand-border shadow-sm">
-            <img src="https://raw.githubusercontent.com/oliviabancroft0-prog/5-5-2026/main/USDT_Logo.png" alt="USDT" className="h-5 md:h-7 w-auto" />
-            <span className="text-[10px] font-bold text-gray-700">USDT</span>
-          </div>
-          <div className="bg-white border border-brand-border px-4 py-2 rounded-lg flex items-center space-x-2 opacity-80 hover:opacity-100 transition-opacity shadow-sm">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/f/f2/Google_Pay_Logo.svg" alt="Google Pay" className="h-5 md:h-7 w-auto" />
+
+          <div className="pt-12 border-t border-brand-border/30">
+            <p className="text-[10px] tracking-[0.4em] uppercase font-bold text-brand-black/80 mb-8">
+              Strategic Partners
+            </p>
+            <div className="flex flex-wrap justify-center items-center gap-10 md:gap-20">
+              <div className="flex flex-col items-center space-y-2">
+                <img 
+                  src="https://upload.wikimedia.org/wikipedia/commons/0/05/Shopify_logo_2018.svg" 
+                  alt="Shopify" 
+                  className="h-6 md:h-8 w-auto grayscale opacity-70 hover:grayscale-0 hover:opacity-100 transition-all" 
+                />
+                <span className="text-[9px] uppercase tracking-widest text-brand-black/40">Infrastructure Partner</span>
+              </div>
+
+              <div className="flex flex-col items-center space-y-2">
+                <img 
+                  src="https://upload.wikimedia.org/wikipedia/commons/b/b9/HSBC_Logo.svg" 
+                  alt="HSBC Innovation" 
+                  className="h-4 md:h-6 w-auto grayscale opacity-70 hover:grayscale-0 hover:opacity-100 transition-all" 
+                />
+                <span className="text-[9px] uppercase tracking-widest text-brand-black/40">UK Tech Banking Partner</span>
+              </div>
+
+              <div className="flex flex-col items-center space-y-2">
+                <img 
+                  src="https://upload.wikimedia.org/wikipedia/commons/0/09/J.P._Morgan_logo.svg" 
+                  alt="J.P. Morgan Innovation" 
+                  className="h-4 md:h-5 w-auto grayscale opacity-70 hover:grayscale-0 hover:opacity-100 transition-all" 
+                />
+                <span className="text-[9px] uppercase tracking-widest text-brand-black/40">US Banking Partner</span>
+              </div>
+              
+              <div className="flex flex-col items-center space-y-2">
+                <img 
+                  src="https://upload.wikimedia.org/wikipedia/en/e/ef/Equity_Bank_Group_Logo.svg" 
+                  alt="Equity Bank Kenya" 
+                  className="h-8 md:h-10 w-auto grayscale opacity-70 hover:grayscale-0 hover:opacity-100 transition-all" 
+                />
+                <span className="text-[9px] uppercase tracking-widest text-brand-black/40">Kenyan Banking Partner</span>
+              </div>
+            </div>
           </div>
         </motion.div>
       </div>
@@ -1121,8 +1124,17 @@ const Footer = () => {
           />
         </div>
 
-        <div className="text-[10px] tracking-widest uppercase text-brand-black/50 text-right space-y-2">
-          <p>&copy; 2026, Bramingham Barely.</p>
+        <div className="text-[10px] tracking-widest uppercase text-brand-black/50 text-center lg:text-right space-y-4">
+          <div className="space-y-1">
+            <p className="text-brand-black/70 font-bold">HQ Office</p>
+            <p>Notting Hill, London, W11, United Kingdom</p>
+          </div>
+          <div className="space-y-1">
+            <p className="text-brand-black/70 font-bold">Registration</p>
+            <p>Bramingham Barely LLC • Sheridan, Wyoming, USA</p>
+          </div>
+          <p className="pt-4 opacity-40 italic">Global Authority in Digital Asset Management.</p>
+          <p className="pt-2">&copy; 2026, Bramingham Barely.</p>
         </div>
       </div>
     </footer>
@@ -1509,6 +1521,11 @@ export default function App() {
         <Route path="/onboarding/fan" element={
           <ProtectedRoute>
             {wrapInLayout(<FanOnboarding />)}
+          </ProtectedRoute>
+        } />
+        <Route path="/agency/roster" element={
+          <ProtectedRoute>
+            {wrapInLayout(<AgencyRoster />)}
           </ProtectedRoute>
         } />
         <Route path="/hubs/:categoryId" element={wrapInLayout(<CategoryPage />)} />

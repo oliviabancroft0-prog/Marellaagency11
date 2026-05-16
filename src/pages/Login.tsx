@@ -145,8 +145,8 @@ export const Login: React.FC = () => {
     <div className="min-h-screen pt-12 md:pt-16 pb-12 px-6 flex flex-col items-center bg-brand-offwhite">
       <div className="w-full max-w-md bg-white border border-brand-border p-12 rounded-sm shadow-sm">
         <div className="text-center mb-12">
-          <h1 className="text-4xl font-serif italic mb-4">Network Portal</h1>
-          <p className="text-sm font-light text-brand-black/50 uppercase tracking-widest">Digital authority architecture by Bramingham Barely</p>
+          <h1 className="text-4xl font-serif italic mb-4">Welcome Back.</h1>
+          <p className="text-sm font-light text-brand-black/50 uppercase tracking-widest">Log in to catch up with your favorite creators / jump back into your studio</p>
         </div>
 
         {error && (
@@ -204,7 +204,7 @@ export const Login: React.FC = () => {
                 disabled={loading}
                 className="w-full bg-brand-black text-white py-4 rounded-full text-[11px] uppercase tracking-[0.3em] font-bold hover:bg-brand-black/90 transition-colors disabled:opacity-50"
               >
-                {loading ? 'Processing...' : 'Sign In'}
+                {loading ? 'Processing...' : 'Log In'}
               </button>
             </form>
 
@@ -214,7 +214,7 @@ export const Login: React.FC = () => {
                   disabled={loading}
                   className="w-full border border-brand-border text-brand-black py-4 rounded-full text-[11px] uppercase tracking-[0.3em] font-bold hover:bg-brand-offwhite transition-colors disabled:opacity-50"
                 >
-                  Join the Roster (Sign Up)
+                  New Here? Create Account
                 </button>
             </div>
           </>
@@ -283,7 +283,7 @@ export const Login: React.FC = () => {
               d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"
             />
           </svg>
-          <span className="text-brand-black">Continue with Google</span>
+          <span className="text-brand-black">Log in with Google</span>
         </button>
 
           <p className="mt-12 text-center text-[10px] uppercase tracking-widest text-brand-black/40 leading-relaxed"></p>

@@ -71,11 +71,14 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
           else if (rolePending) role = null;
         }
 
+        const isAdmin = currentUser.email === 'oliviabancroft0@gmail.com';
+
         const enrichedProfile = profileData ? {
           ...profileData,
           displayName: cleanName,
-          role,
-          onboarding_completed: profileData.onboarding_completed ?? (!onboardingPending && role !== null)
+          role: isAdmin ? 'admin' : role,
+          isAdmin,
+          onboarding_completed: (profileData.onboarding_completed ?? (!onboardingPending && role !== null)) || isAdmin
         } : null;
         
         setProfile(enrichedProfile);

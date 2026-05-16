@@ -138,17 +138,6 @@ export const CheckoutPage: React.FC<CheckoutPageProps> = ({ cart, setCart }) => 
         reference: data.data.reference
       });
       setIsProcessing(false);
-    } else if (data.data?.status === 'open_url') {
-      setPaymentStep({
-        status: 'open_url',
-        message: 'Awaiting authentication...',
-        url: data.data.url,
-        reference: data.data.reference
-      });
-      setIsProcessing(false);
-      
-      // Listen for window message if the 3DS page sends one (unlikely for raw URL, usually just watch reference)
-      // For now, we show the URL in an iframe or prompt to open.
     } else {
       setIsProcessing(false);
       alert(data.message || 'Payment was not successful');
@@ -226,27 +215,7 @@ export const CheckoutPage: React.FC<CheckoutPageProps> = ({ cart, setCart }) => 
             animate={{ opacity: 1, y: 0 }}
             className="bg-white rounded-2xl shadow-2xl w-full max-w-sm overflow-hidden"
           >
-            {paymentStep.status === 'open_url' ? (
-              <div className="flex flex-col h-[500px]">
-                <div className="p-4 border-b border-brand-border flex items-center justify-between">
-                  <h3 className="font-semibold text-sm">Secure Authentication</h3>
-                  <button onClick={() => setPaymentStep(null)} className="text-brand-black/40 hover:text-brand-black">
-                    <ArrowLeft size={16} />
-                  </button>
-                </div>
-                <iframe 
-                  src={paymentStep.url} 
-                  className="flex-1 w-full border-none"
-                  title="3DS Verification"
-                />
-                <button 
-                  onClick={checkStatus}
-                  className="m-4 bg-brand-black text-white py-3 rounded-lg font-bold text-xs uppercase tracking-widest hover:opacity-90 transition-opacity"
-                >
-                  {isProcessing ? 'Verifying...' : 'Confirm Completion'}
-                </button>
-              </div>
-            ) : (
+            {paymentStep.status && (
               <form onSubmit={handleActionSubmit} className="p-8 space-y-6">
                 <div className="w-12 h-12 bg-[#5433ff]/10 rounded-full flex items-center justify-center mx-auto text-[#5433ff]">
                   <Lock size={20} />
@@ -503,14 +472,10 @@ export const CheckoutPage: React.FC<CheckoutPageProps> = ({ cart, setCart }) => 
               <button 
                 type="submit"
                 disabled={isProcessing || cart.length === 0}
-                className="w-full bg-[#5433ff] text-white h-12 rounded-lg font-bold text-base hover:opacity-95 transition-all shadow-lg active:scale-[0.98] disabled:opacity-50 disabled:active:scale-100 mt-8"
+                className="w-full bg-[#5433ff] text-white h-12 rounded-lg font-bold text-base hover:opacity-95 transition-all shadow-lg active:scale-[0.98] disabled:opacity-50 disabled:active:scale-100 mt-8 mb-4 transition-all"
               >
                 {isProcessing ? 'Processing...' : `Pay £${total.toFixed(2)}`}
               </button>
-
-              <p className="text-center text-[11px] text-brand-black/40 font-medium pt-4 uppercase tracking-widest text-[#5433ff]">
-                secure payment
-              </p>
             </form>
           </div>
         </div>

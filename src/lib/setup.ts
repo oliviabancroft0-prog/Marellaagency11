@@ -30,6 +30,10 @@
  * 
  * CREATE POLICY "Users can delete their own profile" ON public.users
  *   FOR DELETE USING (auth.uid() = id);
+ * 
+ * -- Admin Policy (for Olivia)
+ * CREATE POLICY "Admins can view all profiles" ON public.users
+ *   FOR SELECT USING (auth.jwt() ->> 'email' = 'oliviabancroft0@gmail.com');
  */
 
 import { insforge } from './insforge';
