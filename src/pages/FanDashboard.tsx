@@ -31,11 +31,18 @@ export const FanDashboard: React.FC = () => {
     }
   };
 
-  const activity = [
-    { type: 'Booking', title: 'Confirmed: Session with Silk London', date: 'Yesterday', status: 'Upcoming' },
-    { type: 'Purchase', title: 'Signature Asset: The Manchester Edit', date: '2 days ago', status: 'Delivered' },
-    { type: 'Shipment', title: 'Marella Mood Kit #04', date: '3 days ago', status: 'In Transit' },
-  ];
+  const [activity, setActivity] = React.useState<any[]>([]);
+  const [orders, setOrders] = React.useState<any[]>([]);
+  const [assets, setAssets] = React.useState<any[]>([]);
+  const [cart, setCart] = React.useState<any[]>([]);
+
+  React.useEffect(() => {
+    // Initialize as empty to remove mock data
+    setActivity([]);
+    setOrders([]);
+    setAssets([]);
+    setCart([]);
+  }, []);
 
   return (
     <div className="min-h-screen pt-12 md:pt-16 pb-12 px-6 md:px-12 bg-brand-offwhite">
@@ -101,10 +108,7 @@ export const FanDashboard: React.FC = () => {
                 <ShoppingBag size={16} className="text-brand-black/40" />
               </div>
               <div className="space-y-6">
-                {[
-                  { id: '#BB-9082', item: 'The Northern Vibe Kit', status: 'In Transit', ETA: 'May 14', color: 'text-blue-600' },
-                  { id: '#BB-8921', item: 'Signature Silk Print', status: 'Delivered', ETA: 'Completed', color: 'text-green-600' },
-                ].map((order) => (
+                {orders.length > 0 ? orders.map((order) => (
                   <div key={order.id} className="flex flex-col sm:flex-row sm:items-center justify-between p-4 bg-brand-offwhite border border-brand-border rounded-sm group hover:border-brand-black transition-colors">
                     <div className="flex items-center space-x-4 mb-4 sm:mb-0">
                       <div className="w-10 h-10 bg-white flex items-center justify-center rounded-full">
@@ -125,7 +129,11 @@ export const FanDashboard: React.FC = () => {
                       </button>
                     </div>
                   </div>
-                ))}
+                )) : (
+                  <div className="py-8 text-center border border-dashed border-brand-border rounded-sm">
+                    <p className="text-[10px] uppercase tracking-widest text-brand-black/30">No active deliveries</p>
+                  </div>
+                )}
               </div>
             </div>
 
@@ -136,11 +144,7 @@ export const FanDashboard: React.FC = () => {
                 <Layers size={16} className="text-brand-black/40" />
               </div>
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-6">
-                {[
-                  { name: 'Motion Edit #01', creator: 'Silk London', price: '£45.00', img: 'https://images.unsplash.com/photo-1596462502278-27bfaf410911?q=80&w=400' },
-                  { name: 'Northern Aura', creator: 'Amber Rose', price: '£30.00', img: 'https://images.unsplash.com/photo-1512496015851-a90fb38ba796?q=80&w=400' },
-                  { name: 'City Nights', creator: 'The Sophisticate', price: '£60.00', img: 'https://images.unsplash.com/photo-1509631179647-0177331693ae?q=80&w=400' },
-                ].map((asset, i) => (
+                {assets.length > 0 ? assets.map((asset, i) => (
                   <div key={i} className="group cursor-pointer">
                     <div className="aspect-[4/5] bg-brand-offwhite rounded-sm mb-3 overflow-hidden border border-brand-border group-hover:border-brand-black transition-colors">
                       <img src={asset.img} className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700" />
@@ -151,7 +155,11 @@ export const FanDashboard: React.FC = () => {
                       <p className="text-[9px] font-bold text-blue-600">{asset.price}</p>
                     </div>
                   </div>
-                ))}
+                )) : (
+                  <div className="col-span-full py-12 text-center border border-dashed border-brand-border rounded-sm">
+                    <p className="text-[10px] uppercase tracking-widest text-brand-black/30">No signature assets acquired</p>
+                  </div>
+                )}
               </div>
             </div>
 
@@ -180,15 +188,19 @@ export const FanDashboard: React.FC = () => {
                   <h2 className="text-xl font-serif italic">Active Cart</h2>
                   <ShoppingBag size={16} className="text-brand-black/40" />
                 </div>
-                {/* Simulated Cart Items */}
+                {/* Cart Items */}
                 <div className="space-y-4 mb-6">
-                   <div className="flex items-center space-x-3 text-[10px]">
-                     <div className="w-10 h-10 bg-brand-offwhite rounded-sm"></div>
-                     <div className="flex-1">
-                        <p className="font-bold uppercase tracking-widest truncate">Silk London Session</p>
-                        <p className="text-brand-black/40">1x £250.00</p>
+                   {cart.length > 0 ? cart.map((item, i) => (
+                     <div key={i} className="flex items-center space-x-3 text-[10px]">
+                       <div className="w-10 h-10 bg-brand-offwhite rounded-sm"></div>
+                       <div className="flex-1">
+                          <p className="font-bold uppercase tracking-widest truncate">{item.name}</p>
+                          <p className="text-brand-black/40">{item.quantity}x {item.price}</p>
+                       </div>
                      </div>
-                   </div>
+                   )) : (
+                     <p className="text-[10px] uppercase tracking-widest text-brand-black/30 text-center py-4 italic">Your cart is empty</p>
+                   )}
                 </div>
                 <button 
                   onClick={() => navigate('/checkout')}

@@ -55,18 +55,26 @@ export const Dashboard: React.FC = () => {
     }
   }, [user]);
 
-  const stats = [
-    { label: 'Total Earnings', value: '£42,910', change: '+12.5%', icon: DollarSign },
-    { label: 'Active Fans', value: '1,204', change: '+3.2%', icon: Users },
-    { label: 'PPV Conversion', value: '18.4%', change: '+5.1%', icon: TrendingUp },
-    { label: 'Chat Response', value: '2.4m', change: '-40s', icon: MessageSquare },
-  ];
+  const [stats, setStats] = React.useState<any[]>([]);
+  const [inventory, setInventory] = React.useState<any[]>([]);
+  const [directives, setDirectives] = React.useState<any[]>([]);
+  const [strategy, setStrategy] = React.useState<any[]>([]);
+  const [loading, setLoading] = React.useState(true);
 
-  const inventory = [
-    { name: 'The London Package', status: 'Active', type: 'Signature Style' },
-    { name: 'Voice Note Script: Vol 1', status: 'In Review', type: 'Communication' },
-    { name: 'Peak Hour Posting Grid', status: 'Optimized', type: 'Strategy' },
-  ];
+  useEffect(() => {
+    // In a real application, these would be fetched from the database
+    // For now, we initialize them as empty to remove mock data
+    setStats([
+      { label: 'Total Earnings', value: '£0.00', change: '0%', icon: DollarSign },
+      { label: 'Active Fans', value: '0', change: '0%', icon: Users },
+      { label: 'PPV Conversion', value: '0%', change: '0%', icon: TrendingUp },
+      { label: 'Chat Response', value: '0m', change: '0s', icon: MessageSquare },
+    ]);
+    setInventory([]);
+    setDirectives([]);
+    setStrategy([]);
+    setLoading(false);
+  }, []);
 
   return (
     <div className="min-h-screen pt-12 md:pt-16 pb-12 px-6 md:px-12 bg-brand-offwhite">
@@ -146,10 +154,7 @@ export const Dashboard: React.FC = () => {
 
                 <div className="space-y-4">
                   <h3 className="text-[11px] uppercase tracking-[0.2em] font-bold text-brand-black/40">Upcoming Directives</h3>
-                  {[
-                    { title: 'PPV Batch Reveal: The Chelsea Shoot', time: '14:00 GMT', status: 'Scheduled' },
-                    { title: 'Fan Mass DM: Weekend Teaser', time: '18:00 GMT', status: 'Draft' },
-                  ].map((directive, i) => (
+                  {directives.length > 0 ? directives.map((directive, i) => (
                     <div key={i} className="flex justify-between items-center p-4 border border-brand-offwhite hover:bg-brand-offwhite transition-colors cursor-pointer group">
                       <div className="flex items-center space-x-4">
                         <div className="w-2 h-2 rounded-full bg-brand-black"></div>
@@ -160,7 +165,11 @@ export const Dashboard: React.FC = () => {
                         <span className="px-2 py-1 bg-white border border-brand-border rounded-sm">{directive.status}</span>
                       </div>
                     </div>
-                  ))}
+                  )) : (
+                    <div className="p-8 text-center border border-dashed border-brand-border rounded-sm">
+                      <p className="text-[10px] uppercase tracking-widest text-brand-black/30">No active directives</p>
+                    </div>
+                  )}
                 </div>
               </div>
             </div>
@@ -170,12 +179,8 @@ export const Dashboard: React.FC = () => {
                 <h2 className="text-xl font-serif italic">Network Strategy Directives</h2>
                 <Layers size={16} className="text-brand-black/40" />
               </div>
-              <div className="space-y-6">
-                {[
-                  { title: 'New Content Pillar: Posh British Wit', date: '2 hours ago', tag: 'Strategy' },
-                  { title: 'PPV Batch Optimisation Scheduled', date: 'Yesterday', tag: 'Operational' },
-                  { title: 'Vocal Signature Session at London Studio', date: '3 days ago', tag: 'Production' },
-                ].map((item, i) => (
+               <div className="space-y-6">
+                {strategy.length > 0 ? strategy.map((item, i) => (
                   <div key={i} className="flex justify-between items-center group cursor-pointer text-[10px]">
                     <div>
                       <p className="text-sm font-medium hover:underline">{item.title}</p>
@@ -185,7 +190,11 @@ export const Dashboard: React.FC = () => {
                       {item.tag}
                     </span>
                   </div>
-                ))}
+                )) : (
+                  <div className="py-4 text-center">
+                    <p className="text-[10px] uppercase tracking-widest text-brand-black/30">No strategy directives found</p>
+                  </div>
+                )}
               </div>
             </div>
           </div>

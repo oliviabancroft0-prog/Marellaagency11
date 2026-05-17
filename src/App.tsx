@@ -848,7 +848,7 @@ const Philosophy = () => {
         <div className="space-y-12">
           <h2 className="text-3xl md:text-4xl leading-tight font-serif tracking-tight">
             <span className="block font-black not-italic mb-1 tracking-tighter">Bramingham Barely</span>
-            UK OnlyFans Management That Delivers
+            Book Her. Tip Her. All In One Place
           </h2>
           <div className="relative aspect-[4/5] w-full max-w-sm overflow-hidden rounded-sm bg-black/5 shadow-2xl group">
             <video 
@@ -1017,7 +1017,7 @@ const Footer = () => {
         >
           <div>
             <p className="text-[10px] tracking-[0.4em] uppercase font-bold text-brand-black/80 mb-8">
-              Backed by World-Class Venture Capital
+              Backed by
             </p>
             <div className="flex flex-wrap justify-center items-center gap-8 md:gap-16 opacity-100">
                {/* Global VC Logos */}
