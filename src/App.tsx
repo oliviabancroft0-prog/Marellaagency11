@@ -184,7 +184,6 @@ const ProductCard = ({ product, onClick }: ProductCardProps) => {
         <div>
           <h3 className="text-xl font-serif italic mb-1">{product.name}</h3>
           <p className="text-[10px] uppercase tracking-widest text-brand-black/40 mb-1">{product.subtitle}</p>
-          <p className="text-[9px] text-brand-black/60 font-medium lowercase font-mono">{product.instagram}</p>
         </div>
         <p className="text-sm font-medium">{product.price}</p>
       </div>
@@ -1020,27 +1019,22 @@ const Footer = () => {
             <p className="text-[10px] tracking-[0.4em] uppercase font-bold text-brand-black/80 mb-8">
               Funded by Global VC Capital Firms
             </p>
-            <div className="flex flex-wrap justify-center items-center gap-8 md:gap-16 opacity-60">
+            <div className="flex flex-wrap justify-center items-center gap-8 md:gap-16 opacity-100">
                {/* Global VC Logos */}
                <img 
-                 src="input_file_0.png" 
-                 alt="Index Ventures" 
-                 className="h-5 md:h-7 w-auto grayscale hover:grayscale-0 transition-all cursor-pointer" 
-               />
-               <img 
-                 src="input_file_1.png" 
+                 src="https://raw.githubusercontent.com/oliviabancroft0-prog/17-05-26/main/images%20(3).png" 
                  alt="Balderton Capital" 
-                 className="h-5 md:h-7 w-auto grayscale hover:grayscale-0 transition-all cursor-pointer" 
+                 className="h-7 md:h-10 w-auto grayscale-[0.3] hover:grayscale-0 transition-all cursor-pointer opacity-80 hover:opacity-100" 
                />
                <img 
-                 src="input_file_2.png" 
+                 src="https://raw.githubusercontent.com/oliviabancroft0-prog/17-05-26/main/Accel_(Partners)_2015_logo.png" 
                  alt="Accel" 
-                 className="h-5 md:h-7 w-auto grayscale hover:grayscale-0 transition-all cursor-pointer" 
+                 className="h-7 md:h-10 w-auto grayscale-[0.3] hover:grayscale-0 transition-all cursor-pointer opacity-80 hover:opacity-100" 
                />
                <img 
-                 src="input_file_3.png" 
+                 src="https://raw.githubusercontent.com/oliviabancroft0-prog/17-05-26/main/OV-logo-carre-large-500x322.webp" 
                  alt="Orange Ventures" 
-                 className="h-5 md:h-7 w-auto grayscale hover:grayscale-0 transition-all cursor-pointer" 
+                 className="h-7 md:h-10 w-auto grayscale-[0.3] hover:grayscale-0 transition-all cursor-pointer opacity-80 hover:opacity-100" 
                />
             </div>
           </div>
@@ -1049,46 +1043,46 @@ const Footer = () => {
             <p className="text-[10px] tracking-[0.4em] uppercase font-bold text-brand-black/80 mb-8">
               Strategic Partners
             </p>
-            <div className="flex flex-wrap justify-center items-center gap-10 md:gap-20">
-              <div className="flex flex-col items-center space-y-2">
-                <img 
-                  src="https://upload.wikimedia.org/wikipedia/commons/0/05/Shopify_logo_2018.svg" 
-                  alt="Shopify" 
-                  className="h-6 md:h-8 w-auto grayscale opacity-70 hover:grayscale-0 hover:opacity-100 transition-all" 
-                />
-                <span className="text-[9px] uppercase tracking-widest text-brand-black/40">Infrastructure Partner</span>
-              </div>
-
-              <div className="flex flex-col items-center space-y-2">
-                <img 
-                  src="https://upload.wikimedia.org/wikipedia/commons/b/b9/HSBC_Logo.svg" 
-                  alt="HSBC Innovation" 
-                  className="h-4 md:h-6 w-auto grayscale opacity-70 hover:grayscale-0 hover:opacity-100 transition-all" 
-                />
-                <span className="text-[9px] uppercase tracking-widest text-brand-black/40">UK Tech Banking Partner</span>
-              </div>
-
-              <div className="flex flex-col items-center space-y-2">
-                <img 
-                  src="https://upload.wikimedia.org/wikipedia/commons/0/09/J.P._Morgan_logo.svg" 
-                  alt="J.P. Morgan Innovation" 
-                  className="h-4 md:h-5 w-auto grayscale opacity-70 hover:grayscale-0 hover:opacity-100 transition-all" 
-                />
-                <span className="text-[9px] uppercase tracking-widest text-brand-black/40">US Banking Partner</span>
-              </div>
-              
-              <div className="flex flex-col items-center space-y-2">
-                <img 
-                  src="https://upload.wikimedia.org/wikipedia/en/e/ef/Equity_Bank_Group_Logo.svg" 
-                  alt="Equity Bank Kenya" 
-                  className="h-8 md:h-10 w-auto grayscale opacity-70 hover:grayscale-0 hover:opacity-100 transition-all" 
-                />
-                <span className="text-[9px] uppercase tracking-widest text-brand-black/40">Kenyan Banking Partner</span>
-              </div>
-            </div>
-          </div>
-        </motion.div>
-      </div>
+            <div className="flex flex-wrap justify-center items-center gap-10 md:gap-24">
+               <div className="flex flex-col items-center space-y-3">
+                 <img 
+                   src="https://www.vectorlogo.zone/logos/shopify/shopify-ar21.svg" 
+                   alt="Shopify" 
+                   className="h-10 md:h-14 w-auto grayscale-[0.3] opacity-90 hover:grayscale-0 hover:opacity-100 transition-all" 
+                 />
+                 <span className="text-[10px] uppercase tracking-widest text-brand-black/50 font-medium">Infrastructure Partner</span>
+               </div>
+ 
+               <div className="flex flex-col items-center space-y-3">
+                 <img 
+                   src="https://raw.githubusercontent.com/oliviabancroft0-prog/17-05-26/main/HSBC-Innovation-logo.png" 
+                   alt="HSBC Innovation" 
+                   className="h-8 md:h-12 w-auto grayscale-[0.3] opacity-90 hover:grayscale-0 hover:opacity-100 transition-all" 
+                 />
+                 <span className="text-[10px] uppercase tracking-widest text-brand-black/50 font-medium">UK Tech Banking Partner</span>
+               </div>
+ 
+               <div className="flex flex-col items-center space-y-3">
+                 <img 
+                   src="https://raw.githubusercontent.com/oliviabancroft0-prog/17-05-26/main/images%20(4).png" 
+                   alt="J.P. Morgan Innovation" 
+                   className="h-8 md:h-11 w-auto grayscale-[0.3] opacity-90 hover:grayscale-0 hover:opacity-100 transition-all" 
+                 />
+                 <span className="text-[10px] uppercase tracking-widest text-brand-black/50 font-medium">US Banking Partner</span>
+               </div>
+               
+               <div className="flex flex-col items-center space-y-3">
+                 <img 
+                   src="https://raw.githubusercontent.com/oliviabancroft0-prog/17-05-26/main/equity-2.png" 
+                   alt="Equity Bank Kenya" 
+                   className="h-12 md:h-18 w-auto grayscale-[0.3] opacity-90 hover:grayscale-0 hover:opacity-100 transition-all" 
+                 />
+                 <span className="text-[10px] uppercase tracking-widest text-brand-black/50 font-medium">Kenyan Banking Partner</span>
+               </div>
+             </div>
+           </div>
+         </motion.div>
+       </div>
 
       <div className="px-6 md:px-12 py-24 border-t border-brand-border grid grid-cols-2 md:grid-cols-3 gap-12 text-[11px] tracking-widest uppercase text-brand-black/60">
         <div className="space-y-6">
@@ -1215,20 +1209,6 @@ const ProductDetail = ({ product, onBack, onAddToCart }: { product?: Product, on
                 <div className="border border-brand-border p-4 rounded-sm">
                   <p className="text-[9px] uppercase tracking-widest text-brand-black/40 mb-1">Availability</p>
                   <p className="text-lg font-medium text-green-600">Immediate</p>
-                </div>
-              </div>
-              
-              <div className="pt-4 space-y-4">
-                <p className="text-[10px] uppercase tracking-widest font-bold">Social Connection</p>
-                <div className="flex space-x-6">
-                   <a href={`https://instagram.com/${activeProduct.instagram.replace('@', '')}`} target="_blank" rel="noopener noreferrer" className="flex items-center space-x-2 text-[11px] font-mono hover:text-blue-600 transition-colors">
-                     <Instagram size={14} />
-                     <span>{activeProduct.instagram}</span>
-                   </a>
-                   <a href={`https://${activeProduct.onlyfans}`} target="_blank" rel="noopener noreferrer" className="flex items-center space-x-2 text-[11px] font-mono hover:text-blue-600 transition-colors">
-                     <Globe size={14} />
-                     <span>OnlyFans Profile</span>
-                   </a>
                 </div>
               </div>
             </div>
