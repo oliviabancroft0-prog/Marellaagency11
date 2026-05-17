@@ -1017,7 +1017,7 @@ const Footer = () => {
         >
           <div>
             <p className="text-[10px] tracking-[0.4em] uppercase font-bold text-brand-black/80 mb-8">
-              Funded by Global VC Capital Firms
+              Backed by World-Class Venture Capital
             </p>
             <div className="flex flex-wrap justify-center items-center gap-8 md:gap-16 opacity-100">
                {/* Global VC Logos */}
