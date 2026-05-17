@@ -96,6 +96,14 @@ const ScrollToTop = () => {
     if (navType !== 'POP' && !hash) {
       window.scrollTo(0, 0);
     }
+
+    // Manual Google Analytics Page View Tracking
+    const gacId = 'G-GVF84FRPWG';
+    if (typeof (window as any).gtag === 'function') {
+      (window as any).gtag('config', gacId, {
+        page_path: pathname + hash,
+      });
+    }
   }, [pathname, hash, navType]);
   
   return null;
