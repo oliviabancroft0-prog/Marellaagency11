@@ -1077,7 +1077,7 @@ const Footer = () => {
                    alt="Equity Bank Kenya" 
                    className="h-12 md:h-18 w-auto grayscale-[0.3] opacity-90 hover:grayscale-0 hover:opacity-100 transition-all" 
                  />
-                 <span className="text-[10px] uppercase tracking-widest text-brand-black/50 font-medium">Kenyan Banking Partner</span>
+                 <span className="text-[10px] uppercase tracking-widest text-brand-black/50 font-medium">African Banking Partner</span>
                </div>
              </div>
            </div>
