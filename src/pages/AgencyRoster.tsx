@@ -42,6 +42,9 @@ export const AgencyRoster: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCreator, setSelectedCreator] = useState<CreatorProfile | null>(null);
+  const [activeTab, setActiveTab] = useState<'signed' | 'pending'>('signed');
+  const [actioning, setActioning] = useState<string | null>(null);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   useEffect(() => {
     fetchCreators();
@@ -52,8 +55,7 @@ export const AgencyRoster: React.FC = () => {
     try {
       const { data, error } = await insforge.database
         .from('users')
-        .select('*')
-        .eq('onboarding_completed', true);
+        .select('*');
 
       if (error) throw error;
       setCreators(data || []);
@@ -64,10 +66,94 @@ export const AgencyRoster: React.FC = () => {
     }
   };
 
-  const filteredCreators = creators.filter(c => 
-    c.full_name?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    c.creator_profile?.stage_name?.toLowerCase().includes(searchTerm.toLowerCase())
+  const handleApprove = async (creatorId: string) => {
+    setActioning(creatorId);
+    setErrorMessage(null);
+    try {
+      const { error } = await insforge.database
+        .from('users')
+        .update({ 
+          onboarding_completed: true,
+          role: 'talent'
+        })
+        .eq('id', creatorId);
+
+      if (error) throw error;
+
+      // Update local state smoothly
+      setCreators(prev => prev.map(c => 
+        c.id === creatorId ? { ...c, onboarding_completed: true, role: 'talent' } : c
+      ));
+
+      setSelectedCreator(null);
+    } catch (err) {
+      console.error('Failed to approve creator:', err);
+      setErrorMessage((err as any).message || 'Database update failed.');
+    } finally {
+      setActioning(null);
+    }
+  };
+
+  const handleReject = async (creatorId: string) => {
+    setActioning(creatorId);
+    setErrorMessage(null);
+    try {
+      // Set onboarding_completed to false and empty creator_profile so they can re-onboard
+      const { error } = await insforge.database
+        .from('users')
+        .update({ 
+          onboarding_completed: false,
+          creator_profile: null
+        })
+        .eq('id', creatorId);
+
+      if (error) throw error;
+
+      // Update local state smoothly
+      setCreators(prev => prev.map(c => 
+        c.id === creatorId ? { ...c, onboarding_completed: false, creator_profile: undefined } : c
+      ));
+
+      setSelectedCreator(null);
+    } catch (err) {
+      console.error('Failed to reject/reset creator:', err);
+      setErrorMessage((err as any).message || 'Database update failed.');
+    } finally {
+      setActioning(null);
+    }
+  };
+
+  // Extract display name, cleaning up any internal system prefixes safely
+  const getDisplayName = (creator: CreatorProfile) => {
+    if (creator.creator_profile?.stage_name) return creator.creator_profile.stage_name;
+    if (!creator.full_name) return 'Anonymous Applicant';
+    if (creator.full_name.includes('ROLE_PENDING:')) {
+      const parts = creator.full_name.split(':');
+      return parts[parts.length - 1] || 'New Applicant';
+    }
+    return creator.full_name;
+  };
+
+  // Separate signed creators vs those who in progress of onboarding or are pending sign up/review
+  const signedCreators = creators.filter(c => c.onboarding_completed === true && c.role === 'talent');
+  
+  const pendingCreators = creators.filter(c => 
+    c.onboarding_completed !== true &&
+    c.role !== 'admin' &&
+    c.role !== 'fan' &&
+    (c.role === 'talent' || c.creator_profile !== null || (c.full_name && c.full_name.includes('ONBOARDING_PENDING')))
   );
+
+  const currentList = activeTab === 'signed' ? signedCreators : pendingCreators;
+
+  const filteredCreators = currentList.filter(c => {
+    const term = searchTerm.toLowerCase();
+    const displayName = getDisplayName(c).toLowerCase();
+    const stageName = (c.creator_profile?.stage_name || '').toLowerCase();
+    const emailStr = (c.email || '').toLowerCase();
+    
+    return displayName.includes(term) || stageName.includes(term) || emailStr.includes(term);
+  });
 
   return (
     <div className="min-h-screen bg-brand-offwhite pt-32 pb-24 px-6 md:px-12">
@@ -92,6 +178,37 @@ export const AgencyRoster: React.FC = () => {
           </div>
         </div>
 
+        {/* Minimal High-Contrast Navigation Tabs */}
+        <div className="flex border-b border-brand-border mb-12 gap-8 items-center">
+          <button
+            onClick={() => {
+              setActiveTab('signed');
+              setSearchTerm('');
+            }}
+            className={`pb-4 text-xs uppercase tracking-[0.2em] font-bold border-b-2 transition-all cursor-pointer flex items-center gap-2 ${activeTab === 'signed' ? 'border-brand-black text-brand-black' : 'border-transparent text-brand-black/40 hover:text-brand-black'}`}
+          >
+            Signed Roster
+            <span className="px-2 py-0.5 text-[9px] bg-brand-black/5 border border-brand-border rounded-full text-brand-black/60 font-mono">
+              {signedCreators.length}
+            </span>
+          </button>
+          <button
+            onClick={() => {
+              setActiveTab('pending');
+              setSearchTerm('');
+            }}
+            className={`pb-4 text-xs uppercase tracking-[0.2em] font-bold border-b-2 transition-all cursor-pointer flex items-center gap-2 relative ${activeTab === 'pending' ? 'border-brand-black text-brand-black' : 'border-transparent text-brand-black/40 hover:text-brand-black'}`}
+          >
+            Pending Applicants
+            {pendingCreators.length > 0 && (
+              <span className="absolute -top-1 right-2 w-2 h-2 bg-red-500 rounded-full animate-pulse" />
+            )}
+            <span className="px-2 py-0.5 text-[9px] bg-amber-50 text-amber-800 border border-amber-200 rounded-full font-mono font-bold">
+              {pendingCreators.length}
+            </span>
+          </button>
+        </div>
+
         {loading ? (
           <div className="py-24 flex flex-col items-center justify-center">
             <div className="w-12 h-12 border-2 border-brand-black border-t-transparent rounded-full animate-spin mb-4"></div>
@@ -101,7 +218,9 @@ export const AgencyRoster: React.FC = () => {
           <div className="py-24 text-center bg-white border border-brand-border rounded-sm">
             <Users size={48} className="mx-auto text-brand-black/10 mb-6" />
             <h3 className="text-xl font-serif italic mb-2">No Talent Found</h3>
-            <p className="text-[10px] uppercase tracking-widest text-brand-black/40">The registry currently contains no active creator profiles.</p>
+            <p className="text-[10px] uppercase tracking-widest text-brand-black/40">
+              No matching profiles found in this selection.
+            </p>
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -122,13 +241,17 @@ export const AgencyRoster: React.FC = () => {
                     )}
                   </div>
                   <div className="flex flex-col items-end">
-                    <span className="text-[8px] px-2 py-1 bg-green-50 text-green-700 border border-green-100 rounded-sm font-bold uppercase tracking-widest">Signed</span>
+                    {creator.onboarding_completed ? (
+                      <span className="text-[8px] px-2 py-1 bg-green-50 text-green-700 border border-green-100 rounded-sm font-bold uppercase tracking-widest">Signed</span>
+                    ) : (
+                      <span className="text-[8px] px-2 py-1 bg-amber-50 text-amber-700 border border-amber-100 rounded-sm font-bold uppercase tracking-widest">Pending</span>
+                    )}
                     <span className="text-[9px] text-brand-black/40 mt-1 uppercase tracking-widest italic">{new Date(creator.created_at).toLocaleDateString()}</span>
                   </div>
                 </div>
 
                 <div className="mb-6">
-                  <h3 className="text-2xl font-serif italic group-hover:underline">{creator.creator_profile?.stage_name || creator.full_name}</h3>
+                  <h3 className="text-2xl font-serif italic group-hover:underline">{getDisplayName(creator)}</h3>
                   <p className="text-[10px] uppercase tracking-widest text-brand-black/40 font-bold mt-1">Digital Sovereign</p>
                 </div>
 
@@ -139,9 +262,15 @@ export const AgencyRoster: React.FC = () => {
                   </div>
                   <div className="flex justify-between items-center text-[10px] uppercase tracking-widest">
                     <span className="text-brand-black/40">Security Status</span>
-                    <span className="font-bold flex items-center text-green-600">
-                      <ShieldCheck size={12} className="mr-1" /> Verified
-                    </span>
+                    {creator.creator_profile?.id_verification_pending || !creator.onboarding_completed ? (
+                      <span className="font-bold flex items-center text-amber-600">
+                        <Clock size={12} className="mr-1 animate-pulse" /> Pending Review
+                      </span>
+                    ) : (
+                      <span className="font-bold flex items-center text-green-600">
+                        <ShieldCheck size={12} className="mr-1" /> Verified
+                      </span>
+                    )}
                   </div>
                 </div>
 
@@ -174,15 +303,21 @@ export const AgencyRoster: React.FC = () => {
             >
               <div className="p-8 border-b border-brand-border flex justify-between items-center bg-brand-offwhite">
                 <div>
-                  <h2 className="text-3xl font-serif italic mb-1">{selectedCreator.creator_profile?.stage_name}</h2>
+                  <h2 className="text-3xl font-serif italic mb-1">{getDisplayName(selectedCreator)}</h2>
                   <p className="text-[10px] uppercase tracking-[0.3em] font-bold text-brand-black/40">Creator Technical Dossier</p>
                 </div>
-                <button onClick={() => setSelectedCreator(null)} className="p-2 hover:rotate-90 transition-transform">
+                <button onClick={() => setSelectedCreator(null)} className="p-2 hover:rotate-90 transition-transform cursor-pointer">
                   <X size={24} />
                 </button>
               </div>
 
               <div className="flex-1 overflow-y-auto p-10">
+                {errorMessage && (
+                  <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-sm text-xs font-mono text-red-700">
+                    System Error: {errorMessage}
+                  </div>
+                )}
+                
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
                   {/* Left Column: Visuals & Files */}
                   <div className="lg:col-span-2 space-y-10">
@@ -249,7 +384,7 @@ export const AgencyRoster: React.FC = () => {
                     <div className="bg-brand-offwhite p-8 border border-brand-border rounded-sm">
                       <h3 className="text-[11px] uppercase tracking-[0.2em] font-bold text-brand-black mb-6 underline">Persona Background</h3>
                       <p className="text-sm font-light leading-relaxed text-brand-black/80">
-                        {selectedCreator.creator_profile?.bio}
+                        {selectedCreator.creator_profile?.bio || 'No description supplied yet.'}
                       </p>
                     </div>
 
@@ -271,11 +406,26 @@ export const AgencyRoster: React.FC = () => {
                     </div>
 
                     <div className="pt-6">
-                      <button className="w-full py-4 bg-brand-black text-white rounded-full text-[10px] font-bold uppercase tracking-[0.3em] hover:bg-brand-black/90 transition-all mb-4">
-                        Approve Talent Roster
-                      </button>
-                      <button className="w-full py-4 border border-red-200 text-red-600 rounded-full text-[10px] font-bold uppercase tracking-[0.3em] hover:bg-red-50 transition-all">
-                        Request Redocumentation
+                      {!selectedCreator.onboarding_completed ? (
+                        <button 
+                          onClick={() => handleApprove(selectedCreator.id)}
+                          disabled={actioning !== null}
+                          className="w-full py-4 bg-brand-black text-white rounded-full text-[10px] font-bold uppercase tracking-[0.3em] hover:bg-brand-black/95 active:scale-[0.98] transition-all mb-4 disabled:opacity-50 cursor-pointer"
+                        >
+                          {actioning === selectedCreator.id ? 'Approving...' : 'Approve Talent Roster'}
+                        </button>
+                      ) : (
+                        <div className="w-full text-center py-4 bg-green-50 text-green-700 border border-green-200 text-[10px] font-bold uppercase tracking-[0.3em] rounded-full mb-4">
+                          Already Approved & Signed
+                        </div>
+                      )}
+                      
+                      <button 
+                        onClick={() => handleReject(selectedCreator.id)}
+                        disabled={actioning !== null}
+                        className="w-full py-4 border border-red-200 text-red-600 rounded-full text-[10px] font-bold uppercase tracking-[0.3em] hover:bg-red-50 active:scale-[0.98] transition-all disabled:opacity-50 cursor-pointer"
+                      >
+                        {actioning === selectedCreator.id ? 'Processing...' : 'Request Redocumentation'}
                       </button>
                     </div>
                   </div>
