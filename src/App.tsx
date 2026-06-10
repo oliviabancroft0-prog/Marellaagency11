@@ -858,13 +858,13 @@ const Philosophy = () => {
             <span className="block font-black not-italic mb-1 tracking-tighter">Bramingham Barely</span>
             Book Her. Tip Her. All In One Place
           </h2>
-          <div className="relative aspect-[4/5] w-full max-w-sm overflow-hidden rounded-sm bg-black/5 shadow-2xl group">
+          <div className="relative aspect-[4/5] w-full max-w-sm overflow-hidden rounded-sm bg-black shadow-2xl group">
             <video 
               autoPlay 
               loop 
               muted={isIntroMuted}
               playsInline 
-              className="w-full h-full object-cover brightness-90"
+              className="w-full h-full object-contain bg-black brightness-90"
             >
               <source src="https://raw.githubusercontent.com/oliviabancroft0-prog/videosbram/main/Untitled%20design%20(3).mp4" type="video/mp4" />
             </video>
@@ -888,13 +888,13 @@ const Philosophy = () => {
           </div>
           
           <div className="space-y-4 order-2 flex flex-col items-center md:items-start">
-            <div className="relative aspect-[9/16] w-full max-w-[320px] bg-black/5 rounded-lg overflow-hidden shadow-2xl mx-auto md:mx-0 group">
+            <div className="relative aspect-[9/16] w-full max-w-[320px] bg-black rounded-lg overflow-hidden shadow-2xl mx-auto md:mx-0 group">
               <video 
                 autoPlay 
                 loop 
                 muted={isReviewMuted}
                 playsInline 
-                className="w-full h-full object-cover"
+                className="w-full h-full object-contain bg-black"
               >
                 <source src="https://raw.githubusercontent.com/oliviabancroft0-prog/videosbram/main/Untitled%20design%20(1).mp4" type="video/mp4" />
               </video>
