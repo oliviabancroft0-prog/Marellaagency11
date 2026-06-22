@@ -36,7 +36,8 @@ export const CheckoutPage: React.FC<CheckoutPageProps> = ({ cart, setCart }) => 
   });
 
   const subtotal = cart.reduce((acc, item) => acc + (item.price * item.quantity), 0);
-  const shipping = 5.00;
+  const hasPhysicalProducts = cart.some(item => item.type === 'product' || !item.type);
+  const shipping = cart.length > 0 && hasPhysicalProducts ? 5.00 : 0.00;
   const total = subtotal + shipping;
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {

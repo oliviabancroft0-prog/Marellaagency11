@@ -193,7 +193,6 @@ const ProductCard = ({ product, onClick }: ProductCardProps) => {
           <h3 className="text-xl font-serif italic mb-1">{product.name}</h3>
           <p className="text-[10px] uppercase tracking-widest text-brand-black/40 mb-1">{product.subtitle}</p>
         </div>
-        <p className="text-sm font-medium">{product.price}</p>
       </div>
     </div>
   );
@@ -855,7 +854,6 @@ const Philosophy = () => {
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 items-start">
         <div className="space-y-12">
           <h2 className="text-3xl md:text-4xl leading-tight font-serif tracking-tight">
-            <span className="block font-black not-italic mb-1 tracking-tighter">Bramingham Barely</span>
             Book Her. Tip Her. All In One Place
           </h2>
           <div className="relative aspect-[4/5] w-full max-w-sm overflow-hidden rounded-sm bg-black shadow-2xl group">
@@ -879,9 +877,6 @@ const Philosophy = () => {
         </div>
         <div className="md:pt-32 space-y-12 flex flex-col">
           <div className="max-w-md order-1">
-            <p className="text-lg leading-relaxed font-light text-brand-black/80 mb-6 font-sans">
-              £millions+ processed for creators. Thousands of verified client bookings completed through our secure platform.
-            </p>
             <p className="text-lg leading-relaxed font-bold text-brand-black mb-6 font-sans">
               Full compliance, discretion, and dedicated account managers. Operational 24/7.
             </p>
@@ -1123,21 +1118,12 @@ const ProductDetail = ({ product, onBack, onAddToCart }: { product?: Product, on
             <p className="text-lg text-brand-black/60 mb-6 font-light">{activeProduct.subtitle}</p>
           </div>
 
-          <div className="space-y-4">
-            <h3 className="text-[10px] uppercase tracking-widest font-bold">Biography</h3>
-            <p className="text-lg leading-relaxed font-light text-brand-black/80">
-              {activeProduct.bio}
-            </p>
-          </div>
+
 
           <div className="pt-8 border-t border-brand-border space-y-6">
             <div className="space-y-4">
               <h3 className="text-[10px] uppercase tracking-widest font-bold">Booking Details</h3>
-              <div className="grid grid-cols-2 gap-4">
-                <div className="border border-brand-border p-4 rounded-sm">
-                  <p className="text-[9px] uppercase tracking-widest text-brand-black/40 mb-1">Fee</p>
-                  <p className="text-xl font-medium">{activeProduct.price}</p>
-                </div>
+              <div className="grid grid-cols-1 gap-4">
                 <div className="border border-brand-border p-4 rounded-sm">
                   <p className="text-[9px] uppercase tracking-widest text-brand-black/40 mb-1">Availability</p>
                   <p className="text-lg font-medium text-green-600">Immediate</p>
@@ -1166,11 +1152,12 @@ const ProductDetail = ({ product, onBack, onAddToCart }: { product?: Product, on
                   onAddToCart({
                     id: activeProduct.id,
                     name: activeProduct.name,
-                    price: parseInt(activeProduct.price.replace(/[^0-9]/g, '')),
+                    price: 20,
                     quantity: 1,
                     image: activeProduct.image,
                     type: 'talent'
                   });
+                  navigate('/checkout');
                 }
               }}
               className="w-full bg-brand-black text-white py-5 rounded-full text-[11px] uppercase tracking-[0.3em] font-bold hover:bg-brand-black/90 transition-colors"
