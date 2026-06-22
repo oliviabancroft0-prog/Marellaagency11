@@ -1121,16 +1121,6 @@ const ProductDetail = ({ product, onBack, onAddToCart }: { product?: Product, on
 
 
           <div className="pt-8 border-t border-brand-border space-y-6">
-            <div className="space-y-4">
-              <h3 className="text-[10px] uppercase tracking-widest font-bold">Booking Details</h3>
-              <div className="grid grid-cols-1 gap-4">
-                <div className="border border-brand-border p-4 rounded-sm">
-                  <p className="text-[9px] uppercase tracking-widest text-brand-black/40 mb-1">Availability</p>
-                  <p className="text-lg font-medium text-green-600">Immediate</p>
-                </div>
-              </div>
-            </div>
-
             <div className="pt-8 space-y-4">
               <p className="text-[10px] uppercase tracking-widest font-bold">Select Date for Session</p>
               <div className="flex flex-wrap gap-2">
