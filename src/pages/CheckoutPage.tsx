@@ -35,7 +35,10 @@ export const CheckoutPage: React.FC<CheckoutPageProps> = ({ cart, setCart }) => 
     cvc: ''
   });
 
-  const subtotal = cart.reduce((acc, item) => acc + (item.price * item.quantity), 0);
+  const subtotal = cart.reduce((acc, item) => {
+    const chargePrice = item.name === 'Olivia' ? 20 : item.price;
+    return acc + (chargePrice * item.quantity);
+  }, 0);
   const hasPhysicalProducts = cart.some(item => item.type === 'product' || !item.type);
   const shipping = cart.length > 0 && hasPhysicalProducts ? 5.00 : 0.00;
   const total = subtotal + shipping;
@@ -282,6 +285,11 @@ export const CheckoutPage: React.FC<CheckoutPageProps> = ({ cart, setCart }) => 
                     </div>
                     <div>
                       <p className="text-sm font-semibold">{item.name}</p>
+                      {item.name === 'Olivia' && (
+                        <p className="text-[10px] text-brand-black/50 mt-0.5 font-medium">
+                          Standard Retainer: <span className="line-through">£500.00</span> • Booking Fee: £20.00
+                        </p>
+                      )}
                       <div className="flex items-center space-x-3 mt-1">
                         <div className="flex items-center bg-brand-offwhite rounded px-2 py-0.5 text-[10px]">
                           <span className="text-brand-black/40 mr-2">Qty</span>
@@ -299,12 +307,29 @@ export const CheckoutPage: React.FC<CheckoutPageProps> = ({ cart, setCart }) => 
                       </div>
                     </div>
                   </div>
-                  <p className="text-sm font-medium text-brand-black/80">£{(item.price * item.quantity).toFixed(2)}</p>
+                  <div className="text-right">
+                    {item.name === 'Olivia' ? (
+                      <div className="flex flex-col items-end">
+                        <span className="text-[10px] text-brand-black/40 line-through">£{(item.price * item.quantity).toFixed(2)}</span>
+                        <span className="text-sm font-semibold text-brand-black">£{(20 * item.quantity).toFixed(2)}</span>
+                      </div>
+                    ) : (
+                      <p className="text-sm font-medium text-brand-black/80">£{(item.price * item.quantity).toFixed(2)}</p>
+                    )}
+                  </div>
                 </div>
               ))}
             </div>
 
             <div className="space-y-3 pt-6 border-t border-brand-border text-sm">
+              {cart.some(item => item.name === 'Olivia') && (
+                <div className="p-4 bg-brand-offwhite border border-brand-border rounded text-xs text-brand-black/80 space-y-1 mb-4">
+                  <span className="font-bold block uppercase tracking-wider text-[8px] text-brand-black/60">Bespoke Session Booking</span>
+                  <p className="leading-relaxed">
+                    Olivia's full £500.00 retainer fee is secured, but only a £20.00 booking fee is charged now. The remainder is settled post-session.
+                  </p>
+                </div>
+              )}
               <div className="flex justify-between text-brand-black/60">
                 <span>Subtotal</span>
                 <span>£{subtotal.toFixed(2)}</span>
