@@ -892,7 +892,7 @@ const Philosophy = () => {
         <div className="md:pt-32 space-y-12 flex flex-col">
           <div className="max-w-md order-1">
             <p className="text-lg leading-relaxed font-bold text-brand-black mb-6 font-sans">
-              Full compliance, discretion, and dedicated account managers. Operational 24/7.
+              Full compliance, anonymous OnlyFans management, discretion, and dedicated account managers. Operational 24/7.
             </p>
           </div>
           
@@ -1068,7 +1068,6 @@ const Footer = () => {
             <p className="text-brand-black/70 font-bold">Registration</p>
             <p>Bramingham Barely LLC • Sheridan, Wyoming, USA</p>
           </div>
-          <p className="pt-4 opacity-40 italic">Global Authority in Digital Asset Management.</p>
           <p className="pt-2">&copy; 2026, Bramingham Barely.</p>
         </div>
       </div>
