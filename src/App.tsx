@@ -190,7 +190,14 @@ const ProductCard = ({ product, onClick }: ProductCardProps) => {
       </div>
       <div className="flex justify-between items-start">
         <div>
-          <h3 className="text-xl font-serif italic mb-1">{product.name}</h3>
+          <h3 className="text-xl font-serif italic mb-1 flex items-center gap-1.5">
+            <span>{product.name}</span>
+            <span className="inline-flex items-center justify-center bg-blue-500 text-white rounded-full w-4 h-4 flex-shrink-0" title="Verified Model">
+              <svg className="w-2.5 h-2.5 fill-none stroke-current stroke-[3]" viewBox="0 0 24 24">
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
+            </span>
+          </h3>
           <p className="text-[10px] uppercase tracking-widest text-brand-black/40 mb-1">{product.subtitle}</p>
         </div>
       </div>
@@ -509,7 +516,14 @@ const SearchOverlay = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => vo
                             <img src={m.image} alt={m.name} referrerPolicy="no-referrer" className="w-full h-full object-cover group-hover:scale-110 transition-transform" />
                           </div>
                           <div>
-                            <h4 className="text-xl font-serif italic">{m.name}</h4>
+                            <h4 className="text-xl font-serif italic flex items-center gap-1.5">
+                              <span>{m.name}</span>
+                              <span className="inline-flex items-center justify-center bg-blue-500 text-white rounded-full w-4 h-4 flex-shrink-0" title="Verified Model">
+                                <svg className="w-2.5 h-2.5 fill-none stroke-current stroke-[3]" viewBox="0 0 24 24">
+                                  <polyline points="20 6 9 17 4 12" />
+                                </svg>
+                              </span>
+                            </h4>
                             <p className="text-[10px] uppercase font-bold tracking-widest text-brand-black/40">{m.location}</p>
                           </div>
                         </div>
@@ -1114,7 +1128,14 @@ const ProductDetail = ({ product, onBack, onAddToCart }: { product?: Product, on
               <span className="bg-brand-black text-white text-[9px] px-3 py-1 uppercase tracking-widest">Verified Talent</span>
               <span className="text-[9px] uppercase tracking-widest text-brand-black/40 font-bold">{activeProduct.location} Hub</span>
             </div>
-            <h1 className="text-5xl md:text-6xl mb-4 italic">{activeProduct.name}</h1>
+            <h1 className="text-5xl md:text-6xl mb-4 italic flex items-center gap-3">
+              <span>{activeProduct.name}</span>
+              <span className="inline-flex items-center justify-center bg-blue-500 text-white rounded-full w-7 h-7 flex-shrink-0" title="Verified Model">
+                <svg className="w-4 h-4 fill-none stroke-current stroke-[3]" viewBox="0 0 24 24">
+                  <polyline points="20 6 9 17 4 12" />
+                </svg>
+              </span>
+            </h1>
             <p className="text-lg text-brand-black/60 mb-6 font-light">{activeProduct.subtitle}</p>
           </div>
 
@@ -1139,10 +1160,11 @@ const ProductDetail = ({ product, onBack, onAddToCart }: { product?: Product, on
             <button 
               onClick={() => {
                 if (onAddToCart && activeProduct) {
+                  const numericPrice = parseInt(activeProduct.price.replace(/[^0-9]/g, ''), 10) || 400;
                   onAddToCart({
                     id: activeProduct.id,
-                    name: activeProduct.name,
-                    price: 20,
+                    name: `${activeProduct.name} - Booking Session (${selectedDate})`,
+                    price: numericPrice,
                     quantity: 1,
                     image: activeProduct.image,
                     type: 'talent'
@@ -1250,7 +1272,14 @@ const CartDrawer = ({ isOpen, onClose, cart, setCart }: { isOpen: boolean, onClo
                       <div className="aspect-square bg-brand-offwhite mb-2 overflow-hidden border border-brand-border">
                         <img src={p.image} referrerPolicy="no-referrer" className="w-full h-full object-cover group-hover:scale-105 transition-transform" />
                       </div>
-                      <p className="text-[10px] font-serif italic truncate">{p.name}</p>
+                      <p className="text-[10px] font-serif italic truncate flex items-center gap-1">
+                        <span className="truncate">{p.name}</span>
+                        <span className="inline-flex items-center justify-center bg-blue-500 text-white rounded-full w-3.5 h-3.5 flex-shrink-0" title="Verified Model">
+                          <svg className="w-2 h-2 fill-none stroke-current stroke-[3]" viewBox="0 0 24 24">
+                            <polyline points="20 6 9 17 4 12" />
+                          </svg>
+                        </span>
+                      </p>
                     </div>
                   ))}
                 </div>
@@ -1322,7 +1351,7 @@ const Home = () => {
         <div className="max-w-7xl mx-auto">
           <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 gap-8">
             <div className="space-y-4">
-              <h2 className="text-4xl italic">The Lineup</h2>
+              <h2 className="text-4xl italic">Fan Favourites</h2>
               <p className="text-lg font-light text-brand-black/60 max-w-md">
                 Britain’s finest OnlyFans talent. Carefully chosen, professionally managed, and ready to deliver.
               </p>

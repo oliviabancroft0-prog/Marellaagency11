@@ -64,7 +64,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
           .replace('ROLE_CREATOR:', '')
           .replace('ROLE_FAN:', '');
 
-        let role = profileData.role;
+        let role = profileData?.role;
         if (!role) {
           if (isCreator) role = 'creator';
           else if (isFan) role = 'fan';

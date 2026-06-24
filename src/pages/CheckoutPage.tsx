@@ -328,18 +328,6 @@ export const CheckoutPage: React.FC<CheckoutPageProps> = ({ cart, setCart }) => 
         {/* Right Side: Payment Form */}
         <div className="w-full lg:w-[55%] bg-white p-8 lg:p-16">
           <div className="max-w-md mr-auto lg:ml-0">
-            {/* Express Checkout */}
-            <button className="w-full bg-brand-black text-white h-12 rounded-lg flex items-center justify-center space-x-2 hover:opacity-90 transition-opacity mb-8 shadow-sm">
-              <img src="https://upload.wikimedia.org/wikipedia/commons/b/b0/Apple_Pay_logo.svg" alt="Apple Pay" className="h-6 invert" />
-            </button>
-
-            <div className="relative flex items-center justify-center mb-8">
-              <div className="absolute inset-0 flex items-center">
-                <div className="w-full border-t border-brand-border"></div>
-              </div>
-              <span className="relative px-4 bg-white text-brand-black/40 text-xs font-medium">Or pay with card</span>
-            </div>
-
             <form onSubmit={handlePayment} className="space-y-8 text-sm">
               {/* Shipping Information */}
               <div className="space-y-4">
@@ -429,10 +417,6 @@ export const CheckoutPage: React.FC<CheckoutPageProps> = ({ cart, setCart }) => 
                           placeholder="1234 1234 1234 1234"
                           className="w-full h-11 px-4 border-b border-brand-border outline-none focus:bg-brand-offwhite/30"
                         />
-                        <div className="absolute right-4 top-1/2 -translate-y-1/2 flex space-x-1 opacity-50">
-                           <img src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg" alt="MC" className="h-4" />
-                           <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Visa_Inc._logo.svg" alt="Visa" className="h-3 self-center" />
-                        </div>
                       </div>
                       <div className="flex">
                         <input 
