@@ -42,7 +42,26 @@ export const FanDashboard: React.FC = () => {
     setOrders([]);
     setAssets([]);
     setCart([]);
-  }, []);
+
+    // Trigger welcome email for first-time login (especially OAuth)
+    if (user?.email && user?.id) {
+      const welcomeKey = `welcome_sent_${user.id}`;
+      if (!localStorage.getItem(welcomeKey)) {
+        fetch('/api/send-welcome', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ 
+            email: user.email, 
+            name: profile?.full_name || user.email.split('@')[0] 
+          }),
+        }).then(res => {
+          if (res.ok) {
+            localStorage.setItem(welcomeKey, 'true');
+          }
+        }).catch(err => console.error('FanDashboard welcome trigger failed:', err));
+      }
+    }
+  }, [user, profile]);
 
   return (
     <div className="min-h-screen pt-12 md:pt-16 pb-12 px-6 md:px-12 bg-brand-offwhite">

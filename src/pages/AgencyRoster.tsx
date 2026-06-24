@@ -138,10 +138,10 @@ export const AgencyRoster: React.FC = () => {
   const signedCreators = creators.filter(c => c.onboarding_completed === true && c.role === 'talent');
   
   const pendingCreators = creators.filter(c => 
-    c.onboarding_completed !== true &&
+    !(c.onboarding_completed === true && c.role === 'talent') &&
     c.role !== 'admin' &&
     c.role !== 'fan' &&
-    (c.role === 'talent' || c.creator_profile !== null || (c.full_name && c.full_name.includes('ONBOARDING_PENDING')))
+    (c.role === 'talent' || c.creator_profile !== null || c.onboarding_completed === true || (c.full_name && c.full_name.includes('ONBOARDING_PENDING')))
   );
 
   const currentList = activeTab === 'signed' ? signedCreators : pendingCreators;
@@ -241,10 +241,12 @@ export const AgencyRoster: React.FC = () => {
                     )}
                   </div>
                   <div className="flex flex-col items-end">
-                    {creator.onboarding_completed ? (
+                    {creator.onboarding_completed && creator.role === 'talent' ? (
                       <span className="text-[8px] px-2 py-1 bg-green-50 text-green-700 border border-green-100 rounded-sm font-bold uppercase tracking-widest">Signed</span>
+                    ) : creator.onboarding_completed ? (
+                      <span className="text-[8px] px-2 py-1 bg-blue-50 text-blue-700 border border-blue-100 rounded-sm font-bold uppercase tracking-widest">Pending Review</span>
                     ) : (
-                      <span className="text-[8px] px-2 py-1 bg-amber-50 text-amber-700 border border-amber-100 rounded-sm font-bold uppercase tracking-widest">Pending</span>
+                      <span className="text-[8px] px-2 py-1 bg-amber-50 text-amber-700 border border-amber-100 rounded-sm font-bold uppercase tracking-widest">Pending Onboarding</span>
                     )}
                     <span className="text-[9px] text-brand-black/40 mt-1 uppercase tracking-widest italic">{new Date(creator.created_at).toLocaleDateString()}</span>
                   </div>
@@ -406,7 +408,7 @@ export const AgencyRoster: React.FC = () => {
                     </div>
 
                     <div className="pt-6">
-                      {!selectedCreator.onboarding_completed ? (
+                      {selectedCreator.role !== 'talent' ? (
                         <button 
                           onClick={() => handleApprove(selectedCreator.id)}
                           disabled={actioning !== null}
