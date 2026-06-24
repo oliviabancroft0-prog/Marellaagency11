@@ -112,6 +112,7 @@ export const CreatorOnboarding: React.FC = () => {
             bio: formData.bio,
             payout_provider: formData.payoutProvider,
             payout_details: formData.payoutDetails,
+            email: user.email,
             // Store the actual file URLs
             photos: photoUrls,
             id_url: idUrl,

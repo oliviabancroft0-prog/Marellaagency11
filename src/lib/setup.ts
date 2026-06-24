@@ -84,6 +84,23 @@ export const syncUserProfile = async () => {
 
       if (error) {
         console.error('Error creating initial user profile:', error.message);
+      } else {
+        // Centralized welcome email dispatch when a new profile is successfully registered
+        const welcomeKey = `welcome_sent_${user.id}`;
+        if (!localStorage.getItem(welcomeKey)) {
+          fetch('/api/send-welcome', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ 
+              email: user.email, 
+              name: (user as any).name || user.email.split('@')[0] 
+            }),
+          }).then(res => {
+            if (res.ok) {
+              localStorage.setItem(welcomeKey, 'true');
+            }
+          }).catch(err => console.error('Centralized welcome trigger failed:', err));
+        }
       }
     } else {
       // Update last login / sync

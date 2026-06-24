@@ -26,6 +26,7 @@ export const FanOnboarding: React.FC = () => {
           full_name: formData.fullName,
           fan_profile: {
             preferences: formData.preferences,
+            email: user.email,
             registration_date: new Date().toISOString()
           },
           updated_at: new Date().toISOString()

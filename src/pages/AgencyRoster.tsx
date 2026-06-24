@@ -28,6 +28,7 @@ interface CreatorProfile {
     bio: string;
     payout_provider: string;
     payout_details: string;
+    email?: string;
     photos?: string[];
     id_url?: string;
     photos_count?: number;
@@ -134,14 +135,25 @@ export const AgencyRoster: React.FC = () => {
     return creator.full_name;
   };
 
+  // Extract email address safely from profile, nested profile, or pending name string
+  const getCreatorEmail = (creator: CreatorProfile) => {
+    if (creator.email) return creator.email;
+    if (creator.creator_profile?.email) return creator.creator_profile.email;
+    if (creator.full_name && creator.full_name.includes('@')) {
+      const parts = creator.full_name.split(':');
+      const emailPart = parts.find(p => p.includes('@'));
+      if (emailPart) return emailPart;
+    }
+    return '';
+  };
+
   // Separate signed creators vs those who in progress of onboarding or are pending sign up/review
   const signedCreators = creators.filter(c => c.onboarding_completed === true && c.role === 'talent');
   
   const pendingCreators = creators.filter(c => 
     !(c.onboarding_completed === true && c.role === 'talent') &&
     c.role !== 'admin' &&
-    c.role !== 'fan' &&
-    (c.role === 'talent' || c.creator_profile !== null || c.onboarding_completed === true || (c.full_name && c.full_name.includes('ONBOARDING_PENDING')))
+    c.role !== 'fan'
   );
 
   const currentList = activeTab === 'signed' ? signedCreators : pendingCreators;
@@ -150,7 +162,7 @@ export const AgencyRoster: React.FC = () => {
     const term = searchTerm.toLowerCase();
     const displayName = getDisplayName(c).toLowerCase();
     const stageName = (c.creator_profile?.stage_name || '').toLowerCase();
-    const emailStr = (c.email || '').toLowerCase();
+    const emailStr = getCreatorEmail(c).toLowerCase();
     
     return displayName.includes(term) || stageName.includes(term) || emailStr.includes(term);
   });
@@ -254,7 +266,12 @@ export const AgencyRoster: React.FC = () => {
 
                 <div className="mb-6">
                   <h3 className="text-2xl font-serif italic group-hover:underline">{getDisplayName(creator)}</h3>
-                  <p className="text-[10px] uppercase tracking-widest text-brand-black/40 font-bold mt-1">Digital Sovereign</p>
+                  <div className="flex justify-between items-center mt-1">
+                    <p className="text-[10px] uppercase tracking-widest text-brand-black/40 font-bold">Digital Sovereign</p>
+                    {getCreatorEmail(creator) && (
+                      <p className="text-[10px] font-mono text-brand-black/50 select-all">{getCreatorEmail(creator)}</p>
+                    )}
+                  </div>
                 </div>
 
                 <div className="space-y-4 pt-6 border-t border-brand-offwhite">
@@ -306,7 +323,15 @@ export const AgencyRoster: React.FC = () => {
               <div className="p-8 border-b border-brand-border flex justify-between items-center bg-brand-offwhite">
                 <div>
                   <h2 className="text-3xl font-serif italic mb-1">{getDisplayName(selectedCreator)}</h2>
-                  <p className="text-[10px] uppercase tracking-[0.3em] font-bold text-brand-black/40">Creator Technical Dossier</p>
+                  <div className="flex items-center space-x-3 text-[10px] uppercase tracking-[0.3em] font-bold text-brand-black/40">
+                    <span>Creator Technical Dossier</span>
+                    {getCreatorEmail(selectedCreator) && (
+                      <>
+                        <span className="opacity-40">•</span>
+                        <span className="font-mono lowercase select-all text-brand-black/60">{getCreatorEmail(selectedCreator)}</span>
+                      </>
+                    )}
+                  </div>
                 </div>
                 <button onClick={() => setSelectedCreator(null)} className="p-2 hover:rotate-90 transition-transform cursor-pointer">
                   <X size={24} />
